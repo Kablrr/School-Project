@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Image Editor</title>
+</head>
+<body>
+  <h2>AI Image Editing Example</h2>
+
+  <input type="file" id="imageInput" accept="image/*" />
+  <button id="editBtn">Edit Image</button>
+
+  <br><br>
+  <img id="resultImage" width="400" />
+
+  <script>
+    document.getElementById("editBtn").onclick = async () => {
+      const fileInput = document.getElementById("imageInput");
+      if (!fileInput.files.length) {
+        alert("Upload an image first.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+
+      // Send the uploaded image to your backend
+      const response = await fetch("/edit-image", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      document.getElementById("resultImage").src = data.output_url;
+    };
+  </script>
+</body>
+</html>
