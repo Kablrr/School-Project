@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Image Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      text-align: center;
+      padding: 20px;
+    }
+    #result {
+      margin-top: 20px;
+      max-width: 400px;
+      border-radius: 10px;
+      display: none;
+    }
+    #loading {
+      display: none;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+      margin: auto;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #005fcc;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>AI Image Generator</h2>
+    <input type="text" id="prompt" placeholder="Describe your image here..." />
+    <button onclick="generateImage()">Generate</button>
+
+    <div id="loading">Generating your image... please wait.</div>
+
+    <img id="result" />
+  </div>
+
+  <script>
+    async function generateImage() {
+      const prompt = document.getElementById("prompt").value;
+      if (!prompt) return alert("Please enter a prompt!");
+
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("result").style.display = "none";
+
+      try {
+        const res = await fetch("http://localhost:3000/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("result").src = data.image;
+        document.getElementById("result").style.display = "block";
+
+      } catch (err) {
+        document.getElementById("loading").style.display = "none";
+        alert("Error generating image");
+      }
+    }
+  </script>
+
+</body>
+</html>
