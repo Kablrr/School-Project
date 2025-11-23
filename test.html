@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <Title>Test for School Project</Title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>AI Image Editor</title>
 </head>
-<body style="background-color: #E0F2E9;">
-    <h1 style="color: #5B7B7A; font-weight: normal; font-size: 75px; font-family: Sour Gummy; text-align: center;">Schools in 1776</h1>
-    <h1>Generate an AI Image</h1>
+<body>
+  <h2>AI Image Editing Example</h2>
 
-    <input id="prompt" type="text" placeholder="Enter your prompt..." style="width:300px;">
-    <button onclick="generateImage()">Generate</button>
+  <input type="file" id="imageInput" accept="image/*" />
+  <button id="editBtn">Edit Image</button>
 
-    <h2>Result:</h2>
-    <img id="resultImage" src="" style="max-width:500px; display:block; margin-top:20px;">
+  <br><br>
+  <img id="resultImage" width="400" />
 
-    <script src="script.js"></script>
+  <script>
+    document.getElementById("editBtn").onclick = async () => {
+      const fileInput = document.getElementById("imageInput");
+      if (!fileInput.files.length) {
+        alert("Upload an image first.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+
+      // Send the uploaded image to your backend
+      const response = await fetch("/edit-image", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      document.getElementById("resultImage").src = data.output_url;
+    };
+  </script>
 </body>
-
 </html>
