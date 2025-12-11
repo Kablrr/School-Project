@@ -6,8 +6,67 @@
     </head>
     <body style="color: beige;">   
         <h1 style="text-align: center;color: brown;font-family: cursive;">This is the main part</h1>
+    
+    <script>
+// STEP 1: Convert file → Base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+// STEP 2: Upload image to imgbb
+async function uploadToImgbb(base64) {
+    const apiKey = 8deb5ec45c23628ae93656ff4891b341; // <-- Replace this
+
+    const formData = new FormData();
+    formData.append("key", apiKey);
+    formData.append("image", base64);
+
+    const res = await fetch("https://api.imgbb.com/1/upload", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await res.json();
+    console.log("IMGBB RESPONSE:", data);
+
+    if (!data.success) {
+        alert("Upload to imgbb failed:\n" + JSON.stringify(data, null, 2));
+        return null;
+    }
+
+    return data.data.url;
+}
+
+// STEP 3: Convert using Pollinations
+async function convert() {
+    const file = document.getElementById("upload").files[0];
+    if (!file) {
+        alert("Please upload an image first.");
+        return;
+    }
+
+    const base64 = await fileToBase64(file);
+
+    const imageURL = await uploadToImgbb(base64);
+    if (!imageURL) return; // Stop if upload failed
+
+    const prompt =
+        "A realistic painting in the style of 1776 of the person in this image: " + imageURL;
+
+    const apiURL = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
+
+    document.getElementById("result").src = apiURL;
+}
+</script>
+
     </body>
 </html>
+
 
 
 
