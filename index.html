@@ -4,59 +4,12 @@
     <title>1776 School Project</title>
 </head>
 <body>
-    <h1>Convert Your Photo to a 1776 Style Portrait</h1>
+    <img src="https://image.pollinations.ai/prompt/pictureofamonkeyin1776revolutionarywarstyle" alt="AI generated artwork">
 
-    <input type="file" id="upload" accept="image/*" />
-    <button onclick="convert()">Convert</button>
-
-    <h2>Result:</h2>
-    <img id="result" style="width:300px;">
-
-<script>
-// Upload image directly to Pollinations
-async function uploadToPollinations(file) {
-    const formData = new FormData();
-    formData.append("image", file);
-
-    const res = await fetch("https://image.pollinations.ai/upload", {
-        method: "POST",
-        body: formData
-    });
-
-    const data = await res.json();
-    console.log("Pollinations upload response:", data);
-
-    return data.url; // This is a PUBLIC image URL Pollinations can read
-}
-
-async function convert() {
-    const file = document.getElementById("upload").files[0];
-    if (!file) {
-        alert("Please upload an image first.");
-        return;
-    }
-
-    // 1. Upload image to Pollinations
-    const imageURL = await uploadToPollinations(file);
-    if (!imageURL) {
-        alert("Upload failed.");
-        return;
-    }
-
-    // 2. Build the prompt
-    const prompt =
-        "A realistic painting in the style of 1776 of the person in this image: " + imageURL;
-
-    const apiURL =
-        "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
-
-    // 3. Display the generated image
-    document.getElementById("result").src = apiURL;
-}
-</script>
 
 </body>
 </html>
+
 
 
 
