@@ -5,15 +5,16 @@
 </head>
 <body>
     <img src="https://image.pollinations.ai/prompt/pictureofamonkeyin1776revolutionarywarstyle" alt="AI generated artwork" width="500" height="200">
-    <form action="/submit_page" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" placeholder="Enter your username">
-      <input type="submit" value="Submit">
-    </form>
+    <input type="text" id="myTextBox" placeholder="Enter text here">
+    <button onclick="updateVariable()">Store Value</button>
+    <button onclick="updateTextBox()">Display Variable</button>
+    <p>Current Variable Value: <span id="displayVar"></span></p>
+
 
 
 </body>
 </html>
+
 
 
 
