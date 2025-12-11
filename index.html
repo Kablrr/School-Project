@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1776 AI Portrait Converter</title>
+</head>
+<body>
+    <h1>Convert Your Photo to a 1776 Style Portrait</h1>
+
+    <input type="file" id="upload" accept="image/*" />
+    <button onclick="convert()">Convert</button>
+
+    <h2>Result:</h2>
+    <img id="result" style="width:300px;">
+
+    <script>
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function convert() {
+            const fileInput = document.getElementById("upload");
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please upload an image first!");
+                return;
+            }
+
+            // Convert the image to Base64
+            const base64Image = await fileToBase64(file);
+
+            // Create Pollinations prompt
+            const prompt = `A realistic painting in the style of 1776 of the person in this image: ${base64Image}`;
+
+            const apiURL =
+                "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
+
+            // Display the result
+            document.getElementById("result").src = apiURL;
+        }
+    </script>
+</body>
+</html>
