@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>1776 School Project</title>
-</head>
-<body>
-    <h1>Convert Your Photo to a 1776 Style Portrait</h1>
-
-    <input type="file" id="upload" accept="image/*" />
-    <button onclick="convert()">Convert</button>
-
-    <h2>Result:</h2>
-    <img id="result" style="width:300px;">
-
 <script>
 // STEP 1: Convert file → Base64
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]); 
+        reader.onload = () => resolve(reader.result.split(',')[1]);
         reader.onerror = reject;
         reader.readAsDataURL(file);
     });
@@ -25,7 +11,7 @@ function fileToBase64(file) {
 
 // STEP 2: Upload image to imgbb
 async function uploadToImgbb(base64) {
-    const apiKey = "8deb5ec45c23628ae93656ff4891b341";
+    const apiKey = 8deb5ec45c23628ae93656ff4891b341; // <-- Replace this
 
     const formData = new FormData();
     formData.append("key", apiKey);
@@ -37,7 +23,14 @@ async function uploadToImgbb(base64) {
     });
 
     const data = await res.json();
-    return data.data.url; // public image link
+    console.log("IMGBB RESPONSE:", data);
+
+    if (!data.success) {
+        alert("Upload to imgbb failed:\n" + JSON.stringify(data, null, 2));
+        return null;
+    }
+
+    return data.data.url;
 }
 
 // STEP 3: Convert using Pollinations
@@ -48,22 +41,18 @@ async function convert() {
         return;
     }
 
-    // Convert file → base64
     const base64 = await fileToBase64(file);
 
-    // Upload to imgbb → get public URL
     const imageURL = await uploadToImgbb(base64);
+    if (!imageURL) return; // Stop if upload failed
 
-    // Build Pollinations prompt
-    const prompt = "A realistic painting in the style of 1776 of the person in this image: " + imageURL;
+    const prompt =
+        "A realistic painting in the style of 1776 of the person in this image: " + imageURL;
+
     const apiURL = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
 
-    // Show result
     document.getElementById("result").src = apiURL;
 }
 </script>
-
-</body>
-</html>
 
 
