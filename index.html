@@ -1,17 +1,252 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>1776 School Project</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stable Diffusion img2img — 1776 Revolutionary War Style</title>
+  <style>
+    :root{--bg:#0b1020;--card:#0f1724;--muted:#9aa4b2;--accent:#d9b08c}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:linear-gradient(180deg,#071020 0%,#081426 100%);color:#e6eef6}
+    .wrap{max-width:980px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:20px}
+    .card{background:var(--card);border-radius:12px;padding:14px;margin-top:14px;box-shadow:0 6px 18px rgba(2,6,23,.6)}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=text], input[type=number], textarea, select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:transparent;color:inherit;font-size:14px}
+    textarea{min-height:88px}
+    .row{display:flex;gap:12px}
+    .col{flex:1}
+    .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .btn{appearance:none;border:0;padding:10px 14px;border-radius:10px;background:var(--accent);color:#081020;font-weight:700;cursor:pointer}
+    .small{font-size:12px;color:var(--muted)}
+    #preview{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .preview-card{background:#081323;padding:8px;border-radius:8px;width:320px}
+    .preview-card img{width:100%;display:block;border-radius:6px}
+    footer.small{margin-top:18px;color:var(--muted)}
+    .params{display:flex;gap:8px;flex-wrap:wrap}
+    .param{background:rgba(255,255,255,.02);padding:6px 8px;border-radius:8px;font-size:13px}
+    .progress{height:8px;background:rgba(255,255,255,.04);border-radius:8px;overflow:hidden}
+    .progress > b{display:block;height:100%;width:0%;background:linear-gradient(90deg,#ffd8b2,#d9b08c)}
+    .note{font-size:12px;color:#ffedc7}
+    .danger{color:#ff9aa2}
+    @media (max-width:640px){.row{flex-direction:column}}
+  </style>
 </head>
 <body>
-    <img src="https://image.pollinations.ai/prompt/pictureofamonkeyin1776revolutionarywarstyle" alt="AI generated artwork" width="500" height="200">
-    <input type="text" id="myTextBox" placeholder="Enter text here">
-    <button onclick="updateVariable()">Store Value</button>
-    <button onclick="updateTextBox()">Display Variable</button>
-    <p>Current Variable Value: <span id="displayVar"></span></p>
+  <div class="wrap">
+    <header>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#d9b08c"/><path d="M7 17L11 7l4 10" stroke="#081020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <h1>Img2Img — Revolutionary War (1776) Style</h1>
+        <div class="small">Single-file HTML UI. Connects to a Stable Diffusion img2img API (e.g. AUTOMATIC1111).</div>
+      </div>
+    </header>
 
+    <div class="card">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1">
+          <label>API Base URL</label>
+          <input id="apiUrl" type="text" placeholder="http://localhost:7860" value="http://127.0.0.1:7860" />
+          <div class="small">Point this to your AUTOMATIC1111 / sd-webui or compatible server. CORS must be enabled on the server for browser usage.</div>
+        </div>
+        <div style="width:220px">
+          <label>Sampler</label>
+          <select id="sampler">
+            <option>DPM++ 2M Karras</option>
+            <option>Euler a</option>
+            <option>DDIM</option>
+            <option>PLMS</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
+    <div class="card">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="width:220px">
+          <label>Choose source photo</label>
+          <input id="file" type="file" accept="image/*" />
+        </div>
+        <div style="flex:1">
+          <label>Prompt (target style)</label>
+          <textarea id="prompt">A dramatic 18th-century Revolutionary War oil painting: Continental Army officer on a small wooden boat, waving a flag, stormy winter night, heavy painterly brushstrokes, aged canvas texture, Rembrandt-style chiaroscuro, muted ochre and umber palette, period-accurate uniform and tricorn hat, cinematic composition, highly detailed, visible impasto brushwork, subtle craquelure</textarea>
+        </div>
+      </div>
 
+      <div class="controls" style="margin-top:12px">
+        <div>
+          <label>Negative prompt</label>
+          <input id="negative" type="text" placeholder="e.g. modern clothing, watermark, signature" value="blurry, lowres, watermark, signature, modern clothing, smartphone, photorealistic modern lens flare, deformed anatomy" />
+        </div>
+
+        <div>
+          <label>Width</label>
+          <input id="width" type="number" min="64" step="64" value="1024" />
+        </div>
+
+        <div>
+          <label>Height</label>
+          <input id="height" type="number" min="64" step="64" value="768" />
+        </div>
+
+        <div>
+          <label>Steps</label>
+          <input id="steps" type="number" min="1" max="150" value="30" />
+        </div>
+
+        <div>
+          <label>CFG Scale</label>
+          <input id="cfg" type="number" step="0.1" min="1" max="30" value="7.0" />
+        </div>
+
+        <div>
+          <label>Denoising strength</label>
+          <input id="denoise" type="number" step="0.01" min="0" max="1" value="0.48" />
+        </div>
+
+        <div>
+          <label>Seed (leave -1 for random)</label>
+          <input id="seed" type="number" value="-1" />
+        </div>
+
+        <div>
+          <label>Enable loopback passes</label>
+          <select id="loopback"><option value="0">0 (off)</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+        </div>
+
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button id="run" class="btn">Run img2img</button>
+        <div class="small" id="status">Idle</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <div class="progress" aria-hidden><b id="bar"></b></div>
+      </div>
+
+      <div id="preview"></div>
+
+      <footer class="small">
+        This page calls your Stable Diffusion server's <code>/sdapi/v1/img2img</code> endpoint. If you run AUTOMATIC1111 locally, make sure to enable CORS or use a local proxy. Do not expose your server publicly without proper authentication.
+      </footer>
+    </div>
+
+  </div>
+
+  <script>
+    // Helper: convert File -> dataURL
+    function fileToDataURL(file){
+      return new Promise((res,rej)=>{
+        const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file);
+      })
+    }
+
+    // Build request payload for AUTOMATIC1111 sdapi v1 img2img
+    function buildPayload(dataUrl, opts){
+      return {
+        init_images: [dataUrl.split(',')[1]], // AUTOMATIC1111 expects base64 without data: prefix
+        prompt: opts.prompt,
+        negative_prompt: opts.negative,
+        steps: opts.steps,
+        sampler_name: opts.sampler,
+        cfg_scale: opts.cfg,
+        denoising_strength: opts.denoise,
+        width: opts.width,
+        height: opts.height,
+        seed: opts.seed===-1? -1 : Number(opts.seed),
+        // keep other fields default; you may add 'alwayson_scripts' for LoRAs, ControlNet, etc.
+      }
+    }
+
+    // Send request to API and return response json
+    async function callImg2Img(apiBase, payload){
+      const url = apiBase.replace(/\/$/, '') + '/sdapi/v1/img2img';
+      const resp = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+      if(!resp.ok) throw new Error('Server error: '+resp.status);
+      return await resp.json();
+    }
+
+    // Display image base64 in preview
+    function showResult(base64, label){
+      const wrap=document.getElementById('preview');
+      const card=document.createElement('div');card.className='preview-card';
+      const img=document.createElement('img');img.src='data:image/png;base64,'+base64;
+      const p=document.createElement('div');p.className='small';p.textContent=label||'result';
+      const btn=document.createElement('button');btn.className='btn';btn.textContent='Download PNG';btn.style.marginTop='8px';
+      btn.addEventListener('click',()=>{
+        const a=document.createElement('a');a.href=img.src;a.download='sd_img2img_result.png';a.click();
+      });
+      card.appendChild(img);card.appendChild(p);card.appendChild(btn);wrap.prepend(card);
+    }
+
+    // Update status & progress
+    function setStatus(text, pct){
+      document.getElementById('status').textContent = text;
+      const bar=document.getElementById('bar');
+      bar.style.width = (pct? pct*100 : 0) + '%';
+    }
+
+    document.getElementById('run').addEventListener('click', async ()=>{
+      const file = document.getElementById('file').files[0];
+      if(!file){ alert('Please choose a source image first.'); return; }
+
+      const apiBase = document.getElementById('apiUrl').value.trim();
+      const prompt = document.getElementById('prompt').value;
+      const negative = document.getElementById('negative').value;
+      const sampler = document.getElementById('sampler').value;
+      const width = Number(document.getElementById('width').value);
+      const height = Number(document.getElementById('height').value);
+      const steps = Number(document.getElementById('steps').value);
+      const cfg = Number(document.getElementById('cfg').value);
+      const denoise = Number(document.getElementById('denoise').value);
+      const seed = Number(document.getElementById('seed').value);
+      const loop = Number(document.getElementById('loopback').value);
+
+      try{
+        setStatus('Reading image...', 0);
+        const dataUrl = await fileToDataURL(file);
+
+        let currentDataUrl = dataUrl;
+        for(let pass=0; pass<=loop; pass++){
+          setStatus('Running pass '+(pass+1)+' of '+(loop+1), pass/(loop+1));
+          const payload = buildPayload(currentDataUrl, {prompt, negative, sampler, width, height, steps, cfg, denoise, seed});
+
+          // call API
+          const json = await callImg2Img(apiBase, payload);
+          if(!json || !json.images || !json.images.length) throw new Error('No image in response');
+
+          // images are base64 PNG strings
+          const outBase64 = json.images[0];
+          showResult(outBase64, `Pass ${pass+1}`);
+
+          // prepare for loopback (use returned image as input for next pass)
+          currentDataUrl = 'data:image/png;base64,' + outBase64;
+
+          // small progress update
+          setStatus('Completed pass '+(pass+1), (pass+1)/(loop+1));
+
+          // if seed was -1 keep random; otherwise keep same seed to reproduce
+        }
+
+        setStatus('Done', 1);
+      }catch(err){
+        console.error(err);
+        setStatus('Error: '+err.message, 0);
+        alert('Error: '+err.message+'\nCheck console for details.');
+      }
+
+    })
+  </script>
+
+  <!--
+    NOTES FOR USE:
+    - This single-file UI expects a Stable Diffusion server implementing the AUTOMATIC1111 sdapi v1 img2img endpoint
+      (e.g. AUTOMATIC1111 WebUI at http://127.0.0.1:7860).
+    - The browser must be able to reach the server (CORS must be allowed on the server). If CORS is disabled you'll need to run a local proxy or open the UI in the same origin.
+    - To enable LoRA, ControlNet, or other advanced features you can extend the JSON payload with 'alwayson_scripts' or 'controlnet' fields as supported by your server.
+    - This UI intentionally keeps things simple for learning and experimentation. If you plan to expose a public service, add authentication and server-side rate limits.
+  -->
 </body>
 </html>
 
