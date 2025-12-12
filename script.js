@@ -35,15 +35,4 @@ function generateImage() {
 
     img.src = imageUrl; // This triggers the request to the API and starts image generation
 }
-function getValue() {
-    // Get the input element by its ID
-    const inputElement = document.getElementById('myTextInput');
-    
-    // Access the 'value' property, which is always a string
-    const storedValue = inputElement.value;
-    
-    // Display the result (for demonstration)
-    document.getElementById('outputArea').textContent = "Stored value: " + storedValue;
-    console.log(typeof storedValue); // This will output "string"
-}
 
