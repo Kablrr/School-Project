@@ -12,7 +12,7 @@ function generateImage() {
     imageElement.style.display = 'none'; // Hide previous image
 
     // Add "from 1776" to every prompt
-    const finalPrompt = prompt + " from 1776";
+    const finalPrompt = prompt + "American Revolutionary War era, 18th-century colonial American style, oil painting realism, muted earthy tones, tricorne hats, colonial clothing, vintage texture";
 
     // Encode the final prompt for the URL
     const encodedPrompt = encodeURIComponent(finalPrompt);
@@ -36,3 +36,5 @@ function generateImage() {
 
     img.src = imageUrl;
 }
+const stylePreset = "American Revolutionary War era, 18th-century colonial American style, oil painting realism, muted earthy tones, tricorne hats, colonial clothing, vintage texture";
+
