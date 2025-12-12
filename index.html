@@ -1,16 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <Title> School Project </Title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollinations AI Image Generator</title>
+    <link rel="stylesheet" href="style.css"> <!-- Optional: for styling -->
 </head>
 <body>
-  <h1>SCHOOL PROJECT</h1>
-  <img src="https://image.pollinations.ai/prompt/monkeywithasombrero" alt="Dynamic Image">
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>AI Image Generator with Pollinations.ai</h1>
+        <p>Enter a descriptive prompt to generate an image:</p>
+        <input type="text" id="promptInput" placeholder="e.g., A minimalist abstract artwork representing data networks in blue and gold">
+        <button onclick="generateImage()">Generate Image</button>
+        <div id="imageContainer">
+            <img id="generatedImage" src="" alt="AI Generated Image" style="display: none;">
+            <p id="loadingStatus"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
