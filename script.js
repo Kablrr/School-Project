@@ -9,21 +9,20 @@ function generateImage() {
     }
 
     loadingStatus.textContent = "Generating image... this might take a moment.";
-    imageElement.style.display = 'none'; // Hide previous image
+    imageElement.style.display = 'none';
 
-    // Add "from 1776" to every prompt
-    const finalPrompt = prompt + ", American Revolutionary War era, 18th-century colonial American style, oil painting realism, muted earthy tones, tricorne hats, colonial clothing, vintage texture";
+    // Add 1776 style to every prompt
+    const finalPrompt = 
+        prompt + ", American Revolutionary War era, 18th-century colonial American style, oil painting realism, muted earthy tones, tricorne hats, colonial clothing, vintage texture";
 
-    // Encode the final prompt for the URL
     const encodedPrompt = encodeURIComponent(finalPrompt);
 
-    // Construct the Pollinations API URL
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&seed=${Math.floor(Math.random() * 1000000)}&model=flux`;
+    // Main Pollinations URL
+    let imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&seed=${Math.floor(Math.random()*999999)}`;
 
-    // Test the image load
     const img = new Image();
-    img.crossOrigin = 'anonymous';
-    
+    img.crossOrigin = "anonymous";
+
     img.onload = () => {
         loadingStatus.textContent = "";
         imageElement.src = imageUrl;
@@ -31,9 +30,12 @@ function generateImage() {
     };
 
     img.onerror = () => {
-        loadingStatus.textContent = "Failed to load image. Try a different prompt or check the console for errors.";
+        loadingStatus.textContent = "Retrying with fallback server...";
+        imageElement.src = `https://pollinations.ai/p/${encodedPrompt}`;
+        imageElement.style.display = 'block';
     };
 
     img.src = imageUrl;
 }
+
 
