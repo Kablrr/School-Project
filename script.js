@@ -15,3 +15,22 @@ window.onload = function() {
         document.getElementById("displayArea").textContent = "No data saved yet.";
     }
 };
+// Function to load data when the page loads
+window.onload = function() {
+    // 1. Get the data from localStorage using its key
+    const storedValue = localStorage.getItem("savedUserInput");
+
+    // 2. Check if any data was actually found
+    if (storedValue) {
+        // 3. Find the HTML elements by their IDs
+        const textBox = document.getElementById("myTextBox");
+        const displayArea = document.getElementById("displayArea");
+
+        // 4. Send the data back into the HTML elements
+        textBox.value = storedValue;           // Puts data back into the input box
+        displayArea.textContent = storedValue; // Displays data in the <span> element
+    } else {
+        document.getElementById("displayArea").textContent = "No data saved yet.";
+    }
+};
+
