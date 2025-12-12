@@ -17,7 +17,7 @@ function generateImage() {
     // Construct the Pollinations API URL
     // The basic structure is https://image.pollinations.ai/prompt/{your_prompt}
     // You can add parameters like width, height, seed, and model
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&seed=${Math.floor(Math.random() * 1000000)}&model=flux`;
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&seed=${Math.floor(Math.random() * 1000000)}&model=flux`from1776;
 
     // Test if the image loads properly using an Image object
     const img = new Image();
