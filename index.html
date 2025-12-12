@@ -6,8 +6,19 @@
 
 </head>
 <body>
-  <h1>Rhino :)</h1>
-  <input type="text">
+  <h1>SCHOOL PROJECT</h1>
+  <form>
+    <label for="userData">Enter your text:</label>
+    <!-- Single-line text input -->
+    <input type="text" id="userData" name="userData">
+    
+    <!-- Or, multi-line text area -->
+    <!-- <textarea id="userData" name="userData" rows="4" cols="50"></textarea> -->
+
+    <button type="button" onclick="saveData()">Save Data</button>
+  </form>
+
+  <br>
   <img src="https://image.pollinations.ai/prompt/pandawithahat" alt="AI generated image">
   <br>
   <img id="myImage" src="https://image.pollinations.ai/prompt/bearwithahat" alt="Dynamic Image">
@@ -18,6 +29,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
