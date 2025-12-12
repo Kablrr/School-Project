@@ -1,31 +1,37 @@
-// Function to generate and set a new image source
-function generateAndDisplayImage(prompt) {
-    const encodedPrompt = encodeURIComponent(prompt);
-    // Include parameters for width, height, and model as needed
-    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&model=flux`;
-    
-    document.getElementById('aiImage').src = imageUrl;
-}
+function generateImage() {
+    const prompt = document.getElementById('promptInput').value;
+    const imageElement = document.getElementById('generatedImage');
+    const loadingStatus = document.getElementById('loadingStatus');
 
-// Call the function with a specific prompt
-generateAndDisplayImage("A minimalist abstract artwork of a cat in space");
-async function generateText(prompt) {
-    const url = `https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai&temperature=0.8`;
-    
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const text = await response.text();
-        console.log('Generated Text:', text);
-        // Display the text on your webpage (e.g., in a <p> tag)
-        // document.getElementById('textOutput').textContent = text;
-    } catch (error) {
-        console.error('Error fetching text:', error);
+    if (!prompt) {
+        alert("Please enter a prompt.");
+        return;
     }
+
+    loadingStatus.textContent = "Generating image... this might take a moment.";
+    imageElement.style.display = 'none'; // Hide previous image
+
+    // Encode the prompt for the URL
+    const encodedPrompt = encodeURIComponent(prompt);
+
+    // Construct the Pollinations API URL
+    // The basic structure is https://image.pollinations.ai/prompt/{your_prompt}
+    // You can add parameters like width, height, seed, and model
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&seed=${Math.floor(Math.random() * 1000000)}&model=flux`;
+
+    // Test if the image loads properly using an Image object
+    const img = new Image();
+    img.crossOrigin = 'anonymous'; // Needed if you want to use the image with canvas later
+    
+    img.onload = () => {
+        loadingStatus.textContent = "";
+        imageElement.src = imageUrl;
+        imageElement.style.display = 'block';
+    };
+
+    img.onerror = () => {
+        loadingStatus.textContent = "Failed to load image. Try a different prompt or check the console for errors.";
+    };
+
+    img.src = imageUrl; // This triggers the request to the API and starts image generation
 }
-
-// Call the function with a specific prompt
-generateText("Write a short story about a robot learning to love");
-
