@@ -36,5 +36,4 @@ function generateImage() {
 
     img.src = imageUrl;
 }
-const stylePreset = "American Revolutionary War era, 18th-century colonial American style, oil painting realism, muted earthy tones, tricorne hats, colonial clothing, vintage texture";
 
