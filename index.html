@@ -7,17 +7,11 @@
 </head>
 <body>
   <h1>SCHOOL PROJECT</h1>
-  <form>
-    <label for="userData">Enter your text:</label>
-    <!-- Single-line text input -->
-    <input type="text" id="userData" name="userData">
-    
-    <!-- Or, multi-line text area -->
-    <!-- <textarea id="userData" name="userData" rows="4" cols="50"></textarea> -->
-
-    <button type="button" onclick="saveData()">Save Data</button>
-  </form>
-
+    <label for="myTextBox">Enter Text:</label><br>
+    <input type="text" id="myTextBox" placeholder="Type something here">
+    <!-- Call the saveData function defined in script.js -->
+    <button onclick="saveData()">Save to Local Storage</button>
+    <p>Saved Data: <span id="displayArea"></span></p>
   <br>
   <img src="https://image.pollinations.ai/prompt/pandawithahat" alt="AI generated image">
   <br>
@@ -29,6 +23,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
