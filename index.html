@@ -3,25 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1776 School Project</title>
-    <link rel="stylesheet" href="stylerevamped.css"> <!-- Optional: for styling -->
+    <title>1776 Image Generator</title>
+    <link rel="stylesheet" href="stylerevamped.css">
 </head>
 <body>
     <div class="container">
-        <h1>Generate Image In the style of an image from 1776</h1>
+        <h1>1776 Style Image Generator</h1>
+
+        <!-- TEXT TO IMAGE -->
         <p>Enter what you would like to generate:</p>
         <input type="text" id="promptInput" placeholder="Prompt">
-        <button onclick="generateImage()">Generate Image</button>
-        <div id="imageContainer">
-        <img id="generatedImage" src="https://image.pollinations.ai/prompt" alt="AI Generated Image" style="display: none;">
-            <p id="loadingStatus"></p>
-        <p>Upload an image for img2img (optional):</p>
+        <button onclick="generateImage()">Generate (Prompt → Image)</button>
+
+        <hr>
+
+        <!-- IMG2IMG -->
+        <p>Upload an image to convert it into 1776 style:</p>
         <input type="file" id="imgInput" accept="image/*">
+        <button onclick="convertImg2Img()">Convert (Img2Img → 1776)</button>
+
+        <div id="imageContainer">
+            <img id="generatedImage" src="" style="display:none;">
+            <p id="loadingStatus"></p>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
+
 
 
 
