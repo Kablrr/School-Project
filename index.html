@@ -4,49 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kabir Malhi - 1776 Project</title>
-  <link rel="stylesheet" href="styletwo.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Cursor glow -->
   <div id="cursorGlow"></div>
 
   <div class="container">
-
-    <!-- Text-to-Image Generator -->
+    <!-- Text to Image -->
     <h1>Image Generator</h1>
     <p>See your prompt turn into something from colonial times!</p>
     <input type="text" id="prompt" placeholder="Enter your prompt...">
     <button id="generateBtn">Generate Image</button>
-    <div class="loading" id="loading">Generating image...</div>
+    <div id="loading" class="loading">Generating image...</div>
     <div class="image-container" id="imageContainer"></div>
 
-    <!-- Customizable Avatar Generator -->
-    <h1>Customizable 1776 Avatar</h1>
-    <div id="avatarControls">
-      <label for="outfitSelect">Outfit:</label>
+    <!-- Avatar Generator -->
+    <h1>1776 Avatar Generator</h1>
+    <p>Customize your outfit, background, and accessories, then generate your 1776 avatar!</p>
+    <input type="text" id="avatarPrompt" placeholder="Enter avatar description...">
+    <div class="avatar-options">
       <select id="outfitSelect">
-        <option value="student clothes">Student Clothes</option>
-        <option value="colonial uniform">Colonial Uniform</option>
-        <option value="apron and vest">Apron & Vest</option>
+        <option value="school uniform, colonial style">School Outfit</option>
+        <option value="formal 18th century dress">Formal Outfit</option>
+        <option value="apprentice attire">Apprentice Outfit</option>
       </select>
-
-      <label for="backgroundSelect">Background:</label>
       <select id="backgroundSelect">
-        <option value="schoolroom">Schoolroom</option>
-        <option value="street">Colonial Street</option>
-        <option value="classroom">Classroom</option>
+        <option value="colonial classroom">Colonial Classroom</option>
+        <option value="schoolyard">Schoolyard</option>
+        <option value="library">Library</option>
       </select>
-
-      <label for="propsSelect">Accessories:</label>
-      <select id="propsSelect">
-        <option value="quill and ink">Quill & Ink</option>
-        <option value="books and scrolls">Books & Scrolls</option>
-        <option value="parchment">Parchment</option>
-      </select>
-
-      <button id="generateAvatar">Generate Avatar</button>
     </div>
-    <div class="image-container" id="avatarPreview"></div>
+    <button id="generateAvatarBtn">Generate Avatar</button>
+    <div id="loadingAvatar" class="loading">Generating avatar...</div>
+    <div class="image-container" id="avatarContainer"></div>
+
+    <hr>
 
     <!-- Quiz -->
     <h1>1776 History Quiz</h1>
@@ -56,14 +49,13 @@
       </div>
       <div id="question"></div>
       <div id="answers"></div>
-      <div id="quizControls">
+      <div class="quiz-buttons">
         <button id="submitBtn" disabled>Submit Answer</button>
         <button id="nextBtn" class="hidden">Next Question</button>
       </div>
       <div id="score" class="hidden"></div>
       <div id="grade" class="hidden"></div>
     </div>
-
   </div>
 
   <!-- Sound effects -->
