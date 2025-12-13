@@ -1,6 +1,5 @@
-
 /* Reset */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -9,31 +8,36 @@
 
 body {
   background: linear-gradient(135deg, #89f7fe, #66a6ff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
-.container {
+/* Cards */
+.card {
   background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   text-align: center;
 }
 
-h1 {
+h1, h2 {
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
 p {
-  color: #333;
+  color: #444;
   margin-bottom: 20px;
 }
+
+/* Inputs */
 input[type="text"] {
   width: 100%;
   padding: 12px 15px;
@@ -43,6 +47,7 @@ input[type="text"] {
   font-size: 16px;
 }
 
+/* Buttons */
 button {
   padding: 12px 20px;
   border: none;
@@ -51,13 +56,20 @@ button {
   font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: transform 0.15s ease, background 0.3s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background: #89f7fe;
+  transform: scale(1.03);
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Image */
 .image-container {
   margin-top: 20px;
 }
@@ -69,9 +81,46 @@ button:hover {
 }
 
 .loading {
-  margin-top: 10px;
-  color: #555;
-  font-style: italic;
   display: none;
+  font-style: italic;
+  color: #555;
+}
+
+/* Quiz */
+.quiz-card {
+  animation: fadeIn 0.5s ease;
+}
+
+.answers {
+  display: grid;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.answers button {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.answers button.correct {
+  background: #7dff9e;
+}
+
+.answers button.wrong {
+  background: #ff9e9e;
+}
+
+.hidden {
+  display: none;
+}
+
+.score {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
