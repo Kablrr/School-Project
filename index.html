@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1776 Style Image Generator</title>
-<style>
-    body { font-family: sans-serif; text-align: center; padding: 2rem; background: #f0f0f0; }
-    input { padding: 0.5rem; width: 300px; margin-bottom: 1rem; }
-    button { padding: 0.5rem 1rem; margin-left: 0.5rem; cursor: pointer; }
-    img { max-width: 80%; margin-top: 1rem; border: 2px solid #ccc; border-radius: 8px; }
-    #loading { display: none; font-weight: bold; margin-top: 1rem; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1776 Style Image Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Text-to-1776 Style Image</h1>
-<input type="text" id="promptInput" placeholder="Type something...">
-<button id="generateBtn">Generate</button>
-<div id="loading">Generating image...</div>
-<img id="result" src="" alt="Generated Image">
+    <div class="container">
+        <h1>Text-to-1776 Style Image Generator</h1>
+        
+        <!-- Input Box -->
+        <input type="text" id="promptInput" placeholder="Type something...">
 
-<script src="script.js"></script>
+        <!-- Generate Button -->
+        <button id="generateBtn">Generate</button>
+
+        <!-- Loading Indicator -->
+        <div id="loading">Generating image...</div>
+
+        <!-- Generated Image -->
+        <img id="result" src="" alt="Generated Image">
+
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
 
 
 
