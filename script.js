@@ -5,7 +5,7 @@ document.addEventListener("mousemove", e => {
   cursorGlow.style.left = e.clientX + "px";
 });
 
-/* FORCE HIDE LOADING TEXT */
+/* Hide loading texts initially */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loadingText").classList.add("hidden");
   document.getElementById("avatarLoading").classList.add("hidden");
@@ -46,7 +46,7 @@ generateAvatarBtn.onclick = () => {
   avatarContainer.innerHTML = "";
 
   const prompt =
-    `A smirking ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, ` +
+    `A smiling ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, ` +
     `with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting`;
 
   const img = new Image();
@@ -82,15 +82,24 @@ const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 const submitBtn = document.getElementById("submitBtn");
 const nextBtn = document.getElementById("nextBtn");
-const progressBar = document.getElementById("progressBar");
+const progressContainer = document.getElementById("progressContainer");
 const scoreEl = document.getElementById("score");
 
-function updateProgressBar() {
-  const segments = results.map(r => r ? "green" : "red");
-  const total = quizData.length;
-  const gradient = segments.map((color, i) => `${color} ${i*100/total}%, ${color} ${(i+1)*100/total}%`).join(", ");
-  progressBar.style.background = `linear-gradient(to right, ${gradient})`;
-  progressBar.style.width = "100%";
+/* Initialize quiz progress bar */
+function initProgressBar() {
+  progressContainer.innerHTML = "";
+  for (let i = 0; i < quizData.length; i++) {
+    const seg = document.createElement("div");
+    seg.classList.add("progress-segment");
+    progressContainer.appendChild(seg);
+  }
+}
+
+function markProgress(index, correct) {
+  const segments = document.querySelectorAll(".progress-segment");
+  if (segments[index]) {
+    segments[index].style.background = correct ? "green" : "red";
+  }
 }
 
 function loadQuestion() {
@@ -116,19 +125,19 @@ function loadQuestion() {
 
 submitBtn.onclick = () => {
   if (selected === null) return;
+
   const correct = quizData[current].c;
   const isCorrect = selected === correct;
   results.push(isCorrect);
   if (isCorrect) score++;
 
-  // Mark buttons correct/wrong
-  [...answersEl.children].forEach((b, i) => {
+  [...answersEl.children].forEach((b,i)=>{
     b.disabled = true;
-    if (i === correct) b.classList.add("correct");
-    else if (i === selected) b.classList.add("wrong");
+    if (i===correct) b.classList.add("correct");
+    else if (i===selected) b.classList.add("wrong");
   });
 
-  updateProgressBar();
+  markProgress(current, isCorrect);
   nextBtn.classList.remove("hidden");
 };
 
@@ -143,4 +152,5 @@ nextBtn.onclick = () => {
   }
 };
 
+initProgressBar();
 loadQuestion();
