@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>1776 Project</title>
-  <link rel="stylesheet" href="styletwo.css" />
+  <link rel="stylesheet" href="styletwo.css">
 </head>
 <body>
 
@@ -15,32 +15,30 @@
   <!-- TEXT TO IMAGE -->
   <div class="section">
     <h1>Text-to-Image Generator</h1>
-    <p>Create a colonial-era image from text</p>
-    <input id="prompt" type="text" placeholder="Enter prompt..." />
+    <input id="promptInput" type="text" placeholder="Enter a colonial scene..." />
     <button id="generateBtn">Generate Image</button>
-    <div id="loading" class="loading hidden">Generating image...</div>
+    <div id="loadingText" class="hidden">Generating image...</div>
     <div id="imageContainer" class="image-container"></div>
   </div>
 
   <!-- AVATAR -->
   <div class="section">
     <h1>1776 Avatar Generator</h1>
-    <p>Create your colonial student avatar</p>
 
     <div class="dropdowns">
       <select id="backgroundSelect">
         <option>Classroom</option>
         <option>Library</option>
-        <option>Courtyard</option>
-        <option>Tavern</option>
         <option>Town Square</option>
+        <option>Tavern</option>
+        <option>Courtyard</option>
       </select>
 
       <select id="outfitSelect">
         <option>Blue Coat</option>
         <option>Brown Coat</option>
-        <option>Formal Colonial Suit</option>
-        <option>Simple Farmer Clothes</option>
+        <option>Formal Suit</option>
+        <option>Farmer Clothes</option>
       </select>
 
       <select id="hatSelect">
@@ -51,10 +49,9 @@
       </select>
 
       <select id="accessorySelect">
-        <option>Quill</option>
         <option>Book</option>
+        <option>Quill</option>
         <option>Scroll</option>
-        <option>Ink Bottle</option>
         <option>None</option>
       </select>
 
@@ -65,4 +62,39 @@
       </select>
 
       <select id="raceSelect">
-        <
+        <option>European</option>
+        <option>African</option>
+        <option>Native American</option>
+        <option>Mixed Heritage</option>
+      </select>
+    </div>
+
+    <button id="generateAvatarBtn">Generate Avatar</button>
+    <div id="avatarLoading" class="hidden">Generating avatar...</div>
+    <div id="avatarContainer" class="image-container"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section">
+    <h1>1776 History Quiz</h1>
+
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+
+    <div id="question"></div>
+    <div id="answers"></div>
+
+    <div class="quiz-buttons">
+      <button id="submitBtn" disabled>Submit</button>
+      <button id="nextBtn" class="hidden">Next</button>
+    </div>
+
+    <div id="score" class="hidden"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
