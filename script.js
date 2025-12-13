@@ -1,24 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/* Cursor Glow with smooth animation */
-const cursorGlow = document.getElementById("cursorGlow");
-let mouseX = 0, mouseY = 0;
-let glowX = 0, glowY = 0;
+  /* Cursor Glow with smooth animation */
+  const cursorGlow = document.getElementById("cursorGlow");
+  let mouseX = 0, mouseY = 0;
+  let glowX = 0, glowY = 0;
 
-document.addEventListener("mousemove", e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+  document.addEventListener("mousemove", e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-function animateGlow() {
-  // Smoothly move glow toward the mouse
-  glowX += (mouseX - glowX) * 0.15;
-  glowY += (mouseY - glowY) * 0.15;
-  cursorGlow.style.transform = `translate(${glowX - 100}px, ${glowY - 100}px)`; // -100 to center (half of width/height)
-  requestAnimationFrame(animateGlow);
-}
-animateGlow();
-
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.15;
+    glowY += (mouseY - glowY) * 0.15;
+    cursorGlow.style.transform = `translate(${glowX - 100}px, ${glowY - 100}px)`;
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
 
   /* TEXT TO IMAGE */
   const generateBtn = document.getElementById("generateBtn");
@@ -30,21 +28,19 @@ animateGlow();
     if (!promptInput.value.trim()) return alert("Enter a prompt");
 
     loadingText.classList.remove("hidden");
-    imageContainer.innerHTML = ""; // clear previous image
+    imageContainer.innerHTML = "";
 
     const prompt = `${promptInput.value}, colonial America, 18th century, 1776, oil painting, historical lighting`;
-    const uniqueSeed = Date.now() + Math.random(); // ensure unique request
+    const uniqueSeed = Date.now() + Math.random();
 
     const img = new Image();
     img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${uniqueSeed}`;
-
     img.onload = () => loadingText.classList.add("hidden");
     img.onerror = () => {
       loadingText.classList.add("hidden");
       alert("Failed to load image");
     };
 
-    // Append after a small delay for smoother rendering
     setTimeout(() => imageContainer.appendChild(img), 50);
   };
 
@@ -58,7 +54,7 @@ animateGlow();
     avatarContainer.innerHTML = "";
 
     const prompt =
-      `A smiling ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, ` +
+      `A smiling ${ageSelect.value} ${raceSelect.value} with ${hairSelect.value} hair colonial student wearing ${outfitSelect.value}, ` +
       `with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting`;
 
     const uniqueSeed = Date.now() + Math.random();
@@ -99,21 +95,24 @@ animateGlow();
   const progressContainer = document.getElementById("progressContainer");
   const scoreEl = document.getElementById("score");
 
-  // Initialize progress bar segments
   function initProgressBar() {
     progressContainer.innerHTML = "";
     for (let i = 0; i < quizData.length; i++) {
       const seg = document.createElement("div");
       seg.classList.add("progress-segment");
+      seg.style.display = "inline-block";
+      seg.style.width = `${100/quizData.length}%`;
+      seg.style.height = "14px";
+      seg.style.background = "rgba(255,255,255,0.15)";
+      seg.style.margin = "0 1px";
+      seg.style.borderRadius = "3px";
       progressContainer.appendChild(seg);
     }
   }
 
   function markProgress(index, correct) {
     const segments = document.querySelectorAll(".progress-segment");
-    if (segments[index]) {
-      segments[index].style.background = correct ? "green" : "red";
-    }
+    if (segments[index]) segments[index].style.background = correct ? "green" : "red";
   }
 
   function loadQuestion() {
