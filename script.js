@@ -36,9 +36,11 @@ const backgroundSelect = document.getElementById("backgroundSelect");
 const outfitSelect = document.getElementById("outfitSelect");
 const hatSelect = document.getElementById("hatSelect");
 const accessorySelect = document.getElementById("accessorySelect");
+const ageSelect = document.getElementById("ageSelect");
+const raceSelect = document.getElementById("raceSelect");
 
 generateAvatarBtn.addEventListener("click", () => {
-  const prompt = `A colonial student wearing ${outfitSelect.value}, with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting, 18th century`;
+  const prompt = `A ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting, 18th century`;
   
   avatarContainer.innerHTML = "";
   avatarLoading.style.display = "block";
