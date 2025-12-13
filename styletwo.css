@@ -18,9 +18,10 @@ body {
 
 /* Cards */
 .card {
-  background: url('https://i.imgur.com/wxjR6Zf.jpg'); /* working parchment */
+  background: url('https://upload.wikimedia.org/wikipedia/commons/3/3d/Parchment_background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -150,4 +151,3 @@ button:disabled {
   75% { transform: scale(1.05) translateX(-1px); opacity: 0.9; }
   100% { transform: scale(1) translateX(0); opacity: 1; }
 }
-
