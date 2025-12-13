@@ -110,14 +110,16 @@ button:disabled {
   background: rgba(128,0,0,0.8) !important;
   color: #fff;
 }
-
 /* Cursor Glow */
 #cursorGlow {
   position: fixed;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,140,0,0.3), transparent 70%);
+  width: 150px;           /* slightly smaller for clarity */
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,140,0,0.4) 0%, rgba(255,140,0,0) 70%);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: top 0.05s, left 0.05s;
+  z-index: 9999;          /* make sure it's on top of everything */
+  transition: top 0.05s linear, left 0.05s linear;
 }
+
