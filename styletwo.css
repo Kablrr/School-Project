@@ -80,8 +80,15 @@ img {
     display: none; /* hide until generated */
 }
 
-/* Loading text */
 #loading {
-    display: none; /* hidden by default */
+    display: none;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
+#resultContainer img {
+    max-width: 100%;
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
