@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kabir Malhi - Project</title>
+  <title>Kabir Malhi - 1776 Project</title>
   <link rel="stylesheet" href="styletwo.css">
 </head>
 <body>
@@ -15,6 +15,7 @@
   <!-- TEXT TO IMAGE -->
   <div class="section">
     <h1>Text-to-Image Generator</h1>
+    <p>Convert your ideas into a colonial scene</p>
     <input id="promptInput" type="text" placeholder="Enter a colonial scene...">
     <button id="generateBtn">Generate Image</button>
     <div id="loadingText" class="hidden">Generating image...</div>
@@ -24,6 +25,7 @@
   <!-- AVATAR -->
   <div class="section">
     <h1>1776 Avatar Generator</h1>
+    <p>Customize your colonial student avatar</p>
 
     <div class="dropdowns">
       <select id="backgroundSelect">
@@ -32,8 +34,6 @@
         <option>Town Square</option>
         <option>Tavern</option>
         <option>Courtyard</option>
-        <option>Garden</option>
-        <option>Market</option>
       </select>
 
       <select id="outfitSelect">
@@ -41,8 +41,7 @@
         <option>Brown Coat</option>
         <option>Formal Suit</option>
         <option>Farmer Clothes</option>
-        <option>Robe</option>
-        <option>Apron</option>
+        <option>Plain Clothes</option>
       </select>
 
       <select id="hatSelect">
@@ -50,8 +49,6 @@
         <option>Cap</option>
         <option>Bonnet</option>
         <option>No Hat</option>
-        <option>Wide-brim Hat</option>
-        <option>Feathered Hat</option>
       </select>
 
       <select id="accessorySelect">
@@ -59,24 +56,20 @@
         <option>Quill</option>
         <option>Scroll</option>
         <option>None</option>
-        <option>Lantern</option>
-        <option>Pouch</option>
       </select>
 
       <select id="hairSelect">
-        <option>Short</option>
         <option>Long</option>
-        <option>Curl</option>
-        <option>Wavy</option>
-        <option>Bald</option>
+        <option>Short</option>
+        <option>Curly</option>
+        <option>Bun</option>
+        <option>None</option>
       </select>
 
       <select id="ageSelect">
-        <option>Child</option>
         <option>Young</option>
         <option>Teenage</option>
         <option>Adult</option>
-        <option>Old</option>
       </select>
 
       <select id="raceSelect">
@@ -84,7 +77,6 @@
         <option>African</option>
         <option>Native American</option>
         <option>Mixed Heritage</option>
-        <option>Asian</option>
       </select>
     </div>
 
@@ -105,10 +97,10 @@
     <div class="quiz-buttons">
       <button id="submitBtn" disabled>Submit</button>
       <button id="nextBtn" class="hidden">Next</button>
-      <button id="restartBtn" class="hidden">Take Again</button>
     </div>
 
     <div id="score" class="hidden"></div>
+    <button id="takeAgainBtn" class="hidden">Take Again</button>
   </div>
 
 </div>
