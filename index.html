@@ -8,22 +8,14 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Text-to-1776 Style Image Generator</h1>
-        
-        <!-- Input Box -->
-        <input type="text" id="promptInput" placeholder="Type something...">
-
-        <!-- Generate Button -->
-        <button id="generateBtn">Generate</button>
-
-        <!-- Loading Indicator -->
+    <div id="t2iSection">
+        <input type="text" id="promptInput" placeholder="Type your prompt..." />
+        <button id="generateBtn">Generate Image</button>
         <div id="loading">Generating image...</div>
-
-        <!-- Generated Image -->
-        <img id="result" src="image.pollinations.ai/prompt" alt="Generated Image">
-
+    <!-- REMOVE the placeholder img -->
+        <div id="resultContainer"></div>
     </div>
+
 
     <script src="script.js"></script>
 </body>
