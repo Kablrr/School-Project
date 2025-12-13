@@ -17,19 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!promptInput.value.trim()) return alert("Enter a prompt");
 
     loadingText.classList.remove("hidden");
-    imageContainer.innerHTML = "";
+    imageContainer.innerHTML = ""; // clear previous image
 
     const prompt = `${promptInput.value}, colonial America, 18th century, 1776, oil painting, historical lighting`;
+    const uniqueSeed = Date.now() + Math.random(); // ensure unique request
 
     const img = new Image();
-    img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+    img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${uniqueSeed}`;
+
     img.onload = () => loadingText.classList.add("hidden");
     img.onerror = () => {
       loadingText.classList.add("hidden");
       alert("Failed to load image");
     };
 
-    imageContainer.appendChild(img);
+    // Append after a small delay for smoother rendering
+    setTimeout(() => imageContainer.appendChild(img), 50);
   };
 
   /* AVATAR */
@@ -45,8 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
       `A smiling ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, ` +
       `with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting`;
 
+    const uniqueSeed = Date.now() + Math.random();
     const img = new Image();
-    img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+    img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${uniqueSeed}`;
 
     img.onload = () => avatarLoading.classList.add("hidden");
     img.onerror = () => {
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Failed to load avatar");
     };
 
-    avatarContainer.appendChild(img);
+    setTimeout(() => avatarContainer.appendChild(img), 50);
   };
 
   /* QUIZ */
@@ -82,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressContainer = document.getElementById("progressContainer");
   const scoreEl = document.getElementById("score");
 
+  // Initialize progress bar segments
   function initProgressBar() {
     progressContainer.innerHTML = "";
     for (let i = 0; i < quizData.length; i++) {
