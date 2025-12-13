@@ -140,3 +140,13 @@ function finishQuiz(){
 }
 
 loadQuestion();
+
+// Cursor-following glow
+const cursorGlow = document.getElementById("cursorGlow");
+
+document.addEventListener("mousemove", (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+  cursorGlow.style.left = x + "px";
+  cursorGlow.style.top = y + "px";
+});
