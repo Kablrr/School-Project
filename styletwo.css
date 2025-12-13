@@ -22,6 +22,7 @@ body {
   background: linear-gradient(180deg, #3a2c1a, #2a1f12);
   border-radius: 20px;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  text-align: center;
 }
 
 /* Cursor Glow */
@@ -43,13 +44,11 @@ body {
 }
 
 h1 {
-  text-align: center;
   margin-bottom: 15px;
   font-size: 2rem;
 }
 
 p {
-  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -66,6 +65,22 @@ input[type="text"], select {
 
 select {
   appearance: none;
+}
+
+/* Dropdowns row */
+.dropdowns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.dropdowns label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
 }
 
 /* Buttons */
@@ -89,6 +104,11 @@ button:hover {
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+#generateAvatarBtn {
+  display: block;
+  margin: 0 auto 15px auto;
 }
 
 /* Image containers */
@@ -118,7 +138,6 @@ button:disabled {
 #question {
   font-size: 1.3rem;
   margin-bottom: 15px;
-  text-align: center;
   font-weight: bold;
 }
 
@@ -161,6 +180,5 @@ button:disabled {
 }
 
 #score, #grade {
-  text-align: center;
   margin-top: 15px;
 }
