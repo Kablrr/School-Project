@@ -1,22 +1,95 @@
+/* General */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    max-width: 700px;
+    width: 100%;
+    padding: 20px;
     text-align: center;
-    padding: 20px;
 }
-input, button, textarea {
-    padding: 10px;
-    margin: 10px;
-    width: 300px;
+
+/* Headings */
+h1 {
+    margin-bottom: 20px;
+    color: #222;
 }
-img {
-    margin-top: 20px;
-    max-width: 80%;
-    border: 2px solid #333;
+h2 {
+    margin-bottom: 10px;
+    color: #555;
 }
-#dropZone {
-    border: 2px dashed #666;
-    padding: 20px;
-    margin: 10px auto;
-    width: 300px;
+
+/* Textareas and inputs */
+textarea, input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    resize: none;
+}
+textarea { height: 60px; }
+
+/* Buttons */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #5b5fc7;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
 }
+.btn:hover {
+    background-color: #4748a8;
+}
+
+/* Drag & Drop */
+#dropZone {
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#dropZone.hover {
+    border-color: #5b5fc7;
+    background-color: #e0e0ff;
+}
+
+/* Preview */
+#previewContainer {
+    margin-top: 10px;
+    display: none;
+}
+#preview {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Loading */
+.loading {
+    display: none;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #5b5fc7;
+}
+
+/* Result image */
+.result {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 8px;
+    border: 2px solid #5b5fc7;
+}
+
