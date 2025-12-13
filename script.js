@@ -1,3 +1,9 @@
+/* FORCE HIDE LOADING TEXT */
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("loadingText").classList.add("hidden");
+  document.getElementById("avatarLoading").classList.add("hidden");
+});
+
 /* TEXT TO IMAGE */
 const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
@@ -6,6 +12,7 @@ const loadingText = document.getElementById("loadingText");
 
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
+
   loadingText.classList.remove("hidden");
   imageContainer.innerHTML = "";
 
@@ -15,6 +22,8 @@ generateBtn.onclick = () => {
   )}?seed=${Date.now()}`;
 
   img.onload = () => loadingText.classList.add("hidden");
+  img.onerror = () => loadingText.classList.add("hidden");
+
   imageContainer.appendChild(img);
 };
 
@@ -33,7 +42,9 @@ generateAvatarBtn.onclick = () => {
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+
   img.onload = () => avatarLoading.classList.add("hidden");
+  img.onerror = () => avatarLoading.classList.add("hidden");
 
   avatarContainer.appendChild(img);
 };
@@ -68,34 +79,42 @@ function loadQuestion() {
   answersEl.innerHTML = "";
 
   questionEl.textContent = quizData[current].q;
-  progressBar.style.width = ((current+1)/quizData.length)*100 + "%";
-  progressBar.style.background = "orange";
+  progressBar.style.width = ((current + 1) / quizData.length) * 100 + "%";
 
-  quizData[current].a.forEach((t,i)=>{
-    const b=document.createElement("button");
-    b.textContent=t;
-    b.onclick=()=>{selected=i;submitBtn.disabled=false};
-    answersEl.appendChild(b);
+  quizData[current].a.forEach((text, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.onclick = () => {
+      selected = i;
+      submitBtn.disabled = false;
+    };
+    answersEl.appendChild(btn);
   });
 }
 
 submitBtn.onclick = () => {
+  if (selected === null) return;
+
   const correct = quizData[current].c;
-  const pct = ((current+1)/quizData.length)*100;
+  const percent = ((current + 1) / quizData.length) * 100;
 
-  progressBar.style.background =
-    selected === correct
-    ? `linear-gradient(to right, green ${pct}%, rgba(255,255,255,0.15) ${pct}%)`
-    : `linear-gradient(to right, red ${pct}%, rgba(255,255,255,0.15) ${pct}%)`;
+  if (selected === correct) {
+    score++;
+    progressBar.style.background =
+      `linear-gradient(to right, green ${percent}%, rgba(255,255,255,0.15) ${percent}%)`;
+  } else {
+    progressBar.style.background =
+      `linear-gradient(to right, red ${percent}%, rgba(255,255,255,0.15) ${percent}%)`;
+  }
 
-  if (selected === correct) score++;
   nextBtn.classList.remove("hidden");
 };
 
 nextBtn.onclick = () => {
   current++;
-  if (current < quizData.length) loadQuestion();
-  else {
+  if (current < quizData.length) {
+    loadQuestion();
+  } else {
     questionEl.textContent = "Quiz Complete!";
     answersEl.innerHTML = "";
     scoreEl.textContent = `Score: ${score}/${quizData.length}`;
