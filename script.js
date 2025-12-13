@@ -17,15 +17,8 @@ generateBtn.addEventListener("click", () => {
   const img = document.createElement("img");
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
-  img.onload = () => {
-    loading.style.display = "none";
-    generateBtn.disabled = false;
-  };
-  img.onerror = () => {
-    loading.style.display = "none";
-    generateBtn.disabled = false;
-    alert("Image failed to load.");
-  };
+  img.onload = () => { loading.style.display = "none"; generateBtn.disabled = false; };
+  img.onerror = () => { loading.style.display = "none"; generateBtn.disabled = false; alert("Image failed to load."); };
 
   imageContainer.appendChild(img);
 });
@@ -54,9 +47,7 @@ const quizData = [
   { q:"How many colonies declared independence?", a:["12","13","14","15"], c:1 }
 ];
 
-let current = 0;
-let score = 0;
-let selectedAnswer = null;
+let current = 0, score = 0, selectedAnswer = null;
 
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
@@ -87,6 +78,7 @@ function loadQuestion() {
     const btn = document.createElement("button");
     btn.textContent = text;
     btn.onclick = () => {
+      if (submitBtnEl.disabled === false) return; // prevent reselect after submit
       [...answersEl.children].forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
       selectedAnswer = i;
@@ -98,7 +90,6 @@ function loadQuestion() {
 
 submitBtnEl.onclick = () => {
   if (selectedAnswer === null) return;
-
   const correct = quizData[current].c;
   [...answersEl.children].forEach(b => b.disabled = true);
 
@@ -118,11 +109,8 @@ submitBtnEl.onclick = () => {
 
 nextBtnEl.onclick = () => {
   current++;
-  if (current < quizData.length) {
-    loadQuestion();
-  } else {
-    finishQuiz();
-  }
+  if (current < quizData.length) loadQuestion();
+  else finishQuiz();
 };
 
 function finishQuiz() {
