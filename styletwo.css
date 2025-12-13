@@ -8,7 +8,7 @@
 
 body {
   background: #edc4b3; /* Almond Silk */
-  color: #774936; /* Clay Soil for text */
+  color: #4b2e2a; /* Dark brown for readability */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -17,27 +17,30 @@ body {
   overflow-x: hidden;
 }
 
-/* Container */
 .container {
   max-width: 950px;
   width: 100%;
-  background: linear-gradient(180deg, #e6b8a2, #cd9777); /* Peach Fuzz -> Light Bronze */
+  background: linear-gradient(180deg, #d69f7e, #cd9777); /* Light Bronze shades */
   border-radius: 25px;
   padding: 40px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   text-align: center;
 }
 
-/* Sections */
 .section {
   margin-bottom: 60px;
 }
 
-/* Section headers */
 h1 {
   font-size: 2.2rem;
   margin-bottom: 20px;
-  color: #774936; /* Clay Soil */
+  color: #4b2e2a; /* Dark brown */
+}
+
+p {
+  color: #4b2e2a; /* Dark brown paragraphs for contrast */
+  margin-bottom: 15px;
+  font-size: 1rem;
 }
 
 /* Inputs and dropdowns */
@@ -47,17 +50,16 @@ input[type="text"], select {
   border-radius: 10px;
   border: 1px solid #b07d62; /* Faded Copper */
   font-size: 16px;
-  background: #d69f7e; /* Light Bronze */
-  color: #774936;
+  background: #f5e6dc; /* light beige for readability */
+  color: #4b2e2a;
   outline: none;
 }
 
 select option {
-  background: #deab90; /* Light Bronze highlight */
-  color: #774936;
+  background: #f5e6dc; /* light beige */
+  color: #4b2e2a;
 }
 
-/* Dropdown wrapper */
 .dropdowns {
   display: flex;
   flex-wrap: wrap;
@@ -126,6 +128,7 @@ button:disabled {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 15px;
+  color: #4b2e2a;
 }
 
 #answers button {
@@ -134,8 +137,8 @@ button:disabled {
   max-width: 400px;
   margin: 8px auto;
   border: 1px solid #9d6b53; /* Cinnamon Wood */
-  background: #deab90; /* Light Bronze */
-  color: #774936;
+  background: #f5e6dc; /* light beige */
+  color: #4b2e2a;
   border-radius: 10px;
   font-size: 16px;
   transition: all 0.2s ease;
@@ -149,16 +152,15 @@ button:disabled {
 }
 
 #answers button.correct {
-  background: #4CAF50; /* green for correct */
+  background: #4CAF50;
   color: #fff;
 }
 
 #answers button.wrong {
-  background: #e74c3c; /* red for wrong */
+  background: #e74c3c;
   color: #fff;
 }
 
-/* Quiz buttons wrapper */
 .quiz-buttons {
   display: flex;
   justify-content: center;
@@ -176,5 +178,4 @@ button:disabled {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   mix-blend-mode: overlay;
-  transition: top 0.05s, left 0.05s;
 }
