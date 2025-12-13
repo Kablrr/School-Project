@@ -6,61 +6,66 @@
   font-family: 'Georgia', serif;
 }
 
-/* Body */
+/* Body and container */
 body {
-  background-color: #2e2a22;
-  color: #f7f1e0;
-  position: relative;
+  background-color: #1e1c1c;
+  color: #f0e6d2;
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* Cursor glow */
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(180deg, #3a2c1a, #2a1f12);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Cursor Glow */
 #cursorGlow {
   position: fixed;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(255,140,0,0.5) 0%, rgba(255,140,0,0) 80%);
-  pointer-events: none;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,140,0,0.3) 0%, rgba(255,140,0,0) 80%);
+  mix-blend-mode: overlay;
   transform: translate(-50%, -50%);
-  mix-blend-mode: screen;
   transition: top 0.05s, left 0.05s;
-  z-index: 1000;
 }
 
-/* Container */
-.container {
-  max-width: 900px;
-  margin: 50px auto;
-  background: linear-gradient(180deg, #3b3224, #2e2a22);
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.3), 0 10px 40px rgba(0,0,0,0.5);
+/* Sections */
+.section {
+  margin-bottom: 40px;
 }
 
-/* Headings and text */
 h1 {
   text-align: center;
   margin-bottom: 15px;
   font-size: 2rem;
 }
+
 p {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 1.1rem;
 }
 
-/* Inputs */
-input[type="text"] {
-  width: 100%;
+/* Inputs and dropdowns */
+input[type="text"], select {
   padding: 12px 15px;
-  margin-bottom: 15px;
   border-radius: 10px;
-  border: 1px solid #f7f1e0;
-  background: rgba(255,255,255,0.1);
-  color: #f7f1e0;
+  border: 1px solid #f0e6d2;
+  margin: 5px;
   font-size: 16px;
+  background: rgba(255,255,255,0.1);
+  color: #f0e6d2;
+}
+
+select {
+  appearance: none;
 }
 
 /* Buttons */
@@ -72,24 +77,22 @@ button {
   font-size: 16px;
   cursor: pointer;
   background: rgba(255,140,0,0.7);
-  color: #2e2a22;
+  color: #1e1c1c;
   transition: all 0.2s ease;
 }
+
 button:hover {
   background: rgba(255,140,0,0.9);
   transform: scale(1.05);
 }
 
-/* Loading text */
-.loading {
-  margin-top: 10px;
-  font-style: italic;
-  display: none;
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-/* Image / Avatar containers */
-.image-container img,
-.avatar-container img {
+/* Image containers */
+.image-container img {
   margin-top: 20px;
   max-width: 100%;
   border-radius: 15px;
@@ -100,7 +103,7 @@ button:hover {
 #progressContainer {
   width: 100%;
   height: 12px;
-  background: rgba(255,140,0,0.2);
+  background: rgba(255,255,255,0.1);
   border-radius: 6px;
   margin-bottom: 15px;
 }
@@ -111,50 +114,53 @@ button:hover {
   border-radius: 6px;
   transition: width 0.3s ease;
 }
+
 #question {
   font-size: 1.3rem;
   margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
 }
+
 #answers {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 15px;
 }
+
 #answers button {
   text-align: center;
   background: rgba(255,255,255,0.1);
+  color: #f0e6d2;
   border: 1px solid rgba(255,140,0,0.5);
-  color: #f7f1e0;
-}
-#answers button.selected {
-  background: rgba(255,140,0,0.8);
-  border: 2px solid #ffd27f;
-  transform: scale(1.05);
-}
-#answers button.correct {
-  background: rgba(0,128,0,0.8) !important;
-}
-#answers button.wrong {
-  background: rgba(128,0,0,0.8) !important;
 }
 
-/* Submit + Next side by side */
+#answers button.selected {
+  background: rgba(255,140,0,0.8);
+  color: #1e1c1c;
+  border: 2px solid #ffb84d;
+  transform: scale(1.05);
+}
+
+#answers button.correct {
+  background: rgba(0,128,0,0.8) !important;
+  color: #fff;
+}
+
+#answers button.wrong {
+  background: rgba(128,0,0,0.8) !important;
+  color: #fff;
+}
+
+/* Quiz buttons layout */
 .quiz-buttons {
   display: flex;
   justify-content: center;
-  gap: 15px;
-}
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  gap: 10px;
 }
 
-/* Score + grade */
 #score, #grade {
   text-align: center;
   margin-top: 15px;
-  font-size: 1.2rem;
 }
