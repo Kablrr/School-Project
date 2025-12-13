@@ -18,6 +18,7 @@ const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
 const loadingText = document.getElementById("loadingText");
+loadingText.innerHTML = `<div class="spinner"></div>`;
 
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
@@ -26,7 +27,6 @@ generateBtn.onclick = () => {
   generateBtn.disabled = true;
   imageContainer.innerHTML = "";
 
-  // Improved prompt for more realistic colonial scenes
   const prompt = `${promptInput.value}, colonial America, 18th century, historically accurate, oil painting, soft lighting, warm tones`;
 
   const img = new Image();
@@ -50,6 +50,7 @@ generateBtn.onclick = () => {
 const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
+avatarLoading.innerHTML = `<div class="spinner"></div>`;
 
 // Select elements
 const backgroundSelect = document.getElementById("backgroundSelect");
@@ -65,7 +66,6 @@ generateAvatarBtn.onclick = () => {
   generateAvatarBtn.disabled = true;
   avatarContainer.innerHTML = "";
 
-  // Improved prompt for realistic colonial avatar with gentle smile
   const prompt =
     `A ${ageSelect.value} ${raceSelect.value} colonial student with a gentle smile, ` +
     `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
@@ -163,7 +163,6 @@ submitBtn.onclick = () => {
   results.push(selected === correct);
   if (selected === correct) score++;
 
-  // Highlight answers
   [...answersEl.children].forEach((btn, i) => {
     btn.disabled = true;
     if (i === correct) btn.classList.add("correct");
