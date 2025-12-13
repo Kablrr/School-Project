@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kabir Malhi - 1776 Project</title>
-<link rel="stylesheet" href="styletwo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabir Malhi - 1776 Project</title>
+  <link rel="stylesheet" href="styletwo.css">
 </head>
 <body>
+  <!-- Cursor glow -->
+  <div id="cursorGlow"></div>
 
-<!-- Cursor glow -->
-<div id="cursorGlow"></div>
+  <div class="container">
 
-<div class="container">
-  <h1>Image Generator</h1>
-  <p>See yourself as a student in 1776!</p>
+    <!-- Text-to-Image Generator -->
+    <h1>Image Generator</h1>
+    <p>See your prompt turn into something from colonial times!</p>
+    <input type="text" id="prompt" placeholder="Enter your prompt...">
+    <button id="generateBtn">Generate Image</button>
+    <div class="loading" id="loading">Generating image...</div>
+    <div class="image-container" id="imageContainer"></div>
 
-  <!-- Avatar Customizer -->
-  <div id="avatarCustomizer">
-    <label>Hat:
-      <select id="hatSelect">
-        <option value="">None</option>
-        <option value="tricorn hat">Tricorn Hat</option>
-        <option value="bonnet">Bonnet</option>
+    <!-- Customizable Avatar Generator -->
+    <h1>Customizable 1776 Avatar</h1>
+    <div id="avatarControls">
+      <label for="outfitSelect">Outfit:</label>
+      <select id="outfitSelect">
+        <option value="student clothes">Student Clothes</option>
+        <option value="colonial uniform">Colonial Uniform</option>
+        <option value="apron and vest">Apron & Vest</option>
       </select>
-    </label>
-    <label>Clothing:
-      <select id="clothingSelect">
-        <option value="colonial coat">Colonial Coat</option>
-        <option value="colonial dress">Colonial Dress</option>
+
+      <label for="backgroundSelect">Background:</label>
+      <select id="backgroundSelect">
+        <option value="schoolroom">Schoolroom</option>
+        <option value="street">Colonial Street</option>
+        <option value="classroom">Classroom</option>
       </select>
-    </label>
-    <label>Accessory:
-      <select id="accessorySelect">
-        <option value="">None</option>
-        <option value="quill and ink">Quill and Ink</option>
-        <option value="satchel">Satchel</option>
+
+      <label for="propsSelect">Accessories:</label>
+      <select id="propsSelect">
+        <option value="quill and ink">Quill & Ink</option>
+        <option value="books and scrolls">Books & Scrolls</option>
+        <option value="parchment">Parchment</option>
       </select>
-    </label>
+
+      <button id="generateAvatar">Generate Avatar</button>
+    </div>
+    <div class="image-container" id="avatarPreview"></div>
+
+    <!-- Quiz -->
+    <h1>1776 History Quiz</h1>
+    <div id="quiz">
+      <div id="progressContainer">
+        <div id="progressBar"></div>
+      </div>
+      <div id="question"></div>
+      <div id="answers"></div>
+      <div id="quizControls">
+        <button id="submitBtn" disabled>Submit Answer</button>
+        <button id="nextBtn" class="hidden">Next Question</button>
+      </div>
+      <div id="score" class="hidden"></div>
+      <div id="grade" class="hidden"></div>
+    </div>
+
   </div>
 
-  <input type="text" id="prompt" placeholder="Enter your prompt...">
-  <button id="generateBtn">Generate Image</button>
-  <div class="loading" id="loading">Generating image...</div>
-  <div class="image-container" id="imageContainer"></div>
+  <!-- Sound effects -->
+  <audio id="correctSound" src="correct.mp3"></audio>
+  <audio id="wrongSound" src="wrong.mp3"></audio>
+  <audio id="completeSound" src="complete.mp3"></audio>
 
-  <h1>1776 History Quiz</h1>
-  <div id="quiz">
-    <div id="progressContainer">
-      <div id="progressBar"></div>
-    </div>
-    <div id="question"></div>
-    <div id="answers"></div>
-    <div class="button-row">
-      <button id="submitBtn" disabled>Submit Answer</button>
-      <button id="nextBtn" class="hidden">Next Question</button>
-    </div>
-    <div id="score" class="hidden"></div>
-    <div id="grade" class="hidden"></div>
-  </div>
-</div>
-
-<!-- Sound effects -->
-<audio id="correctSound" src="correct.mp3"></audio>
-<audio id="wrongSound" src="wrong.mp3"></audio>
-<audio id="completeSound" src="complete.mp3"></audio>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
