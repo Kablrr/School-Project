@@ -37,9 +37,11 @@ h1 {
   color: #4b2e2a; /* Dark brown */
 }
 
-p {
-  color: #4b2e2a; /* Dark brown paragraphs for contrast */
-  margin-bottom: 15px;
+/* Instructional text / paragraph */
+p, .section p {
+  color: #4b2e2a; /* dark brown for visibility */
+  font-weight: 500;
+  margin-bottom: 12px;
   font-size: 1rem;
 }
 
@@ -169,13 +171,17 @@ button:disabled {
 }
 
 /* Cursor Glow */
+/* Glow fix */
 #cursorGlow {
   position: fixed;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   background: radial-gradient(circle, rgba(255,140,0,0.3), transparent);
   pointer-events: none;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
   mix-blend-mode: overlay;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  /* remove transition to prevent lag */
 }
