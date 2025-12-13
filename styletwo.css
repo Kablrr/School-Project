@@ -184,3 +184,9 @@ hr {
   margin: 30px 0;
   border: 1px solid rgba(0,0,0,0.2);
 }
+button:disabled,
+button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
