@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kabir Malhi - 1776 Project</title>
-  <link rel="stylesheet" href="styletwo.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Cursor glow -->
@@ -12,25 +12,27 @@
 
   <div class="container">
     <!-- IMAGE GENERATOR -->
-    <h1>Image Generator</h1>
-    <p>See your prompt turn into something from colonial times!</p>
-    <input type="text" id="prompt" placeholder="Enter your prompt...">
-    <button id="generateBtn">Generate Image</button>
-    <div class="loading" id="loading">Generating image...</div>
-    <div class="image-container" id="imageContainer"></div>
+    <div class="section" id="imageSection">
+      <h1>Image Generator</h1>
+      <p>See your prompt turn into something from a colonial time!</p>
+      <input type="text" id="prompt" placeholder="Enter your prompt...">
+      <button id="generateBtn">Generate Image</button>
+      <div id="loading" class="loading">Generating image...</div>
+      <div class="image-container" id="imageContainer"></div>
+    </div>
 
     <!-- QUIZ -->
-    <h1>1776 History Quiz</h1>
-    <div id="quiz">
+    <div class="section" id="quizSection">
+      <h1>1776 History Quiz</h1>
       <div id="progressContainer">
         <div id="progressBar"></div>
       </div>
       <div id="question"></div>
-      <div id="answers-container">
-        <div id="answers"></div>
+      <div id="answers"></div>
+      <div class="quiz-buttons">
         <button id="submitBtn" disabled>Submit Answer</button>
+        <button id="nextBtn" class="hidden">Next Question</button>
       </div>
-      <button id="nextBtn" class="hidden">Next Question</button>
       <div id="score" class="hidden"></div>
       <div id="grade" class="hidden"></div>
     </div>
