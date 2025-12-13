@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kabir Malhi - Project</title>
+    <title>1776 Style AI Generator</title>
     <link rel="stylesheet" href="styletwo.css">
 </head>
 <body>
     <div class="container">
-        <h1>Image Generator</h1>
-        <p>The Prompt you put in will automatically turn into a 1776 style</p> 
-        <br>
-        <!-- Text-to-Image -->
-        <section class="t2i-section">
-            <h2>Text-to-Image</h2>
-            <input type="text" id="t2iPrompt" placeholder="Enter a prompt (e.g. a monkey)">
-            <button id="generateT2IBtn">Generate Image</button>
-        </section>
-        <br>
-        <!-- Img2Img -->
-        <section class="img2img-section">
-            <h2>Image-to-Image</h2>
-            <div id="dropZone">Drag & Drop Image Here</div>
-            <br>
-            <img id="preview" alt="Preview">
-            <input type="text" id="imageUrl" placeholder="Or paste image URL">
-            <input type="text" id="img2imgPrompt" placeholder="Optional prompt">
-            <button id="generateImg2ImgBtn">Generate Image</button>
-        </section>
+        <h1>1776 Style AI Image Generator</h1>
 
-        <!-- Result -->
-        <section class="result-section">
-            <h2>Result</h2>
-            <div id="loading">Generating image...</div>
-            <img id="result" alt="Generated Image">
-        </section>
+        <!-- Text to Image -->
+        <div class="generator-section">
+            <h2>Text to Image</h2>
+            <input type="text" id="t2iPrompt" placeholder="Type your prompt here..." />
+            <button id="generateT2IBtn">Generate Image</button>
+            <div class="loading" id="loadingT2I">Generating image...</div>
+            <img id="resultT2I" class="result-image" />
+        </div>
+
+        <!-- Image to Image -->
+        <div class="generator-section">
+            <h2>Image to Image</h2>
+            <input type="text" id="imageUrl" placeholder="Enter image URL..." />
+            <input type="text" id="img2imgPrompt" placeholder="Optional prompt..." />
+            <button id="generateImg2ImgBtn">Generate Image</button>
+            <div class="loading" id="loadingImg2Img">Generating image...</div>
+            <img id="resultImg2Img" class="result-image" />
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
