@@ -30,7 +30,10 @@ h1 {
   color: #333;
   margin-bottom: 20px;
 }
-
+p {
+  color: #333;
+  margin-bottom: 20px;
+}
 input[type="text"] {
   width: 100%;
   padding: 12px 15px;
