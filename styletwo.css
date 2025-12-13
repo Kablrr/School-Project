@@ -1,57 +1,86 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    text-align: center;
+    padding: 3rem;
     min-height: 100vh;
 }
 
-.container {
-    width: 90%;
-    max-width: 700px;
-    margin-top: 50px;
-    text-align: center;
-}
-
+/* Heading */
 h1 {
-    margin-bottom: 30px;
-    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
 }
 
-.drop-zone {
-    border: 3px dashed #aaa;
-    border-radius: 12px;
-    padding: 40px;
+/* Input */
+input[type="text"] {
+    padding: 0.8rem;
+    width: 60%;
+    max-width: 500px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #2980b9;
+}
+
+/* Button */
+button {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: border-color 0.3s;
-    background-color: #fff;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
 }
 
-.drop-zone.hover {
-    border-color: #007bff;
+button:hover {
+    background-color: #3498db;
 }
 
-.drop-zone p {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #555;
-}
-
-.preview-container, .result-container {
-    margin-top: 30px;
-}
-
-.preview-container img, .result-container img {
+/* Result Image */
+img {
     max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    height: auto;
+    margin-top: 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.loading {
-    margin-top: 20px;
+/* Loading Indicator */
+#loading {
+    display: none;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: #007bff;
+    color: #e67e22;
+    margin-top: 1rem;
 }
+
+/* Flexbox layout for better alignment */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
