@@ -68,22 +68,28 @@ button:disabled {
   border-radius: 15px;
 }
 
-/* Quiz */
+/* Quiz Progress Bar */
 #progressContainer {
+  display: flex;
   height: 14px;
   background: rgba(255,255,255,0.15);
   border-radius: 7px;
+  overflow: hidden;
   margin-bottom: 15px;
 }
 
-#progressBar {
-  height: 100%;
-  width: 0%;
-  background: orange;
-  border-radius: 7px;
-  transition: width 0.3s ease, background 0.3s ease;
+.progress-segment {
+  flex: 1;
+  margin-right: 2px;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.5s ease;
 }
 
+.progress-segment:last-child {
+  margin-right: 0;
+}
+
+/* Quiz Buttons */
 #answers button {
   display: block;
   width: 100%;
@@ -110,16 +116,16 @@ button:disabled {
   background: rgba(128,0,0,0.8) !important;
   color: #fff;
 }
+
 /* Cursor Glow */
 #cursorGlow {
   position: fixed;
-  width: 150px;           /* slightly smaller for clarity */
+  width: 150px;
   height: 150px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255,140,0,0.4) 0%, rgba(255,140,0,0) 70%);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 9999;          /* make sure it's on top of everything */
+  z-index: 9999;
   transition: top 0.05s linear, left 0.05s linear;
 }
-
