@@ -3,24 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kabir Malhi - Project</title>
-    <link rel="stylesheet" href="styletwo.css">
+    <title>1776 Style Image Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Turn your prompt into an image</h1>
-    <p>The style of the image will from 1776</p>
-    <div id="t2iSection">
-        <input type="text" id="promptInput" placeholder="Type your prompt..." />
-        <button id="generateBtn">Generate Image</button>
-        <div id="loading">Generating image...</div>
-    <!-- REMOVE the placeholder img -->
-        <div id="resultContainer"></div>
+    <div class="container">
+        <h1>1776 Style AI Image Generator</h1>
+
+        <!-- Text-to-Image -->
+        <section class="t2i-section">
+            <h2>Text-to-Image</h2>
+            <input type="text" id="t2iPrompt" placeholder="Enter a prompt (e.g. a monkey)">
+            <button id="generateT2IBtn">Generate Image</button>
+        </section>
+
+        <!-- Img2Img -->
+        <section class="img2img-section">
+            <h2>Image-to-Image</h2>
+            <div id="dropZone">Drag & Drop Image Here</div>
+            <img id="preview" alt="Preview">
+            <input type="text" id="imageUrl" placeholder="Or paste image URL">
+            <input type="text" id="img2imgPrompt" placeholder="Optional prompt">
+            <button id="generateImg2ImgBtn">Generate Image</button>
+        </section>
+
+        <!-- Result -->
+        <section class="result-section">
+            <h2>Result</h2>
+            <div id="loading">Generating image...</div>
+            <img id="result" alt="Generated Image">
+        </section>
     </div>
-
-
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
