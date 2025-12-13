@@ -7,40 +7,38 @@
   <link rel="stylesheet" href="styletwo.css">
 </head>
 <body>
+  <!-- Cursor glow -->
+  <div id="cursorGlow"></div>
+
   <div class="container">
     <h1>Image Generator</h1>
-    <p>See your prompt in 1776-style oil painting!</p>
+    <p>See your prompt reimagined in colonial America!</p>
     <input type="text" id="prompt" placeholder="Enter your prompt...">
     <button id="generateBtn">Generate Image</button>
     <div class="loading" id="loading">Generating image...</div>
     <div class="image-container" id="imageContainer"></div>
-  </div>
 
-  <div class="container" id="quizContainer">
-    <h1 id="question">Quiz Loading...</h1>
-    <div id="answers"></div>
-    <div class="buttons">
+    <hr>
+
+    <h1>1776 History Quiz</h1>
+    <div id="quiz">
+      <div id="progressContainer">
+        <div id="progressBar"></div>
+      </div>
+      <div id="question"></div>
+      <div id="answers"></div>
       <button id="submitBtn" disabled>Submit Answer</button>
       <button id="nextBtn" class="hidden">Next Question</button>
+      <div id="score" class="hidden"></div>
+      <div id="grade" class="hidden"></div>
     </div>
-    <br>
-    <div class="progress-bar">
-      <div id="progressBar"></div>
-    </div>
-    <div id="score" class="hidden"></div>
-    <div id="grade" class="hidden"></div>
   </div>
 
-  <!-- Cursor glow -->
-  <div class="cursor-glow" id="cursorGlow"></div>
-
   <!-- Sound effects -->
-  <audio id="correctSound" src="sounds/correct.mp3"></audio>
-  <audio id="wrongSound" src="sounds/wrong.mp3"></audio>
-  <audio id="completeSound" src="sounds/complete.mp3"></audio>
+  <audio id="correctSound" src="correct.mp3"></audio>
+  <audio id="wrongSound" src="wrong.mp3"></audio>
+  <audio id="completeSound" src="complete.mp3"></audio>
 
-  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
-
