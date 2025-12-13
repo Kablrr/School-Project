@@ -17,8 +17,15 @@ generateBtn.addEventListener("click", () => {
   const img = document.createElement("img");
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
-  img.onload = () => { loading.style.display = "none"; generateBtn.disabled = false; };
-  img.onerror = () => { loading.style.display = "none"; generateBtn.disabled = false; alert("Image failed to load."); };
+  img.onload = () => {
+    loading.style.display = "none";
+    generateBtn.disabled = false;
+  };
+  img.onerror = () => {
+    loading.style.display = "none";
+    generateBtn.disabled = false;
+    alert("Image failed to load.");
+  };
 
   imageContainer.appendChild(img);
 });
