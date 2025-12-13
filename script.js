@@ -39,6 +39,7 @@ const accessorySelect = document.getElementById("accessorySelect");
 
 generateAvatarBtn.addEventListener("click", () => {
   const prompt = `A colonial student wearing ${outfitSelect.value}, with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting, 18th century`;
+  
   avatarContainer.innerHTML = "";
   avatarLoading.style.display = "block";
   generateAvatarBtn.disabled = true;
