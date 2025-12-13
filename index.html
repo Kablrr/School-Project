@@ -3,37 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>School Project - Kabir Malhi</title>
-<link rel="stylesheet" href="styletwo.css">
+<title>1776 Style Image Generator</title>
+<style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; background: #f0f0f0; }
+    input { padding: 0.5rem; width: 300px; margin-bottom: 1rem; }
+    button { padding: 0.5rem 1rem; margin-left: 0.5rem; cursor: pointer; }
+    img { max-width: 80%; margin-top: 1rem; border: 2px solid #ccc; border-radius: 8px; }
+    #loading { display: none; font-weight: bold; margin-top: 1rem; }
+</style>
 </head>
 <body>
-<div class="container">
-    <h1>1776 Style Image Generator</h1>
 
-    <input type="text" id="userPrompt" placeholder="Type your prompt (e.g., 'a monkey')" />
-
-    <div id="dropZone" class="drop-zone">
-        <p>Drag & drop an image here, or click to select</p>
-        <input type="file" id="fileInput" hidden>
-    </div>
-
-    <div id="previewContainer" class="preview-container" style="display:none;">
-        <h2>Preview</h2>
-        <img id="preview" alt="Preview Image">
-    </div>
-
-    <div id="loading" class="loading" style="display:none;">Generating image...</div>
-
-    <div id="resultContainer" class="result-container">
-        <h2>Generated 1776 Style Image</h2>
-        <img id="result" alt="Generated Image">
-    </div>
-</div>
+<h1>Text-to-1776 Style Image</h1>
+<input type="text" id="promptInput" placeholder="Type something...">
+<button id="generateBtn">Generate</button>
+<div id="loading">Generating image...</div>
+<img id="result" src="" alt="Generated Image">
 
 <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
