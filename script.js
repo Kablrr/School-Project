@@ -57,12 +57,55 @@ generateAvatarBtn.addEventListener("click", () => {
 
 /* Quiz */
 const quizData = [
-  {q:"What year was the Declaration of Independence signed?", a:["1775","1776","1781","1800"], c:1},
-  {q:"Who wrote most of the Declaration of Independence?", a:["Washington","Franklin","Jefferson","Adams"], c:2},
-  {q:"Who was the first President of the United States?", a:["Adams","Jefferson","Washington","Madison"], c:2},
-  {q:"Which country did the colonies gain independence from?", a:["France","Spain","Britain","Portugal"], c:2},
-  {q:"What war led to American independence?", a:["Civil War","French & Indian War","Revolutionary War","War of 1812"], c:2}
+  { q: "What year was the Declaration of Independence signed?", 
+    a: ["1775", "1776", "1781", "1800"], 
+    c: 1 
+  },
+  { q: "Who wrote most of the Declaration of Independence?", 
+    a: ["Washington", "Franklin", "Jefferson", "Adams"], 
+    c: 2 
+  },
+  { q: "Who was the first President of the United States?", 
+    a: ["Adams", "Jefferson", "Washington", "Madison"], 
+    c: 2 
+  },
+  { q: "Which country did the colonies gain independence from?", 
+    a: ["France", "Spain", "Britain", "Portugal"], 
+    c: 2 
+  },
+  { q: "What war led to American independence?", 
+    a: ["Civil War", "French & Indian War", "Revolutionary War", "War of 1812"], 
+    c: 2 
+  },
+
+  /* NEW QUESTIONS */
+  { q: "Where was the Declaration of Independence signed?", 
+    a: ["Boston", "New York", "Philadelphia", "Charleston"], 
+    c: 2 
+  },
+  { q: "Who was the King of Britain during the American Revolution?", 
+    a: ["King Henry VIII", "King George III", "King Charles I", "King William III"], 
+    c: 1 
+  },
+  { q: "What document officially ended the American Revolutionary War?", 
+    a: ["Treaty of Paris", "Articles of Confederation", "Bill of Rights", "Magna Carta"], 
+    c: 0 
+  },
+  { q: "What group met to write the Declaration of Independence?", 
+    a: ["The Continental Congress", "The Senate", "The Supreme Court", "The British Parliament"], 
+    c: 0 
+  },
+  { q: "What famous phrase begins the Declaration of Independence?", 
+    a: [
+      "Give me liberty or give me death",
+      "We the people",
+      "Four score and seven years ago",
+      "When in the course of human events"
+    ], 
+    c: 3 
+  }
 ];
+
 
 let current=0, score=0, selected=null;
 const questionEl=document.getElementById("question");
