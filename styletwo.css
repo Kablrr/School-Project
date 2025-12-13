@@ -82,7 +82,7 @@ button:disabled {
   flex: 1;
   margin-right: 2px;
   background: rgba(255,255,255,0.15);
-  transition: background 0.5s ease;
+  transition: background 0.6s ease; /* smooth fill animation */
 }
 
 .progress-segment:last-child {
