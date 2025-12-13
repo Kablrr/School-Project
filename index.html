@@ -1,43 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1776 Style AI Generator</title>
-    <link rel="stylesheet" href="styletwo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text-to-Image Generator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>1776 Style AI Image Generator</h1>
+  <div class="container">
+    <h1>Text-to-Image AI Generator</h1>
+    <input type="text" id="prompt" placeholder="Enter your prompt...">
+    <button id="generateBtn">Generate Image</button>
+    <div class="loading" id="loading">Generating image...</div>
+    <div class="image-container" id="imageContainer"></div>
+  </div>
 
-        <!-- Text to Image -->
-        <div class="generator-section">
-            <h2>Text to Image</h2>
-            <input type="text" id="t2iPrompt" placeholder="Type your prompt here..." />
-            <button id="generateT2IBtn">Generate Image</button>
-            <div class="loading" id="loadingT2I">Generating image...</div>
-            <img id="resultT2I" src="image.pollinations.ai/prompt" class="result-image" />
-        </div>
-
-        <!-- Image to Image -->
-        <div class="generator-section">
-            <h2>Image to Image</h2>
-            <input type="text" id="imageUrl" placeholder="Enter image URL..." />
-            <input type="text" id="img2imgPrompt" placeholder="Optional prompt..." />
-            <button id="generateImg2ImgBtn">Generate Image</button>
-            <div class="loading" id="loadingImg2Img">Generating image...</div>
-            <img id="resultImg2Img" src="image.pollinations.ai/prompt" class="result-image" />
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
 
 
 
