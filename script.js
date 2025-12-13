@@ -3,28 +3,28 @@ const promptInput = document.getElementById('prompt');
 const imageContainer = document.getElementById('imageContainer');
 const loading = document.getElementById('loading');
 
-generateBtn.addEventListener('click', async () => {
+generateBtn.addEventListener('click', () => {
   const prompt = promptInput.value.trim();
   if (!prompt) return alert("Please enter a prompt!");
 
   imageContainer.innerHTML = "";
   loading.style.display = "block";
 
-  try {
-    // Pollinations API
-    const response = await fetch(`https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`);
-    if (!response.ok) throw new Error("Failed to generate image");
+  const encodedPrompt = encodeURIComponent(prompt);
+  const imageUrl = `https://pollinations.ai/p/${encodedPrompt}`;
 
-    const imageUrl = response.url;
-    const img = document.createElement('img');
-    img.src = imageUrl;
-    img.alt = prompt;
-    imageContainer.appendChild(img);
-  } catch (error) {
-    alert("Error: " + error.message);
-  } finally {
+  const img = document.createElement('img');
+  img.src = imageUrl;
+  img.alt = prompt;
+  img.onload = () => {
     loading.style.display = "none";
-  }
+  };
+  img.onerror = () => {
+    loading.style.display = "none";
+    alert("Failed to generate image.");
+  };
+
+  imageContainer.appendChild(img);
 });
 
 
