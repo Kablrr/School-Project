@@ -66,13 +66,13 @@ input[type="text"], select {
 /* Dropdown styling for readability */
 select {
   appearance: none;
-  color: #f0e6d2; /* readable text */
-  background: rgba(0,0,0,0.2); /* darker background for contrast */
+  color: #f0e6d2; 
+  background: rgba(0,0,0,0.2);
 }
 
 select option {
-  color: #1e1c1c; /* dark text inside options */
-  background-color: #f0e6d2; /* light background for contrast */
+  color: #1e1c1c; 
+  background-color: #f0e6d2;
 }
 
 /* Dropdowns row */
@@ -122,20 +122,36 @@ button:disabled {
 /* Image containers */
 .image-container img {
   margin-top: 20px;
-  max-width: 400px;    /* smaller max width for sharpness */
-  width: 100%;         /* responsive */
-  height: auto;        /* preserve aspect ratio */
+  max-width: 400px;
+  width: 100%;
+  height: auto;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-  image-rendering: auto; /* prevent blur */
+  image-rendering: auto;
 }
 
 /* Loading text */
 .loading {
-  display: none;       /* hidden by default */
+  display: none;
   margin-top: 10px;
   font-style: italic;
   color: #ffb84d;
+}
+
+/* Loading animation dots */
+@keyframes dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+  100% { content: ""; }
+}
+
+.loading::after {
+  display: inline-block;
+  animation: dots 1s steps(4, end) infinite;
+  content: "";
+  margin-left: 5px;
 }
 
 /* Quiz */
@@ -200,20 +216,4 @@ button:disabled {
 
 #score, #grade {
   margin-top: 15px;
-}
-
-/* Loading animation: dots after text */
-@keyframes dots {
-  0% { content: ""; }
-  25% { content: "."; }
-  50% { content: ".."; }
-  75% { content: "..."; }
-  100% { content: ""; }
-}
-
-.loading::after {
-  display: inline-block;
-  animation: dots 1s steps(4, end) infinite;
-  content: "";
-  margin-left: 5px;
 }
