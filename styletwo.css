@@ -139,3 +139,18 @@ button:disabled {
   75% { transform: scale(1.05) translateX(-1px); opacity: 0.9; }
   100% { transform: scale(1) translateX(0); opacity: 1; }
 }
+/* Glow that follows cursor */
+.cursor-glow {
+  position: fixed;
+  pointer-events: none;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,220,150,0.3) 0%, rgba(255,220,150,0) 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 0.05s ease, left 0.05s ease;
+  z-index: 9999;
+  mix-blend-mode: lighten;
+  filter: blur(40px);
+}
+
