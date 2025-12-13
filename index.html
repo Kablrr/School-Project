@@ -10,15 +10,10 @@
 
   <!-- IMAGE GENERATOR -->
   <section class="card">
-    <h1>1776 Text-to-Image Generator</h1>
+    <h1>Colonial Image Generater</h1>
     <p>Turn any idea into a colonial-era image.</p>
 
-    <input
-      type="text"
-      id="prompt"
-      placeholder="Example: A busy town square"
-    />
-
+    <input id="prompt" type="text" placeholder="Example: A colonial town meeting" />
     <button id="generateBtn">Generate Image</button>
 
     <div class="loading" id="loading">Generating image...</div>
@@ -28,12 +23,15 @@
   <!-- QUIZ -->
   <section class="card quiz-card">
     <h2>Colonial America Quiz</h2>
-    <p id="question"></p>
 
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <p id="question" class="question"></p>
     <div id="answers" class="answers"></div>
 
     <button id="nextBtn" class="hidden">Next Question</button>
-
     <p id="score" class="score hidden"></p>
   </section>
 
