@@ -1,7 +1,7 @@
 let uploadedImage = null;
 
-// Detailed 1776 prompt (hidden from user)
-const defaultPrompt = "in the style of 1776 American Revolutionary War era, historical painting, colonial uniforms, muskets, dramatic lighting, oil painting style";
+// Hidden detailed 1776 style description
+const hidden1776Prompt = "in the style of 1776 American Revolutionary War era, historical painting, colonial uniforms, muskets, dramatic lighting, oil painting style";
 
 // Elements
 const dropZone = document.getElementById('dropZone');
@@ -10,6 +10,7 @@ const previewContainer = document.getElementById('previewContainer');
 const preview = document.getElementById('preview');
 const resultImg = document.getElementById('result');
 const loading = document.getElementById('loading');
+const userPromptInput = document.getElementById('userPrompt');
 
 // Drag & Drop events
 dropZone.addEventListener('dragover', e => {
@@ -47,11 +48,16 @@ function handleFiles(files) {
 // Generate image via Pollinations
 async function generateImg2Img() {
     if(!uploadedImage) return;
+
     loading.style.display = "block";
     resultImg.src = "";
 
+    // Combine user prompt + hidden 1776 prompt
+    const userText = userPromptInput.value.trim();
+    const fullPrompt = userText ? `${userText}, ${hidden1776Prompt}` : hidden1776Prompt;
+
     try {
-        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(defaultPrompt)}?img=${encodeURIComponent(uploadedImage)}`;
+        const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?img=${encodeURIComponent(uploadedImage)}`;
         const response = await fetch(apiUrl);
         if(!response.ok) throw new Error("Failed to generate image.");
         const blob = await response.blob();
@@ -62,4 +68,10 @@ async function generateImg2Img() {
         loading.style.display = "none";
     }
 }
+
+// Optional: auto-generate when user types a new prompt
+userPromptInput.addEventListener('change', () => {
+    if(uploadedImage) generateImg2Img();
+});
+
 
