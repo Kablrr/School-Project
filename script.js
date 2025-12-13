@@ -17,15 +17,8 @@ generateBtn.addEventListener("click", () => {
   const img = document.createElement("img");
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
-  img.onload = () => {
-    loading.style.display = "none";
-    generateBtn.disabled = false;
-  };
-  img.onerror = () => {
-    loading.style.display = "none";
-    generateBtn.disabled = false;
-    alert("Image failed to load.");
-  };
+  img.onload = () => { loading.style.display = "none"; generateBtn.disabled = false; };
+  img.onerror = () => { loading.style.display = "none"; generateBtn.disabled = false; alert("Image failed to load."); };
 
   imageContainer.appendChild(img);
 });
@@ -61,7 +54,6 @@ const submitBtnEl=document.getElementById("submitBtn");
 const nextBtnEl=document.getElementById("nextBtn");
 const scoreEl=document.getElementById("score");
 const gradeEl=document.getElementById("grade");
-const progressBar=document.getElementById("progressBar");
 
 const correctSound=document.getElementById("correctSound");
 const wrongSound=document.getElementById("wrongSound");
@@ -78,7 +70,6 @@ function loadQuestion(){
 
   const q=quizData[current];
   questionEl.textContent=q.q;
-  progressBar.style.width=((current+1)/quizData.length)*100+"%";
 
   q.a.forEach((text,i)=>{
     const btn=document.createElement("button");
@@ -135,18 +126,14 @@ function finishQuiz(){
 
   gradeEl.textContent=`Grade: ${grade}`;
   gradeEl.classList.remove("hidden");
-  progressBar.style.width="100%";
   completeSound.play();
 }
 
 loadQuestion();
 
-// Cursor-following glow
+/* Cursor glow movement */
 const cursorGlow = document.getElementById("cursorGlow");
-
 document.addEventListener("mousemove", (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
-  cursorGlow.style.left = x + "px";
-  cursorGlow.style.top = y + "px";
+  cursorGlow.style.left = e.clientX + "px";
+  cursorGlow.style.top = e.clientY + "px";
 });
