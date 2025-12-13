@@ -68,7 +68,7 @@ button:disabled {
   border-radius: 15px;
 }
 
-/* Quiz Progress Bar */
+/* Progress Bar */
 #progressContainer {
   display: flex;
   height: 14px;
