@@ -18,7 +18,7 @@ body {
 
 /* Cards */
 .card {
-  background: url('https://i.imgur.com/0KfbO8V.png'); /* subtle parchment texture */
+  background: url('https://i.imgur.com/wxjR6Zf.jpg'); /* working parchment */
   background-size: cover;
   background-repeat: no-repeat;
   padding: 30px;
@@ -29,6 +29,8 @@ body {
   text-align: center;
   border: 2px solid #d1b97f;
   color: #3b2f2f;
+  position: relative;
+  overflow: hidden;
 }
 
 h1, h2 { margin-bottom: 10px; }
@@ -95,6 +97,7 @@ button:disabled {
 
 .correct { background: #7dff9e !important; }
 .wrong { background: #ff9e9e !important; }
+.selected { border: 2px solid #b5945e !important; }
 
 .progress {
   width: 100%;
@@ -130,4 +133,21 @@ button:disabled {
   to { transform: translateY(0); opacity: 1; }
 }
 
+/* Candle animation */
+.candle-container { position: relative; display: inline-block; margin-top: 20px; }
+.candle { width: 10px; height: 40px; background: #ffd700; border-radius: 5px 5px 0 0; margin: 0 auto; position: relative; }
+.flame {
+  width: 12px; height: 20px;
+  background: radial-gradient(circle, #fffa8c 0%, #ff8c00 60%, #ff0000 100%);
+  border-radius: 50%;
+  position: absolute; top: -18px; left: -1px;
+  animation: flicker 0.3s infinite alternate;
+}
+@keyframes flicker {
+  0% { transform: scale(1) translateX(0); opacity: 1; }
+  25% { transform: scale(1.1) translateX(-1px); opacity: 0.9; }
+  50% { transform: scale(0.95) translateX(1px); opacity: 0.8; }
+  75% { transform: scale(1.05) translateX(-1px); opacity: 0.9; }
+  100% { transform: scale(1) translateX(0); opacity: 1; }
+}
 
