@@ -15,18 +15,10 @@ generateBtn.addEventListener("click", () => {
   generateBtn.disabled = true;
 
   const img = document.createElement("img");
-  img.src = `https://pollinations.ai/p/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
-  img.onload = () => {
-    loading.style.display = "none";
-    generateBtn.disabled = false;
-  };
-
-  img.onerror = () => {
-    loading.style.display = "none";
-    generateBtn.disabled = false;
-    alert("Image failed to load.");
-  };
+  img.onload = () => { loading.style.display = "none"; generateBtn.disabled = false; };
+  img.onerror = () => { loading.style.display = "none"; generateBtn.disabled = false; alert("Image failed to load."); };
 
   imageContainer.appendChild(img);
 });
@@ -55,10 +47,10 @@ const quizData = [
   { q: "How many colonies declared independence?", a: ["12","13","14","15"], c:1 }
 ];
 
-let current = 0, score = 0;
-
+let current = 0, score = 0, selectedAnswer = null;
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
+const submitBtn = document.getElementById("submitBtn");
 const nextBtn = document.getElementById("nextBtn");
 const scoreEl = document.getElementById("score");
 const gradeEl = document.getElementById("grade");
@@ -70,9 +62,12 @@ const completeSound = document.getElementById("completeSound");
 
 function loadQuestion() {
   answersEl.innerHTML = "";
+  submitBtn.disabled = true;
+  submitBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
   gradeEl.classList.add("hidden");
   scoreEl.classList.add("hidden");
+  selectedAnswer = null;
 
   const q = quizData[current];
   questionEl.textContent = q.q;
@@ -81,27 +76,34 @@ function loadQuestion() {
   q.a.forEach((text,i) => {
     const btn = document.createElement("button");
     btn.textContent = text;
-    btn.onclick = () => selectAnswer(i,btn);
+    btn.onclick = () => {
+      [...answersEl.children].forEach(b=>b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedAnswer = i;
+      submitBtn.disabled = false;
+    };
     answersEl.appendChild(btn);
   });
 }
 
-function selectAnswer(i, btn) {
+submitBtn.onclick = () => {
+  if(selectedAnswer === null) return;
   const correct = quizData[current].c;
   [...answersEl.children].forEach(b=>b.disabled=true);
 
-  if(i===correct){
-    btn.classList.add("correct");
+  if(selectedAnswer === correct){
+    answersEl.children[selectedAnswer].classList.add("correct");
     correctSound.play();
     score++;
   } else {
-    btn.classList.add("wrong");
+    answersEl.children[selectedAnswer].classList.add("wrong");
     answersEl.children[correct].classList.add("correct");
     wrongSound.play();
   }
 
+  submitBtn.classList.add("hidden");
   nextBtn.classList.remove("hidden");
-}
+};
 
 nextBtn.onclick = () => {
   current++;
@@ -132,4 +134,3 @@ function finishQuiz(){
 }
 
 loadQuestion();
-
