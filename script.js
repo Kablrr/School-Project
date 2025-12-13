@@ -91,13 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-function markProgress(index, correct) {
-  const segments = document.querySelectorAll(".progress-segment");
-  if (segments[index]) {
-    segments[index].style.background = correct ? "green" : "red";
+  function markProgress(index, correct) {
+    const segments = document.querySelectorAll(".progress-segment");
+    if (segments[index]) {
+      segments[index].style.background = correct ? "green" : "red";
+    }
   }
-}
-
 
   function loadQuestion() {
     selected = null;
