@@ -114,9 +114,12 @@ button:disabled {
 /* Image containers */
 .image-container img {
   margin-top: 20px;
-  max-width: 100%;
+  max-width: 400px;    /* smaller max width */
+  width: 100%;         /* responsive */
+  height: auto;        /* preserve aspect ratio */
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  image-rendering: auto; /* prevent blur */
 }
 
 /* Quiz */
