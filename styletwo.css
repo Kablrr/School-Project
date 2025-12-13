@@ -23,6 +23,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 10px;
 }
 
 input, select {
@@ -45,6 +46,11 @@ button {
   border: none;
   cursor: pointer;
   margin-top: 10px;
+  transition: transform 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: scale(1.05);
 }
 
 button:disabled {
@@ -82,6 +88,27 @@ button:disabled {
   display: block;
   width: 100%;
   margin: 6px auto;
+  background: rgba(255,255,255,0.1);
+  color: #f0e6d2;
+  border: 1px solid #ffb84d;
+  border-radius: 8px;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+#answers button.selected {
+  background: rgba(255,140,0,0.8);
+  color: #1e1c1c;
+  transform: scale(1.05);
+}
+
+#answers button.correct {
+  background: rgba(0,128,0,0.8) !important;
+  color: #fff;
+}
+
+#answers button.wrong {
+  background: rgba(128,0,0,0.8) !important;
+  color: #fff;
 }
 
 /* Cursor Glow */
@@ -89,7 +116,8 @@ button:disabled {
   position: fixed;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(255,140,0,0.3), transparent);
+  background: radial-gradient(circle, rgba(255,140,0,0.3), transparent 70%);
   pointer-events: none;
   transform: translate(-50%, -50%);
+  transition: top 0.05s, left 0.05s;
 }
