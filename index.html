@@ -1,125 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kabir Malhi - 1776 Project</title>
-  <link rel="stylesheet" href="styletwo.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1776 Project</title>
+  <link rel="stylesheet" href="styletwo.css" />
 </head>
 <body>
-  <!-- Cursor Glow -->
-  <div id="cursorGlow"></div>
 
-  <div class="container">
+<div id="cursorGlow"></div>
 
-    <!-- Text-to-Image Generator -->
-    <div class="section" id="textImageSection">
-      <h1>Image Generator</h1>
-      <p>See your prompt turn into something from colonial times!</p>
-      <input type="text" id="prompt" placeholder="Enter your prompt...">
-      <button id="generateBtn">Generate Image</button>
-      <div class="loading" id="loading">Generating image</div>
-      <div class="image-container" id="imageContainer"></div>
-    </div>
+<div class="container">
 
-    <!-- Avatar Generator -->
-    <div class="section" id="avatarSection">
-      <h1>1776 Avatar Generator</h1>
-      <p>Customize your colonial student avatar!</p>
-      
-      <div class="dropdowns">
-        <label>Background: 
-          <select id="backgroundSelect">
-            <option value="classroom">Classroom</option>
-            <option value="library">Library</option>
-            <option value="courtyard">Courtyard</option>
-            <option value="town square">Town Square</option>
-            <option value="marketplace">Marketplace</option>
-            <option value="garden">Garden</option>
-            <option value="church">Church</option>
-          </select>
-        </label>
-
-        <label>Outfit: 
-          <select id="outfitSelect">
-            <option value="blue coat">Blue Coat</option>
-            <option value="brown coat">Brown Coat</option>
-            <option value="plain clothes">Plain Clothes</option>
-            <option value="red coat">Red Coat</option>
-            <option value="waistcoat and breeches">Waistcoat & Breeches</option>
-            <option value="dress">Dress</option>
-            <option value="apron">Apron</option>
-          </select>
-        </label>
-
-        <label>Hat: 
-          <select id="hatSelect">
-            <option value="tricorn hat">Tricorn Hat</option>
-            <option value="cap">Cap</option>
-            <option value="bicorne hat">Bicorne Hat</option>
-            <option value="bonnet">Bonnet</option>
-            <option value="no hat">No Hat</option>
-          </select>
-        </label>
-
-        <label>Accessory: 
-          <select id="accessorySelect">
-            <option value="quill">Quill</option>
-            <option value="book">Book</option>
-            <option value="scroll">Scroll</option>
-            <option value="basket">Basket</option>
-            <option value="none">None</option>
-          </select>
-        </label>
-
-        <label>Age: 
-          <select id="ageSelect">
-            <option value="child">Child</option>
-            <option value="teen">Teen</option>
-            <option value="adult">Adult</option>
-            <option value="elderly">Elderly</option>
-          </select>
-        </label>
-
-        <label>Race: 
-          <select id="raceSelect">
-            <option value="white">White</option>
-            <option value="black">Black</option>
-            <option value="asian">Asian</option>
-            <option value="native american">Native American</option>
-            <option value="mixed">Mixed</option>
-          </select>
-        </label>
-      </div>
-
-      <button id="generateAvatarBtn">Generate Avatar</button>
-      <div class="loading" id="avatarLoading">Generating avatar</div>
-      <div class="image-container" id="avatarContainer"></div>
-    </div>
-
-    <!-- Quiz -->
-    <div class="section" id="quizSection">
-      <h1>1776 History Quiz</h1>
-      <div id="progressContainer">
-        <div id="progressBar"></div>
-      </div>
-      <div id="question"></div>
-      <div id="answers"></div>
-      <div class="quiz-buttons">
-        <button id="submitBtn" disabled>Submit Answer</button>
-        <button id="nextBtn" class="hidden" disabled>Next Question</button>
-      </div>
-      <div id="score" class="hidden"></div>
-      <div id="grade" class="hidden"></div>
-    </div>
-
+  <!-- TEXT TO IMAGE -->
+  <div class="section">
+    <h1>Text-to-Image Generator</h1>
+    <p>Create a colonial-era image from text</p>
+    <input id="prompt" type="text" placeholder="Enter prompt..." />
+    <button id="generateBtn">Generate Image</button>
+    <div id="loading" class="loading hidden">Generating image...</div>
+    <div id="imageContainer" class="image-container"></div>
   </div>
 
-  <!-- Sound Effects -->
-  <audio id="correctSound" src="correct.mp3"></audio>
-  <audio id="wrongSound" src="wrong.mp3"></audio>
-  <audio id="completeSound" src="complete.mp3"></audio>
+  <!-- AVATAR -->
+  <div class="section">
+    <h1>1776 Avatar Generator</h1>
+    <p>Create your colonial student avatar</p>
 
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="dropdowns">
+      <select id="backgroundSelect">
+        <option>Classroom</option>
+        <option>Library</option>
+        <option>Courtyard</option>
+        <option>Tavern</option>
+        <option>Town Square</option>
+      </select>
+
+      <select id="outfitSelect">
+        <option>Blue Coat</option>
+        <option>Brown Coat</option>
+        <option>Formal Colonial Suit</option>
+        <option>Simple Farmer Clothes</option>
+      </select>
+
+      <select id="hatSelect">
+        <option>Tricorn Hat</option>
+        <option>Cap</option>
+        <option>Bonnet</option>
+        <option>No Hat</option>
+      </select>
+
+      <select id="accessorySelect">
+        <option>Quill</option>
+        <option>Book</option>
+        <option>Scroll</option>
+        <option>Ink Bottle</option>
+        <option>None</option>
+      </select>
+
+      <select id="ageSelect">
+        <option>Young</option>
+        <option>Teenage</option>
+        <option>Adult</option>
+      </select>
+
+      <select id="raceSelect">
+        <
