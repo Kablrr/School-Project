@@ -4,30 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pollinations T2I & Img2Img</title>
-<link rel="stylesheet" href="stylerevamped.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Pollinations T2I & Img2Img</h1>
+<div class="container">
+    <h1>Pollinations AI Generator</h1>
 
-<h2>Text-to-Image</h2>
-<textarea id="t2iPrompt" placeholder="Enter your prompt (e.g., 1776 style)"></textarea>
-<br>
-<button id="generateT2IBtn">Generate Image</button>
+    <section class="generator">
+        <h2>Text-to-Image</h2>
+        <textarea id="t2iPrompt" placeholder="Enter your prompt (e.g., 1776 style)"></textarea>
+        <button id="generateT2IBtn" class="btn">Generate Image</button>
+    </section>
 
-<h2>Image-to-Image</h2>
-<input type="text" id="imageUrl" placeholder="Enter image URL here">
-<br>
-<div id="dropZone">Or drag & drop an image here</div>
-<br>
-<textarea id="img2imgPrompt" placeholder="Enter prompt (default: 1776 style)">1776 style</textarea>
-<br>
-<button id="generateImg2ImgBtn">Generate Img2Img</button>
+    <section class="generator">
+        <h2>Image-to-Image</h2>
+        <input type="text" id="imageUrl" placeholder="Or enter image URL">
+        <div id="dropZone">Drag & Drop Image Here</div>
+        <div id="previewContainer">
+            <img id="preview" src="" alt="Image Preview">
+        </div>
+        <textarea id="img2imgPrompt" placeholder="Enter prompt (default: 1776 style)">1776 style</textarea>
+        <button id="generateImg2ImgBtn" class="btn">Generate Img2Img</button>
+    </section>
 
-<div id="loading" style="display:none;">Generating image...</div>
-<br>
-<img id="result" src="" alt="Generated Image">
+    <div id="loading" class="loading">Generating image...</div>
+    <img id="result" class="result" src="" alt="Generated Image">
+</div>
 
-<script src="script.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
 
