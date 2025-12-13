@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const answersEl = document.getElementById("answers");
   const submitBtn = document.getElementById("submitBtn");
   const nextBtn = document.getElementById("nextBtn");
+  const restartBtn = document.getElementById("restartBtn");
   const progressContainer = document.getElementById("progressContainer");
   const scoreEl = document.getElementById("score");
 
-  /* Initialize quiz progress bar */
   function initProgressBar() {
     progressContainer.innerHTML = "";
     for (let i = 0; i < quizData.length; i++) {
@@ -93,9 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function markProgress(index, correct) {
     const segments = document.querySelectorAll(".progress-segment");
-    if (segments[index]) {
-      segments[index].style.background = correct ? "green" : "red";
-    }
+    if (segments[index]) segments[index].style.background = correct ? "green" : "red";
   }
 
   function loadQuestion() {
@@ -140,12 +138,33 @@ document.addEventListener("DOMContentLoaded", () => {
   nextBtn.onclick = () => {
     current++;
     if (current < quizData.length) loadQuestion();
-    else {
-      questionEl.textContent = "Quiz Complete!";
-      answersEl.innerHTML = "";
-      scoreEl.textContent = `Score: ${score}/${quizData.length}`;
-      scoreEl.classList.remove("hidden");
-    }
+    else finishQuiz();
+  };
+
+  function finishQuiz() {
+    questionEl.textContent = "Quiz Complete!";
+    answersEl.innerHTML = "";
+    submitBtn.classList.add("hidden");
+    nextBtn.classList.add("hidden");
+    restartBtn.classList.remove("hidden");
+    scoreEl.textContent = `Score: ${score}/${quizData.length}`;
+    scoreEl.classList.remove("hidden");
+  }
+
+  restartBtn.onclick = () => {
+    current = 0;
+    score = 0;
+    selected = null;
+    results.length = 0;
+
+    const segments = document.querySelectorAll(".progress-segment");
+    segments.forEach(seg => seg.style.background = "rgba(255,255,255,0.15)");
+
+    restartBtn.classList.add("hidden");
+    scoreEl.classList.add("hidden");
+    submitBtn.classList.remove("hidden");
+
+    loadQuestion();
   };
 
   initProgressBar();
