@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kabir Malhi - Project</title>
-  <link rel="stylesheet" href="styletwo.css" />
+  <title>1776 Generator & Quiz</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- IMAGE GENERATOR -->
-  <section class="card">
-    <h1>Colonial Image Generater</h1>
+  <section class="card generator-card">
+    <h1>1776 Text-to-Image Generator</h1>
     <p>Turn any idea into a colonial-era image.</p>
 
     <input id="prompt" type="text" placeholder="Example: A colonial town meeting" />
@@ -33,11 +33,18 @@
 
     <button id="nextBtn" class="hidden">Next Question</button>
     <p id="score" class="score hidden"></p>
+    <p id="grade" class="grade hidden"></p>
   </section>
+
+  <!-- Sound effects -->
+  <audio id="correctSound" src="https://freesound.org/data/previews/320/320655_5260872-lq.mp3"></audio>
+  <audio id="wrongSound" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3"></audio>
+  <audio id="completeSound" src="https://freesound.org/data/previews/320/320655_5260872-lq.mp3"></audio>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
