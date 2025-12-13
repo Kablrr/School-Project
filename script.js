@@ -47,7 +47,9 @@ const quizData = [
   { q:"How many colonies declared independence?", a:["12","13","14","15"], c:1 }
 ];
 
-let current = 0, score = 0, selectedAnswer = null;
+let current = 0;
+let score = 0;
+let selectedAnswer = null;
 
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
@@ -62,23 +64,16 @@ const wrongSound = document.getElementById("wrongSound");
 const completeSound = document.getElementById("completeSound");
 
 function loadQuestion() {
-  answersEl.innerHTML = "";
-  submitBtnEl.disabled = true;
-  submitBtnEl.classList.remove("hidden");
-  nextBtnEl.classList.add("hidden");
-  gradeEl.classList.add("hidden");
-  scoreEl.classList.add("hidden");
-  selectedAnswer = null;
-
   const q = quizData[current];
   questionEl.textContent = q.q;
-  progressBar.style.width = ((current + 1) / quizData.length) * 100 + "%";
+
+  answersEl.innerHTML = "";
+  selectedAnswer = null;
 
   q.a.forEach((text, i) => {
     const btn = document.createElement("button");
     btn.textContent = text;
     btn.onclick = () => {
-      if (submitBtnEl.disabled === false) return; // prevent reselect after submit
       [...answersEl.children].forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
       selectedAnswer = i;
@@ -86,10 +81,17 @@ function loadQuestion() {
     };
     answersEl.appendChild(btn);
   });
+
+  submitBtnEl.disabled = true;
+  submitBtnEl.classList.remove("hidden");
+  nextBtnEl.classList.add("hidden");
+
+  progressBar.style.width = ((current + 1) / quizData.length) * 100 + "%";
 }
 
 submitBtnEl.onclick = () => {
   if (selectedAnswer === null) return;
+
   const correct = quizData[current].c;
   [...answersEl.children].forEach(b => b.disabled = true);
 
@@ -108,30 +110,46 @@ submitBtnEl.onclick = () => {
 };
 
 nextBtnEl.onclick = () => {
-  current++;
-  if (current < quizData.length) loadQuestion();
-  else finishQuiz();
+  if (submitBtnEl.classList.contains("hidden")) {
+    current++;
+    if (current < quizData.length) {
+      loadQuestion();
+    } else {
+      finishQuiz();
+    }
+  }
 };
 
 function finishQuiz() {
   questionEl.textContent = "Quiz Complete!";
   answersEl.innerHTML = "";
   nextBtnEl.classList.add("hidden");
+
   scoreEl.textContent = `Score: ${score} / ${quizData.length}`;
+  gradeEl.textContent = `Grade: ${getGrade(score, quizData.length)}`;
+
   scoreEl.classList.remove("hidden");
-
-  const pct = (score / quizData.length) * 100;
-  let grade = "";
-  if (pct >= 90) grade = "A";
-  else if (pct >= 80) grade = "B";
-  else if (pct >= 70) grade = "C";
-  else if (pct >= 60) grade = "D";
-  else grade = "F";
-
-  gradeEl.textContent = `Grade: ${grade}`;
   gradeEl.classList.remove("hidden");
+
   progressBar.style.width = "100%";
   completeSound.play();
 }
 
+function getGrade(score, total) {
+  const pct = (score / total) * 100;
+  if (pct >= 90) return "A";
+  if (pct >= 80) return "B";
+  if (pct >= 70) return "C";
+  if (pct >= 60) return "D";
+  return "F";
+}
+
+// Initialize first question
 loadQuestion();
+
+/* Cursor Glow */
+const cursor = document.getElementById("cursorGlow");
+document.addEventListener("mousemove", e => {
+  cursor.style.top = e.clientY + "px";
+  cursor.style.left = e.clientX + "px";
+});
