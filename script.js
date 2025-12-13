@@ -11,7 +11,9 @@ document.addEventListener("mousemove", e => {
   cursorGlow.style.left = `${e.clientX}px`;
 });
 
-/* TEXT TO IMAGE */
+/* ==============================
+   TEXT-TO-IMAGE GENERATOR
+============================== */
 const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
@@ -21,46 +23,72 @@ generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
   loadingText.classList.remove("hidden");
+  generateBtn.disabled = true;
   imageContainer.innerHTML = "";
 
-  const prompt = promptInput.value + ", colonial America, 18th century";
+  // Improved prompt for more realistic colonial scenes
+  const prompt = `${promptInput.value}, colonial America, 18th century, historically accurate, oil painting, soft lighting, warm tones`;
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
-  img.onload = () => loadingText.classList.add("hidden");
+  img.onload = () => {
+    loadingText.classList.add("hidden");
+    generateBtn.disabled = false;
+  };
   img.onerror = () => {
     loadingText.classList.add("hidden");
+    generateBtn.disabled = false;
     alert("Failed to load image");
   };
 
   imageContainer.appendChild(img);
 };
 
-/* AVATAR */
+/* ==============================
+   AVATAR GENERATOR
+============================== */
 const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
 
+// Select elements
+const backgroundSelect = document.getElementById("backgroundSelect");
+const outfitSelect = document.getElementById("outfitSelect");
+const hatSelect = document.getElementById("hatSelect");
+const accessorySelect = document.getElementById("accessorySelect");
+const hairSelect = document.getElementById("hairSelect");
+const ageSelect = document.getElementById("ageSelect");
+const raceSelect = document.getElementById("raceSelect");
+
 generateAvatarBtn.onclick = () => {
   avatarLoading.classList.remove("hidden");
+  generateAvatarBtn.disabled = true;
   avatarContainer.innerHTML = "";
 
+  // Improved prompt for realistic colonial avatar with gentle smile
   const prompt =
-    `A smiling ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, ` +
-    `with ${hatSelect.value}, holding ${accessorySelect.value}, with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting`;
+    `A ${ageSelect.value} ${raceSelect.value} colonial student with a gentle smile, ` +
+    `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
+    `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, realistic, soft lighting, warm colors`;
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
-  img.onload = () => avatarLoading.classList.add("hidden");
+  img.onload = () => {
+    avatarLoading.classList.add("hidden");
+    generateAvatarBtn.disabled = false;
+  };
   img.onerror = () => {
     avatarLoading.classList.add("hidden");
+    generateAvatarBtn.disabled = false;
     alert("Failed to load avatar");
   };
 
   avatarContainer.appendChild(img);
 };
 
-/* QUIZ */
+/* ==============================
+   1776 QUIZ
+============================== */
 const quizData = [
   {q:"What year was the Declaration signed?",a:["1775","1776","1781","1800"],c:1},
   {q:"Who wrote most of it?",a:["Washington","Franklin","Jefferson","Adams"],c:2},
@@ -108,6 +136,7 @@ function updateProgressBar() {
 function loadQuestion() {
   selected = null;
   submitBtn.disabled = true;
+  submitBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
   takeAgainBtn.classList.add("hidden");
   answersEl.innerHTML = "";
@@ -133,6 +162,14 @@ submitBtn.onclick = () => {
   const correct = quizData[current].c;
   results.push(selected === correct);
   if (selected === correct) score++;
+
+  // Highlight answers
+  [...answersEl.children].forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add("correct");
+    if (i === selected && i !== correct) btn.classList.add("wrong");
+  });
+
   updateProgressBar();
   submitBtn.classList.add("hidden");
   nextBtn.classList.remove("hidden");
