@@ -12,7 +12,6 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: none; /* hide default cursor for glow effect */
 }
 
 /* Cursor glow */
