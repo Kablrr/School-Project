@@ -3,40 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pollinations T2I & Img2Img</title>
+<title>1776 Style Image Generator</title>
 <link rel="stylesheet" href="stylerevamped.css">
 </head>
 <body>
 <div class="container">
-    <h1>Pollinations AI Generator</h1>
+    <h1>1776 Style Image Generator</h1>
 
-    <section class="generator">
-        <h2>Text-to-Image</h2>
-        <textarea id="t2iPrompt" placeholder="Enter your prompt (e.g., 1776 style)"></textarea>
-        <button id="generateT2IBtn" class="btn">Generate Image</button>
-    </section>
+    <div id="dropZone" class="drop-zone">
+        <p>Drag & drop an image here, or click to select</p>
+        <input type="file" id="fileInput" hidden>
+    </div>
 
-    <section class="generator">
-        <h2>Image-to-Image</h2>
-        <input type="text" id="imageUrl" placeholder="Or enter image URL">
-        <div id="dropZone">Drag & Drop Image Here</div>
-        <div id="previewContainer">
-            <img id="preview" src="" alt="Image Preview">
-        </div>
-        <textarea id="img2imgPrompt" placeholder="Enter prompt (default: 1776 style)">1776 style</textarea>
-        <button id="generateImg2ImgBtn" class="btn">Generate Img2Img</button>
-    </section>
+    <div id="previewContainer" class="preview-container" style="display:none;">
+        <h2>Preview</h2>
+        <img id="preview" alt="Preview Image">
+    </div>
 
-    <div id="loading" class="loading">Generating image...</div>
-    <img id="result" class="result" src="" alt="Generated Image">
+    <div id="loading" class="loading" style="display:none;">Generating image...</div>
+
+    <div id="resultContainer" class="result-container">
+        <h2>Generated 1776 Style Image</h2>
+        <img id="result" alt="Generated Image">
+    </div>
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
 
 
 
