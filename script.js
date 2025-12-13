@@ -63,50 +63,54 @@ const quizData = [
   {q:"What war led to American independence?", a:["Civil War","French & Indian War","Revolutionary War","War of 1812"], c:2}
 ];
 
-let current=0, score=0, selected=null;
-const questionEl=document.getElementById("question");
-const answersEl=document.getElementById("answers");
-const submitBtn=document.getElementById("submitBtn");
-const nextBtn=document.getElementById("nextBtn");
-const progressBar=document.getElementById("progressBar");
-const scoreEl=document.getElementById("score");
-const gradeEl=document.getElementById("grade");
-const correctSound=document.getElementById("correctSound");
-const wrongSound=document.getElementById("wrongSound");
-const completeSound=document.getElementById("completeSound");
+let current = 0, score = 0, selected = null;
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const submitBtn = document.getElementById("submitBtn");
+const nextBtn = document.getElementById("nextBtn");
+const progressBar = document.getElementById("progressBar");
+const scoreEl = document.getElementById("score");
+const gradeEl = document.getElementById("grade");
+const correctSound = document.getElementById("correctSound");
+const wrongSound = document.getElementById("wrongSound");
+const completeSound = document.getElementById("completeSound");
 
-function loadQuestion(){
-  selected=null;
-  submitBtn.disabled=true;
+function loadQuestion() {
+  selected = null;
+  submitBtn.disabled = true;
   submitBtn.classList.remove("hidden");
+
   nextBtn.classList.add("hidden");
-  answersEl.innerHTML="";
+  nextBtn.disabled = true;
+
+  answersEl.innerHTML = "";
   scoreEl.classList.add("hidden");
   gradeEl.classList.add("hidden");
 
   const q = quizData[current];
   questionEl.textContent = q.q;
-  progressBar.style.width = ((current+1)/quizData.length)*100 + "%";
+  progressBar.style.width = ((current + 1) / quizData.length) * 100 + "%";
 
-  q.a.forEach((text,i)=>{
+  q.a.forEach((text, i) => {
     const btn = document.createElement("button");
     btn.textContent = text;
-    btn.onclick = ()=>{
-      [...answersEl.children].forEach(b=>b.classList.remove("selected"));
+    btn.onclick = () => {
+      [...answersEl.children].forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
-      selected=i;
-      submitBtn.disabled=false;
+      selected = i;
+      submitBtn.disabled = false;
     };
     answersEl.appendChild(btn);
   });
 }
 
 submitBtn.onclick = () => {
-  if(selected===null) return;
-  const correct=quizData[current].c;
-  [...answersEl.children].forEach(b=>b.disabled=true);
+  if (selected === null) return;
 
-  if(selected===correct){
+  const correct = quizData[current].c;
+  [...answersEl.children].forEach(b => b.disabled = true);
+
+  if (selected === correct) {
     answersEl.children[selected].classList.add("correct");
     correctSound.play();
     score++;
@@ -115,33 +119,36 @@ submitBtn.onclick = () => {
     answersEl.children[correct].classList.add("correct");
     wrongSound.play();
   }
+
   submitBtn.classList.add("hidden");
   nextBtn.classList.remove("hidden");
+  nextBtn.disabled = false;
 };
 
 nextBtn.onclick = () => {
   current++;
-  if(current<quizData.length) loadQuestion();
+  if (current < quizData.length) loadQuestion();
   else finishQuiz();
 };
 
-function finishQuiz(){
-  questionEl.textContent="Quiz Complete!";
-  answersEl.innerHTML="";
+function finishQuiz() {
+  questionEl.textContent = "Quiz Complete!";
+  answersEl.innerHTML = "";
   nextBtn.classList.add("hidden");
-  scoreEl.textContent=`Score: ${score} / ${quizData.length}`;
+  scoreEl.textContent = `Score: ${score} / ${quizData.length}`;
   scoreEl.classList.remove("hidden");
 
-  const pct = (score/quizData.length)*100;
-  let grade="";
-  if(pct>=90) grade="A";
-  else if(pct>=80) grade="B";
-  else if(pct>=70) grade="C";
-  else if(pct>=60) grade="D";
-  else grade="F";
+  const pct = (score / quizData.length) * 100;
+  let grade = "";
+  if (pct >= 90) grade = "A";
+  else if (pct >= 80) grade = "B";
+  else if (pct >= 70) grade = "C";
+  else if (pct >= 60) grade = "D";
+  else grade = "F";
+
   gradeEl.textContent = `Grade: ${grade}`;
   gradeEl.classList.remove("hidden");
-  progressBar.style.width="100%";
+  progressBar.style.width = "100%";
   completeSound.play();
 }
 
