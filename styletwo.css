@@ -117,7 +117,7 @@ button:disabled {
 
 .progress-segment {
   height: 100%;
-  width: calc(100% / 10); /* 10 segments for 10 questions */
+  width: calc(100% / 10);
   margin: 0 1px;
   border-radius: 4px;
   background: rgba(255,255,255,0.15);
@@ -168,16 +168,32 @@ button:disabled {
   flex-wrap: wrap;
 }
 
-/* Cursor Glow */
+/* Cursor Glow - warm theme */
 #cursorGlow {
   position: fixed;
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(255,140,0,0.3), transparent);
+  background: radial-gradient(circle, rgba(195,142,112,0.3), transparent); /* Toasted Almond glow */
   pointer-events: none;
   border-radius: 50%;
   mix-blend-mode: overlay;
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
+}
+
+/* Subtle Loading Spinner */
+.spinner {
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  border-top: 6px solid #c38e70; /* Toasted Almond */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
