@@ -63,8 +63,16 @@ input[type="text"], select {
   color: #f0e6d2;
 }
 
+/* Dropdown styling for readability */
 select {
   appearance: none;
+  color: #f0e6d2; /* readable text */
+  background: rgba(0,0,0,0.2); /* darker background for contrast */
+}
+
+select option {
+  color: #1e1c1c; /* dark text inside options */
+  background-color: #f0e6d2; /* light background for contrast */
 }
 
 /* Dropdowns row */
@@ -114,12 +122,20 @@ button:disabled {
 /* Image containers */
 .image-container img {
   margin-top: 20px;
-  max-width: 400px;    /* smaller max width */
+  max-width: 400px;    /* smaller max width for sharpness */
   width: 100%;         /* responsive */
   height: auto;        /* preserve aspect ratio */
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.5);
   image-rendering: auto; /* prevent blur */
+}
+
+/* Loading text */
+.loading {
+  display: none;       /* hidden by default */
+  margin-top: 10px;
+  font-style: italic;
+  color: #ffb84d;
 }
 
 /* Quiz */
