@@ -1,11 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* Cursor Glow */
-  const cursorGlow = document.getElementById("cursorGlow");
-  document.addEventListener("mousemove", e => {
-    cursorGlow.style.top = e.clientY + "px";
-    cursorGlow.style.left = e.clientX + "px";
-  });
+/* Cursor Glow with smooth animation */
+const cursorGlow = document.getElementById("cursorGlow");
+let mouseX = 0, mouseY = 0;
+let glowX = 0, glowY = 0;
+
+document.addEventListener("mousemove", e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateGlow() {
+  // Smoothly move glow toward the mouse
+  glowX += (mouseX - glowX) * 0.15;
+  glowY += (mouseY - glowY) * 0.15;
+  cursorGlow.style.transform = `translate(${glowX - 100}px, ${glowY - 100}px)`; // -100 to center (half of width/height)
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
 
   /* TEXT TO IMAGE */
   const generateBtn = document.getElementById("generateBtn");
