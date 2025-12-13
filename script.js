@@ -1,22 +1,31 @@
 let uploadedImage = null;
 
-// Drag & Drop functionality
+// Drag & Drop
 const dropZone = document.getElementById('dropZone');
-dropZone.addEventListener('dragover', e => e.preventDefault());
+const previewContainer = document.getElementById('previewContainer');
+const preview = document.getElementById('preview');
+
+dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('hover');
+});
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('hover'));
 dropZone.addEventListener('drop', e => {
     e.preventDefault();
+    dropZone.classList.remove('hover');
     const file = e.dataTransfer.files[0];
     if(file && file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            uploadedImage = e.target.result; // base64
-            dropZone.textContent = "Image loaded! Ready to generate.";
+            uploadedImage = e.target.result;
+            preview.src = uploadedImage;
+            previewContainer.style.display = "block";
         }
         reader.readAsDataURL(file);
     }
 });
 
-// Event listeners for buttons
+// Buttons
 document.getElementById('generateT2IBtn').addEventListener('click', generateT2I);
 document.getElementById('generateImg2ImgBtn').addEventListener('click', generateImg2Img);
 
@@ -30,10 +39,10 @@ async function generateT2I() {
     try {
         const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
         const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error("Failed to generate image.");
+        if(!response.ok) throw new Error("Failed to generate image.");
         const blob = await response.blob();
         resultImg.src = URL.createObjectURL(blob);
-    } catch (err) {
+    } catch(err) {
         alert("Error: " + err.message);
     } finally {
         loading.style.display = "none";
@@ -50,11 +59,9 @@ async function generateImg2Img() {
 
     try {
         let imgParam = "";
-        if(uploadedImage) {
-            imgParam = uploadedImage; // base64
-        } else if(imageUrl) {
-            imgParam = imageUrl;
-        } else {
+        if(uploadedImage) imgParam = uploadedImage;
+        else if(imageUrl) imgParam = imageUrl;
+        else {
             alert("Please provide an image URL or upload an image.");
             loading.style.display = "none";
             return;
@@ -62,13 +69,14 @@ async function generateImg2Img() {
 
         const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?img=${encodeURIComponent(imgParam)}`;
         const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error("Failed to generate image.");
+        if(!response.ok) throw new Error("Failed to generate image.");
         const blob = await response.blob();
         resultImg.src = URL.createObjectURL(blob);
-    } catch (err) {
+    } catch(err) {
         alert("Error: " + err.message);
     } finally {
         loading.style.display = "none";
     }
 }
+
 
