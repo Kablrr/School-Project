@@ -87,8 +87,14 @@ generateAvatarBtn.onclick = () => {
 };
 
 /* ==============================
-   1776 QUIZ
+   1776 QUIZ WITH SOUND EFFECTS
 ============================== */
+
+// Quiz Sound Effects
+const correctSound = new Audio('correct.mp3');
+const wrongSound = new Audio('wrong.mp3');
+const completeSound = new Audio('complete.mp3');
+
 const quizData = [
   {q:"What year was the Declaration signed?",a:["1775","1776","1781","1800"],c:1},
   {q:"Who wrote most of it?",a:["Washington","Franklin","Jefferson","Adams"],c:2},
@@ -161,7 +167,12 @@ function loadQuestion() {
 submitBtn.onclick = () => {
   const correct = quizData[current].c;
   results.push(selected === correct);
-  if (selected === correct) score++;
+  if (selected === correct) {
+    score++;
+    correctSound.play();
+  } else {
+    wrongSound.play();
+  }
 
   [...answersEl.children].forEach((btn, i) => {
     btn.disabled = true;
@@ -188,6 +199,8 @@ function finishQuiz() {
   takeAgainBtn.classList.remove("hidden");
   scoreEl.textContent = `Score: ${score}/${quizData.length}`;
   scoreEl.classList.remove("hidden");
+
+  completeSound.play();
 }
 
 takeAgainBtn.onclick = () => {
