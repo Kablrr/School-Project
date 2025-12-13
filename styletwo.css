@@ -81,3 +81,13 @@ button:hover { background: rgba(60,40,20,0.9); transform: scale(1.05); }
 .hidden { display: none; }
 #score, #grade { text-align: center; margin-top: 15px; color: #3b2f2f; font-size: 1.2rem; }
 hr { margin: 30px 0; border: 1px solid rgba(0,0,0,0.2); }
+/* Selected answer effect */
+#answers button.selected {
+  transform: scale(1.05);
+  background: rgba(100, 60, 20, 0.8); /* slightly darker */
+  border: 2px solid #ffdca0; /* subtle highlight */
+  transition: all 0.2s ease;
+}
+#answers button:hover {
+  transform: scale(1.03);
+}
