@@ -18,24 +18,18 @@ body {
   margin-bottom: 50px;
 }
 
-.dropdowns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
 input, select {
   padding: 10px;
+  margin: 5px;
   border-radius: 8px;
   background: #2a1f12;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid #ffb84d;
 }
 
 select option {
   background: #2a1f12;
-  color: #ffffff;
+  color: #fff;
 }
 
 button {
@@ -49,7 +43,6 @@ button {
 
 button:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .hidden {
@@ -82,14 +75,4 @@ button:disabled {
   display: block;
   width: 100%;
   margin: 6px auto;
-}
-
-/* Cursor Glow */
-#cursorGlow {
-  position: fixed;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,140,0,0.3), transparent);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
 }
