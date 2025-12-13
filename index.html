@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1776 Image Generator</title>
-    <link rel="stylesheet" href="stylerevamped.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1776 Style AI Generator</title>
+<link rel="stylesheet" href="stylerevamped.css">
 </head>
 <body>
-    <div class="container">
-        <h1>1776 Style Image Generator</h1>
+<div class="container">
+    <h1>1776 Style AI Generator</h1>
 
-        <!-- TEXT TO IMAGE -->
-        <p>Enter what you would like to generate:</p>
-        <input type="text" id="promptInput" placeholder="Prompt">
-        <button onclick="generateImage()">Generate (Prompt → Image)</button>
-
-        <hr>
-
-        <!-- IMG2IMG -->
-        <p>Upload an image to convert it into 1776 style:</p>
-        <input type="file" id="imgInput" accept="image/*">
-        <button onclick="convertImg2Img()">Convert (Img2Img → 1776)</button>
-
+    <!-- TEXT TO IMAGE (Pollinations) -->
+    <div class="section">
+        <h2>Text → 1776 Image</h2>
+        <input type="text" id="promptInput" placeholder="Enter a prompt">
+        <button onclick="generateImage()">Generate Image</button>
         <div id="imageContainer">
             <img id="generatedImage" src="" style="display:none;">
             <p id="loadingStatus"></p>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <hr>
+
+    <!-- IMG2IMG (Custom Hugging Face Space) -->
+    <div class="section">
+        <h2>Img2Img → 1776 Style</h2>
+        <p>Upload an image to convert it:</p>
+        <input type="file" id="imgInput" accept="image/*">
+        <input type="text" id="img2imgPrompt" placeholder="Optional prompt">
+        <button id="convertBtn">Convert</button>
+
+        <div id="img2imgContainer">
+            <iframe id="hfSpace" src="https://YOUR_SPACE_URL.hf.space" width="100%" height="650" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
+
 
 
 
