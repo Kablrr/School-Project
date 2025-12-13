@@ -17,20 +17,26 @@ body {
 /* ================= CURSOR GLOW ================= */
 #cursorGlow {
   position: fixed;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255,220,150,0.25) 0%, rgba(255,220,150,0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 150, 60, 0.45) 0%,
+    rgba(255, 120, 40, 0.25) 35%,
+    rgba(255, 120, 40, 0.05) 60%,
+    rgba(255, 120, 40, 0) 75%
+  );
   mix-blend-mode: screen;
   z-index: 9999;
-  animation: glowPulse 2.5s infinite alternate;
+  animation: glowPulse 2.2s infinite alternate;
 }
 
 @keyframes glowPulse {
-  from { opacity: 0.6; }
-  to { opacity: 0.9; }
+  from { opacity: 0.65; }
+  to   { opacity: 0.95; }
 }
 
 /* ================= MAIN CONTAINER ================= */
