@@ -4,32 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kabir Malhi - 1776 Project</title>
-  <link rel="stylesheet" href="styletwo.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Cursor glow -->
+  <!-- Cursor Glow -->
   <div id="cursorGlow"></div>
 
   <div class="container">
-    <!-- Text-to-Image Generator -->
-    <h1>Image Generator</h1>
-    <p>See your prompt turn into something from a colonial time!</p>
-    <input type="text" id="prompt" placeholder="Enter your prompt...">
-    <button id="generateBtn">Generate Image</button>
-    <div class="loading" id="loading">Generating image...</div>
-    <div class="image-container" id="imageContainer"></div>
 
-    <!-- Customizable Avatar Generator -->
-    <h1>Customizable 1776 Avatar</h1>
-    <p>Create your own 1776 school student avatar!</p>
-    <input type="text" id="avatarPrompt" placeholder="Enter outfit/props/background...">
-    <button id="generateAvatarBtn">Generate Avatar</button>
-    <div class="loading" id="avatarLoading">Generating avatar...</div>
-    <div class="avatar-container" id="avatarContainer"></div>
+    <!-- Text-to-Image Generator -->
+    <div class="section" id="textImageSection">
+      <h1>Text-to-Image Generator</h1>
+      <p>See your prompt turn into something from colonial times!</p>
+      <input type="text" id="prompt" placeholder="Enter your prompt...">
+      <button id="generateBtn">Generate Image</button>
+      <div class="loading" id="loading">Generating image...</div>
+      <div class="image-container" id="imageContainer"></div>
+    </div>
+
+    <!-- Avatar Generator -->
+    <div class="section" id="avatarSection">
+      <h1>1776 Avatar Generator</h1>
+      <p>Customize your colonial student avatar!</p>
+      <div class="dropdowns">
+        <select id="backgroundSelect">
+          <option value="classroom">Classroom</option>
+          <option value="library">Library</option>
+          <option value="courtyard">Courtyard</option>
+        </select>
+        <select id="outfitSelect">
+          <option value="bluecoat">Blue Coat</option>
+          <option value="browncoat">Brown Coat</option>
+          <option value="plain">Plain Clothes</option>
+        </select>
+        <select id="hatSelect">
+          <option value="tricorn">Tricorn Hat</option>
+          <option value="cap">Cap</option>
+          <option value="none">No Hat</option>
+        </select>
+        <select id="accessorySelect">
+          <option value="quill">Quill</option>
+          <option value="book">Book</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+      <button id="generateAvatarBtn">Generate Avatar</button>
+      <div class="image-container" id="avatarContainer"></div>
+      <div class="loading" id="avatarLoading">Generating avatar...</div>
+    </div>
 
     <!-- Quiz -->
-    <h1>1776 History Quiz</h1>
-    <div id="quiz">
+    <div class="section" id="quizSection">
+      <h1>1776 History Quiz</h1>
       <div id="progressContainer">
         <div id="progressBar"></div>
       </div>
@@ -42,9 +68,10 @@
       <div id="score" class="hidden"></div>
       <div id="grade" class="hidden"></div>
     </div>
+
   </div>
 
-  <!-- Sound effects -->
+  <!-- Sound Effects -->
   <audio id="correctSound" src="correct.mp3"></audio>
   <audio id="wrongSound" src="wrong.mp3"></audio>
   <audio id="completeSound" src="complete.mp3"></audio>
