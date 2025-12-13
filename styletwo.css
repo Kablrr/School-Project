@@ -1,11 +1,7 @@
-* {
-  box-sizing: border-box;
-  font-family: Georgia, serif;
-}
-
 body {
   background: #1e1c1c;
   color: #f0e6d2;
+  font-family: Georgia, serif;
   margin: 0;
 }
 
@@ -45,12 +41,8 @@ button {
   margin-top: 10px;
 }
 
-button:hover {
-  transform: scale(1.05);
-}
-
-.loading {
-  margin-top: 10px;
+button:disabled {
+  opacity: 0.5;
 }
 
 .hidden {
@@ -59,7 +51,7 @@ button:hover {
 
 .image-container img {
   margin-top: 20px;
-  max-width: 400px;
+  max-width: 350px;
   border-radius: 15px;
 }
 
@@ -74,7 +66,7 @@ button:hover {
 #progressBar {
   height: 100%;
   width: 0%;
-  background: rgba(255,140,0,0.8);
+  background: orange;
   border-radius: 7px;
   transition: width 0.3s ease, background 0.3s ease;
 }
@@ -83,17 +75,4 @@ button:hover {
   display: block;
   width: 100%;
   margin: 6px auto;
-}
-
-.correct { background: green !important; color: white; }
-.wrong { background: darkred !important; color: white; }
-
-/* Cursor Glow */
-#cursorGlow {
-  position: fixed;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,140,0,0.3), transparent);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
 }
