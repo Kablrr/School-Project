@@ -52,7 +52,7 @@ const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
 avatarLoading.innerHTML = `<div class="spinner"></div>`;
 
-// Select elements
+// Avatar dropdowns
 const backgroundSelect = document.getElementById("backgroundSelect");
 const outfitSelect = document.getElementById("outfitSelect");
 const hatSelect = document.getElementById("hatSelect");
@@ -89,8 +89,6 @@ generateAvatarBtn.onclick = () => {
 /* ==============================
    1776 QUIZ WITH SOUND EFFECTS
 ============================== */
-
-// Quiz Sound Effects
 const correctSound = new Audio('correct.mp3');
 const wrongSound = new Audio('wrong.mp3');
 const completeSound = new Audio('complete.mp3');
@@ -167,6 +165,11 @@ function loadQuestion() {
 submitBtn.onclick = () => {
   const correct = quizData[current].c;
   results.push(selected === correct);
+
+  // Stop any previous sounds
+  correctSound.pause(); correctSound.currentTime = 0;
+  wrongSound.pause(); wrongSound.currentTime = 0;
+
   if (selected === correct) {
     score++;
     correctSound.play();
@@ -192,6 +195,10 @@ nextBtn.onclick = () => {
 };
 
 function finishQuiz() {
+  // Stop previous sounds
+  correctSound.pause(); correctSound.currentTime = 0;
+  wrongSound.pause(); wrongSound.currentTime = 0;
+
   questionEl.textContent = "Quiz Complete!";
   answersEl.innerHTML = "";
   nextBtn.classList.add("hidden");
