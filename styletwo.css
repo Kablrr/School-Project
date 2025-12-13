@@ -65,15 +65,6 @@ img {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Loading Indicator */
-#loading {
-    display: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #e67e22;
-    margin-top: 1rem;
-}
-
 /* Flexbox layout for better alignment */
 .container {
     display: flex;
@@ -82,5 +73,15 @@ img {
     align-items: center;
     max-width: 800px;
     margin: 0 auto;
+}
+
+/* Hide the image initially */
+#result {
+    display: none; /* hide until generated */
+}
+
+/* Loading text */
+#loading {
+    display: none; /* hidden by default */
 }
 
