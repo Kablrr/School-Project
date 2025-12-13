@@ -11,23 +11,25 @@
   <div id="cursorGlow"></div>
 
   <div class="container">
+    <!-- Text-to-image generator -->
     <h1>Image Generator</h1>
     <p>See your prompt turn into something from a colonial time!</p>
     <input type="text" id="prompt" placeholder="Enter your prompt...">
     <button id="generateBtn">Generate Image</button>
-    <div style="text-align: center;"class="loading" id="loading">Generating image...</div>
+    <div class="loading" id="loading">Generating image...</div>
     <div class="image-container" id="imageContainer"></div>
 
-    <hr>
-
+    <!-- Quiz -->
     <h1>1776 History Quiz</h1>
     <div id="quiz">
       <div id="progressContainer">
         <div id="progressBar"></div>
       </div>
       <div id="question"></div>
-      <div id="answers"></div>
-      <button id="submitBtn" disabled>Submit Answer</button>
+      <div id="answers-wrapper">
+        <div id="answers"></div>
+        <button id="submitBtn" disabled>Submit</button>
+      </div>
       <button id="nextBtn" class="hidden">Next Question</button>
       <div id="score" class="hidden"></div>
       <div id="grade" class="hidden"></div>
@@ -42,8 +44,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
