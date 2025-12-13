@@ -1,4 +1,4 @@
-/* Reset and base styles */
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,7 +8,7 @@
 
 body {
   background: #edc4b3; /* Almond Silk */
-  color: #4b2e2a; /* Dark brown for readability */
+  color: #4b2e2a; /* Dark brown */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ body {
   background: linear-gradient(180deg, #d69f7e, #cd9777); /* Light Bronze shades */
   border-radius: 25px;
   padding: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   text-align: center;
 }
 
@@ -33,15 +33,14 @@ body {
 
 h1 {
   font-size: 2.2rem;
-  margin-bottom: 20px;
-  color: #4b2e2a; /* Dark brown */
+  margin-bottom: 10px;
+  color: #4b2e2a;
 }
 
-/* Instructional text / paragraph */
-p, .section p {
-  color: #4b2e2a; /* dark brown for visibility */
+p {
+  color: #4b2e2a;
   font-weight: 500;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-size: 1rem;
 }
 
@@ -52,13 +51,13 @@ input[type="text"], select {
   border-radius: 10px;
   border: 1px solid #b07d62; /* Faded Copper */
   font-size: 16px;
-  background: #f5e6dc; /* light beige for readability */
+  background: #f5e6dc; /* light beige */
   color: #4b2e2a;
   outline: none;
 }
 
 select option {
-  background: #f5e6dc; /* light beige */
+  background: #f5e6dc;
   color: #4b2e2a;
 }
 
@@ -95,7 +94,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Hidden class */
 .hidden {
   display: none;
 }
@@ -110,20 +108,20 @@ button:disabled {
 
 /* Quiz */
 #progressContainer {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
   height: 16px;
   margin-bottom: 20px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.15);
-  display: flex;
 }
 
 .progress-segment {
   height: 100%;
-  margin: 0 2px;
-  border-radius: 5px;
+  width: calc(100% / 10); /* 10 segments for 10 questions */
+  margin: 0 1px;
+  border-radius: 4px;
   background: rgba(255,255,255,0.15);
-  transition: background 0.3s ease;
+  transition: background 0.4s ease;
 }
 
 #question {
@@ -138,8 +136,8 @@ button:disabled {
   width: 90%;
   max-width: 400px;
   margin: 8px auto;
-  border: 1px solid #9d6b53; /* Cinnamon Wood */
-  background: #f5e6dc; /* light beige */
+  border: 1px solid #9d6b53;
+  background: #f5e6dc;
   color: #4b2e2a;
   border-radius: 10px;
   font-size: 16px;
@@ -147,10 +145,10 @@ button:disabled {
 }
 
 #answers button.selected {
-  background: #c38e70; /* Toasted Almond */
-  color: #ffffff;
+  background: #c38e70;
+  color: #fff;
   transform: scale(1.05);
-  border: 2px solid #b07d62; /* Faded Copper */
+  border: 2px solid #b07d62;
 }
 
 #answers button.correct {
@@ -171,7 +169,6 @@ button:disabled {
 }
 
 /* Cursor Glow */
-/* Glow fix */
 #cursorGlow {
   position: fixed;
   width: 180px;
@@ -183,5 +180,4 @@ button:disabled {
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
-  /* remove transition to prevent lag */
 }
