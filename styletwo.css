@@ -18,17 +18,18 @@ body {
 /* Cursor glow */
 #cursorGlow {
   position: fixed;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,140,0,0.25) 0%, rgba(255,140,0,0) 60%);
+  width: 120px;      /* smaller */
+  height: 120px;     /* smaller */
+  background: radial-gradient(circle, rgba(255,140,0,0.5) 0%, rgba(255,140,0,0) 60%);
   pointer-events: none;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   mix-blend-mode: overlay;
+  filter: blur(12px);
+  z-index: 9999;      /* in front of everything */
   transition: top 0.05s, left 0.05s;
-  filter: blur(15px);
-  z-index: 9999; /* always in front */
 }
+
 
 /* Main container */
 .container {
