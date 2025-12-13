@@ -21,7 +21,8 @@ generateBtn.addEventListener("click", () => {
   generateBtn.disabled = true;
 
   const img = document.createElement("img");
-  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  // Request 512px image for sharper display
+  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}&size=512`;
   img.onload = () => { loading.style.display = "none"; generateBtn.disabled = false; };
   img.onerror = () => { loading.style.display = "none"; generateBtn.disabled = false; alert("Image failed to load."); };
 
@@ -41,13 +42,14 @@ const raceSelect = document.getElementById("raceSelect");
 
 generateAvatarBtn.addEventListener("click", () => {
   const prompt = `A ${ageSelect.value} ${raceSelect.value} colonial student wearing ${outfitSelect.value}, with ${hatSelect.value}, holding ${accessorySelect.value}, standing in a ${backgroundSelect.value}, oil painting, 18th century`;
-  
+
   avatarContainer.innerHTML = "";
   avatarLoading.style.display = "block";
   generateAvatarBtn.disabled = true;
 
   const img = document.createElement("img");
-  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  // Request 512px image for sharper display
+  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}&size=512`;
   img.onload = () => { avatarLoading.style.display = "none"; generateAvatarBtn.disabled = false; };
   img.onerror = () => { avatarLoading.style.display = "none"; generateAvatarBtn.disabled = false; alert("Avatar failed to load."); };
 
