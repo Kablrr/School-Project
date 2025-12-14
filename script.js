@@ -5,7 +5,7 @@ document.addEventListener('mousemove', e => {
   cursorGlow.style.left = e.clientX + 'px';
 });
 
-// ===== Image Generator (placeholder with improved look) =====
+// ===== Image Generator with Pollinations AI =====
 const generateBtn = document.getElementById('generateBtn');
 const promptInput = document.getElementById('promptInput');
 const imageContainer = document.getElementById('imageContainer');
@@ -19,13 +19,22 @@ generateBtn.addEventListener('click', () => {
   loadingText.classList.remove('hidden');
   loadingText.textContent = 'Generating image...';
 
-  setTimeout(() => {
+  const img = new Image();
+  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+  img.alt = prompt;
+  img.style.border = '2px solid #4b2e2a';
+  img.style.borderRadius = '12px';
+  img.onload = () => {
     loadingText.classList.add('hidden');
-    imageContainer.innerHTML = `<img src="https://via.placeholder.com/500x300?text=${encodeURIComponent(prompt)}" alt="Generated Image" style="border:2px solid #4b2e2a; border-radius:12px;">`;
-  }, 1500);
+    imageContainer.appendChild(img);
+  };
+  img.onerror = () => {
+    loadingText.classList.add('hidden');
+    alert('Failed to generate image. Try a different prompt.');
+  };
 });
 
-// ===== Avatar Generator (placeholder) =====
+// ===== Avatar Generator with Pollinations AI =====
 const generateAvatarBtn = document.getElementById('generateAvatarBtn');
 const avatarContainer = document.getElementById('avatarContainer');
 const avatarLoading = document.getElementById('avatarLoading');
@@ -35,31 +44,21 @@ generateAvatarBtn.addEventListener('click', () => {
   avatarLoading.classList.remove('hidden');
   avatarLoading.textContent = 'Generating avatar...';
 
-  const gender = document.getElementById('genderSelect').value;
-  const background = document.getElementById('backgroundSelect').value;
-  const outfit = document.getElementById('outfitSelect').value;
-  const hat = document.getElementById('hatSelect').value;
-  const accessory = document.getElementById('accessorySelect').value;
-  const hair = document.getElementById('hairSelect').value;
-  const age = document.getElementById('ageSelect').value;
-  const race = document.getElementById('raceSelect').value;
+  const prompt = `Colonial avatar, gender: ${document.getElementById('genderSelect').value}, background: ${document.getElementById('backgroundSelect').value}, outfit: ${document.getElementById('outfitSelect').value}, hat: ${document.getElementById('hatSelect').value}, accessory: ${document.getElementById('accessorySelect').value}, hair: ${document.getElementById('hairSelect').value}, age: ${document.getElementById('ageSelect').value}, heritage: ${document.getElementById('raceSelect').value}`;
 
-  setTimeout(() => {
+  const img = new Image();
+  img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+  img.alt = 'Colonial Avatar';
+  img.style.border = '2px solid #4b2e2a';
+  img.style.borderRadius = '12px';
+  img.onload = () => {
     avatarLoading.classList.add('hidden');
-    avatarContainer.innerHTML = `
-      <div style="padding:20px; border:2px solid #4b2e2a; border-radius:12px; background:#f5e6dc;">
-        <h3>Avatar Preview</h3>
-        <p><strong>Gender:</strong> ${gender}</p>
-        <p><strong>Background:</strong> ${background}</p>
-        <p><strong>Outfit:</strong> ${outfit}</p>
-        <p><strong>Hat:</strong> ${hat}</p>
-        <p><strong>Accessory:</strong> ${accessory}</p>
-        <p><strong>Hair:</strong> ${hair}</p>
-        <p><strong>Age:</strong> ${age}</p>
-        <p><strong>Heritage:</strong> ${race}</p>
-      </div>
-    `;
-  }, 1500);
+    avatarContainer.appendChild(img);
+  };
+  img.onerror = () => {
+    avatarLoading.classList.add('hidden');
+    alert('Failed to generate avatar. Try different options.');
+  };
 });
 
 // ===== Quiz Logic =====
@@ -81,7 +80,7 @@ const nextBtn = document.getElementById('nextBtn');
 const scoreEl = document.getElementById('score');
 const takeAgainBtn = document.getElementById('takeAgainBtn');
 
-// Initialize Progress
+// Initialize progress bar
 function initProgress() {
   progressContainer.innerHTML = '';
   quizData.forEach(() => {
@@ -91,7 +90,7 @@ function initProgress() {
   });
 }
 
-// Load Question
+// Load question
 function loadQuestion() {
   submitBtn.disabled = true;
   submitBtn.classList.remove('hidden');
@@ -111,7 +110,7 @@ function loadQuestion() {
   });
 }
 
-// Update Progress
+// Update progress bar
 function updateProgress() {
   const segments = document.querySelectorAll('.progress-segment');
   segments.forEach((seg, index) => {
@@ -119,7 +118,7 @@ function updateProgress() {
   });
 }
 
-// Submit Answer
+// Submit answer
 submitBtn.addEventListener('click', () => {
   const selected = document.querySelector('#answers button.selected');
   if (!selected) return;
@@ -130,23 +129,22 @@ submitBtn.addEventListener('click', () => {
     if (btn.textContent === correct) btn.classList.add('correct');
   });
 
-  if (selected.textContent === correct) score++;
-
-  selected.classList.toggle('wrong', selected.textContent !== correct);
+  if (selected.textContent !== correct) selected.classList.add('wrong');
+  else score++;
 
   submitBtn.classList.add('hidden');
   nextBtn.classList.remove('hidden');
   updateProgress();
 });
 
-// Next Question
+// Next question
 nextBtn.addEventListener('click', () => {
   currentQuestion++;
   if (currentQuestion >= quizData.length) return showScore();
   loadQuestion();
 });
 
-// Show Final Score
+// Show final score
 function showScore() {
   questionEl.textContent = 'Quiz Completed!';
   answersEl.innerHTML = '';
@@ -157,7 +155,7 @@ function showScore() {
   takeAgainBtn.classList.remove('hidden');
 }
 
-// Restart Quiz
+// Restart quiz
 takeAgainBtn.addEventListener('click', () => {
   currentQuestion = 0;
   score = 0;
@@ -167,6 +165,6 @@ takeAgainBtn.addEventListener('click', () => {
   initProgress();
 });
 
-// Initialize
+// Initialize quiz
 initProgress();
 loadQuestion();
