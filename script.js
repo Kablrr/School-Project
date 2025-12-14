@@ -85,7 +85,6 @@ const raceSelect = document.getElementById("raceSelect");
 let currentAvatar = null;
 
 generateAvatarBtn.onclick = () => {
-  // Disable button while loading
   generateAvatarBtn.disabled = true;
 
   if (currentAvatar) {
@@ -177,6 +176,15 @@ function updateProgressBar() {
   });
 }
 
+// SHUFFLE ARRAY UTILITY
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 function loadQuestion() {
   selected = null;
   submitBtn.disabled = true;
@@ -187,11 +195,15 @@ function loadQuestion() {
   answersEl.innerHTML = "";
   questionEl.textContent = quizData[current].q;
 
-  quizData[current].a.forEach((answerText, i) => {
+  // Create answer objects with original index
+  const answers = quizData[current].a.map((text, i) => ({ text, index: i }));
+  shuffleArray(answers);
+
+  answers.forEach(obj => {
     const btn = document.createElement("button");
-    btn.textContent = answerText;
+    btn.textContent = obj.text;
     btn.onclick = () => {
-      selected = i;
+      selected = obj.index; // store original index
       submitBtn.disabled = false;
       Array.from(answersEl.children).forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
@@ -203,7 +215,7 @@ function loadQuestion() {
 }
 
 submitBtn.onclick = () => {
-  if (selected === null) return; // Safety check
+  if (selected === null) return;
 
   const correct = quizData[current].c;
   results.push(selected === correct);
@@ -218,9 +230,11 @@ submitBtn.onclick = () => {
   }
   currentSound.play();
 
-  Array.from(answersEl.children).forEach((btn, i) => {
-    if (i === correct) btn.classList.add("correct");
-    if (i === selected && selected !== correct) btn.classList.add("wrong");
+  // Highlight answers
+  Array.from(answersEl.children).forEach(btn => {
+    const btnText = btn.textContent;
+    if (btnText === quizData[current].a[correct]) btn.classList.add("correct");
+    if (btnText === quizData[current].a[selected] && selected !== correct) btn.classList.add("wrong");
   });
 
   submitBtn.classList.add("hidden");
