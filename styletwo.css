@@ -185,21 +185,24 @@ button:disabled {
 /* ==============================
    Loading Spinner
 ============================== */
-/* ==============================
-   Loading Spinner
-============================== */
 #loadingText, #avatarLoading {
   min-height: 60px;            /* reserve space */
   display: flex;               /* center spinner */
   justify-content: center;
   align-items: center;
-  position: relative;          /* allow z-index */
+  position: relative;
   z-index: 10;
+  transition: opacity 0.4s ease;  /* fade effect */
+  opacity: 0;                     /* initially hidden */
+}
+
+#loadingText.show, #avatarLoading.show {
+  opacity: 1;                     /* fade in */
 }
 
 .spinner {
   border: 5px solid rgba(255, 255, 255, 0.3); /* light outer border */
-  border-top: 5px solid #4b2e2a;            /* dark brown spinning part */
+  border-top: 5px solid #4b2e2a;            /* dark brown for spinning effect */
   border-radius: 50%;
   width: 40px;
   height: 40px;
