@@ -10,143 +10,6 @@
 
 <div id="cursorGlow"></div>
 
-<div class="container">
-
-  <!-- TEXT TO IMAGE -->
-  <div class="section">
-    <h1>Image Generator</h1>
-    <p>Convert your ideas into a colonial scene (May take 30-60 seconds)</p>
-    <input id="promptInput" type="text" placeholder="Enter a colonial scene...">
-    <button id="generateBtn">Generate Image</button>
-    <div id="loadingText" class="hidden"></div>
-    <div id="imageContainer" class="image-container"></div>
-  </div>
-
-  <!-- AVATAR -->
-  <div class="section">
-    <h1>1776 Avatar Generator</h1>
-    <p>Customize your colonial student avatar (May take 30-60 seconds)</p>
-
-    <div class="dropdowns">
-      <div class="dropdown-group">
-        <label for="genderSelect">Gender:</label>
-        <select id="genderSelect">
-          <option>Male</option>
-          <option>Female</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="backgroundSelect">Background:</label>
-        <select id="backgroundSelect">
-          <option>Classroom</option>
-          <option>Library</option>
-          <option>Town Square</option>
-          <option>Tavern</option>
-          <option>Courtyard</option>
-          <option>Market</option>
-          <option>Garden</option>
-          <option>Ship Deck</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="outfitSelect">Outfit:</label>
-        <select id="outfitSelect">
-          <option>Blue Coat</option>
-          <option>Brown Coat</option>
-          <option>Formal Suit</option>
-          <option>Farmer Clothes</option>
-          <option>Plain Clothes</option>
-          <option>Merchant Clothes</option>
-          <option>Military Uniform</option>
-          <option>Apprentice Outfit</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="hatSelect">Hat:</label>
-        <select id="hatSelect">
-          <option>Tricorn Hat</option>
-          <option>Cap</option>
-          <option>Bonnet</option>
-          <option>No Hat</option>
-          <option>Wide Brim Hat</option>
-          <option>Bandana</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="accessorySelect">Accessory:</label>
-        <select id="accessorySelect">
-          <option>Book</option>
-          <option>Quill</option>
-          <option>Scroll</option>
-          <option>None</option>
-          <option>Sword</option>
-          <option>Basket</option>
-          <option>Lantern</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="hairSelect">Hair Style:</label>
-        <select id="hairSelect">
-          <option>Long</option>
-          <option>Short</option>
-          <option>Curly</option>
-          <option>Bun</option>
-          <option>None</option>
-          <option>Ponytail</option>
-          <option>Braided</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="ageSelect">Age:</label>
-        <select id="ageSelect">
-          <option>Young</option>
-          <option>Teenage</option>
-          <option>Adult</option>
-          <option>Elderly</option>
-        </select>
-      </div>
-
-      <div class="dropdown-group">
-        <label for="raceSelect">Heritage:</label>
-        <select id="raceSelect">
-          <option>European</option>
-          <option>African</option>
-          <option>Native American</option>
-          <option>Mixed Heritage</option>
-          <option>Asian</option>
-          <option>Middle Eastern</option>
-        </select>
-      </div>
-    </div>
-
-    <button id="generateAvatarBtn">Generate Avatar</button>
-    <div id="avatarLoading" class="hidden"></div>
-    <div id="avatarContainer" class="image-container"></div>
-  </div>
-
-  <!-- QUIZ -->
-  <div class="section">
-    <h1>1776 History Quiz</h1>
-
-    <div id="progressContainer"></div>
-    <div id="question"></div>
-    <div id="answers"></div>
-
-    <div class="quiz-buttons">
-      <button id="submitBtn" disabled>Submit</button>
-      <button id="nextBtn" class="hidden">Next</button>
-    </div>
-
-    <div id="score" class="hidden"></div>
-    <button id="takeAgainBtn" class="hidden">Take Again</button>
-  </div>
-
 <div class="main-layout">
 
   <!-- Left Column: 1776 Images -->
@@ -158,14 +21,146 @@
     <div class="image-wrapper">
       <img src="PUT_1776_IMAGE_2_URL_HERE" alt="1776 Image 2">
     </div>
-    <!-- Add more 1776 images here -->
   </div>
 
   <!-- Center Column: Apps -->
   <div class="apps-column">
-    <div class="container">
-      <!-- Copy your existing apps HTML here (Text-to-Image, Avatar, Quiz) -->
+
+    <!-- TEXT TO IMAGE -->
+    <div class="section">
+      <h1>Image Generator</h1>
+      <p>Convert your ideas into a colonial scene (May take 30-60 seconds)</p>
+      <input id="promptInput" type="text" placeholder="Enter a colonial scene...">
+      <button id="generateBtn">Generate Image</button>
+      <div id="loadingText" class="hidden"></div>
+      <div id="imageContainer" class="image-container"></div>
     </div>
+
+    <!-- AVATAR GENERATOR -->
+    <div class="section">
+      <h1>1776 Avatar Generator</h1>
+      <p>Customize your colonial student avatar (May take 30-60 seconds)</p>
+
+      <div class="dropdowns">
+        <div class="dropdown-group">
+          <label for="genderSelect">Gender:</label>
+          <select id="genderSelect">
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="backgroundSelect">Background:</label>
+          <select id="backgroundSelect">
+            <option>Classroom</option>
+            <option>Library</option>
+            <option>Town Square</option>
+            <option>Tavern</option>
+            <option>Courtyard</option>
+            <option>Market</option>
+            <option>Garden</option>
+            <option>Ship Deck</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="outfitSelect">Outfit:</label>
+          <select id="outfitSelect">
+            <option>Blue Coat</option>
+            <option>Brown Coat</option>
+            <option>Formal Suit</option>
+            <option>Farmer Clothes</option>
+            <option>Plain Clothes</option>
+            <option>Merchant Clothes</option>
+            <option>Military Uniform</option>
+            <option>Apprentice Outfit</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="hatSelect">Hat:</label>
+          <select id="hatSelect">
+            <option>Tricorn Hat</option>
+            <option>Cap</option>
+            <option>Bonnet</option>
+            <option>No Hat</option>
+            <option>Wide Brim Hat</option>
+            <option>Bandana</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="accessorySelect">Accessory:</label>
+          <select id="accessorySelect">
+            <option>Book</option>
+            <option>Quill</option>
+            <option>Scroll</option>
+            <option>None</option>
+            <option>Sword</option>
+            <option>Basket</option>
+            <option>Lantern</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="hairSelect">Hair Style:</label>
+          <select id="hairSelect">
+            <option>Long</option>
+            <option>Short</option>
+            <option>Curly</option>
+            <option>Bun</option>
+            <option>None</option>
+            <option>Ponytail</option>
+            <option>Braided</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="ageSelect">Age:</label>
+          <select id="ageSelect">
+            <option>Young</option>
+            <option>Teenage</option>
+            <option>Adult</option>
+            <option>Elderly</option>
+          </select>
+        </div>
+
+        <div class="dropdown-group">
+          <label for="raceSelect">Heritage:</label>
+          <select id="raceSelect">
+            <option>European</option>
+            <option>African</option>
+            <option>Native American</option>
+            <option>Mixed Heritage</option>
+            <option>Asian</option>
+            <option>Middle Eastern</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="generateAvatarBtn">Generate Avatar</button>
+      <div id="avatarLoading" class="hidden"></div>
+      <div id="avatarContainer" class="image-container"></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section">
+      <h1>1776 History Quiz</h1>
+
+      <div id="progressContainer"></div>
+      <div id="question"></div>
+      <div id="answers"></div>
+
+      <div class="quiz-buttons">
+        <button id="submitBtn" disabled>Submit</button>
+        <button id="nextBtn" class="hidden">Next</button>
+      </div>
+
+      <div id="score" class="hidden"></div>
+      <button id="takeAgainBtn" class="hidden">Take Again</button>
+    </div>
+
   </div>
 
   <!-- Right Column: 2025 Images -->
@@ -177,19 +172,10 @@
     <div class="image-wrapper">
       <img src="PUT_2025_IMAGE_2_URL_HERE" alt="2025 Image 2">
     </div>
-    <!-- Add more 2025 images here -->
   </div>
 
 </div>
 
-
-</div>
-  </div>
-</div>
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
