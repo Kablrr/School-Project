@@ -22,7 +22,7 @@ let currentImage = null;
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
-  // Remove previous image if exists
+  // Remove previous image safely
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
@@ -30,7 +30,6 @@ generateBtn.onclick = () => {
     currentImage = null;
   }
 
-  imageContainer.innerHTML = "";
   loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
 
@@ -41,17 +40,22 @@ generateBtn.onclick = () => {
   img.style.opacity = "0";
   img.style.transition = "opacity 0.5s ease-in-out";
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
-  imageContainer.appendChild(img);
 
   img.onload = () => {
-    loadingText.classList.add("hidden");
-    img.style.opacity = "1"; // fade in
+    if (currentImage === img) { // ensure only current image
+      loadingText.classList.add("hidden");
+      img.style.opacity = "1";
+    }
   };
 
   img.onerror = () => {
-    loadingText.classList.add("hidden");
-    alert("Failed to load image");
+    if (currentImage === img) {
+      loadingText.classList.add("hidden");
+      alert("Failed to load image");
+    }
   };
+
+  imageContainer.appendChild(img);
 };
 
 /* AVATAR GENERATOR */
@@ -72,6 +76,7 @@ const raceSelect = document.getElementById("raceSelect");
 let currentAvatar = null;
 
 generateAvatarBtn.onclick = () => {
+  // Remove previous avatar safely
   if (currentAvatar) {
     currentAvatar.onload = null;
     currentAvatar.onerror = null;
@@ -79,7 +84,6 @@ generateAvatarBtn.onclick = () => {
     currentAvatar = null;
   }
 
-  avatarContainer.innerHTML = "";
   avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
   generateAvatarBtn.disabled = true;
@@ -94,21 +98,26 @@ generateAvatarBtn.onclick = () => {
   img.style.opacity = "0";
   img.style.transition = "opacity 0.5s ease-in-out";
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
-  avatarContainer.appendChild(img);
 
   img.onload = () => {
-    avatarLoading.classList.add("hidden");
-    avatarLoading.innerHTML = "";
-    img.style.opacity = "1"; // fade in
-    generateAvatarBtn.disabled = false;
+    if (currentAvatar === img) {
+      avatarLoading.classList.add("hidden");
+      avatarLoading.innerHTML = "";
+      img.style.opacity = "1";
+      generateAvatarBtn.disabled = false;
+    }
   };
 
   img.onerror = () => {
-    avatarLoading.classList.add("hidden");
-    avatarLoading.innerHTML = "";
-    generateAvatarBtn.disabled = false;
-    alert("Failed to load avatar");
+    if (currentAvatar === img) {
+      avatarLoading.classList.add("hidden");
+      avatarLoading.innerHTML = "";
+      generateAvatarBtn.disabled = false;
+      alert("Failed to load avatar");
+    }
   };
+
+  avatarContainer.appendChild(img);
 };
 
 /* QUIZ */
@@ -191,14 +200,10 @@ submitBtn.onclick = () => {
   results.push(selected === correct);
   if (currentSound) currentSound.pause();
 
-  if (selected === correct) {
-    score++;
-    currentSound = correctSound.cloneNode();
-    currentSound.play();
-  } else {
-    currentSound = wrongSound.cloneNode();
-    currentSound.play();
-  }
+  currentSound = (selected === correct ? correctSound.cloneNode() : wrongSound.cloneNode());
+  currentSound.play();
+
+  if (selected === correct) score++;
 
   updateProgressBar();
   submitBtn.classList.add("hidden");
