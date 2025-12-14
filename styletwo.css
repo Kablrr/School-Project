@@ -17,7 +17,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== Main Layout ===== */
+/* ===== Layout ===== */
 .main-layout {
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ body {
   max-width: 1600px;
 }
 
-/* ===== Image Columns ===== */
+/* ===== Columns ===== */
 .image-column {
   flex: 0 0 300px;
   display: flex;
@@ -37,11 +37,6 @@ body {
 
 .left-column { order: 0; }
 .right-column { order: 2; }
-
-.image-column h2 {
-  margin-bottom: 15px;
-  color: #4b2e2a;
-}
 
 .image-wrapper {
   margin-bottom: 20px;
@@ -78,6 +73,7 @@ body {
   align-items: center;
 }
 
+/* ===== Headings ===== */
 h1 {
   font-size: 2.2rem;
   margin-bottom: 10px;
@@ -105,7 +101,23 @@ input[type="text"], select {
   max-width: 420px;
 }
 
-/* ===== Dropdowns (Avatar Generator) ===== */
+/* ===== Buttons ===== */
+button {
+  padding: 12px 20px;
+  margin: 10px 5px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+button:hover { transform: scale(1.05); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ===== Avatar Dropdowns ===== */
 .dropdowns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -123,29 +135,7 @@ input[type="text"], select {
   margin-bottom: 5px;
 }
 
-/* ===== Buttons ===== */
-button {
-  padding: 12px 20px;
-  margin: 10px 5px 0;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ===== Quiz Overlay Buttons ===== */
+/* ===== Quiz Buttons Overlay ===== */
 .button-wrapper {
   position: relative;
   display: flex;
@@ -154,8 +144,7 @@ button:disabled {
   max-width: 420px;
 }
 
-#submitBtn,
-#nextBtn {
+#submitBtn, #nextBtn {
   width: 100%;
   position: absolute;
   top: 0;
@@ -195,7 +184,7 @@ button:disabled {
   margin-top: 20px;
 }
 
-/* ===== Progress Bar ===== */
+/* ===== Quiz Progress Bar ===== */
 #progressContainer {
   display: flex;
   justify-content: space-between;
@@ -213,7 +202,7 @@ button:disabled {
   transition: background 0.4s ease;
 }
 
-/* ===== Quiz Buttons & Answers ===== */
+/* ===== Quiz Answers ===== */
 #question {
   font-size: 1.4rem;
   font-weight: bold;
@@ -263,27 +252,14 @@ button:disabled {
   transform: translate(-50%, -50%);
 }
 
-/* ===== Spinner (Image/Avatar loading) ===== */
-.spinner {
-  border: 5px solid #f5e6dc;
-  border-top: 5px solid #4b2e2a;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin: 20px auto;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
 /* ===== Responsive ===== */
 @media (max-width: 1200px) {
   .main-layout {
     flex-direction: column;
     align-items: center;
   }
-  .apps-column,
-  .image-column {
+
+  .apps-column, .image-column {
     flex: none;
     width: 90%;
     max-width: 650px;
@@ -294,6 +270,7 @@ button:disabled {
   .dropdowns {
     grid-template-columns: 1fr;
   }
+
   #answers button {
     width: 95%;
   }
