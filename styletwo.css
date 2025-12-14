@@ -47,7 +47,7 @@ p {
 /* Inputs and dropdowns */
 input[type="text"], select {
   padding: 12px 14px;
-  margin: 8px;
+  margin: 8px 0;
   border-radius: 10px;
   border: 1px solid #b07d62; /* Faded Copper */
   font-size: 16px;
@@ -56,17 +56,28 @@ input[type="text"], select {
   outline: none;
 }
 
-select option {
-  background: #f5e6dc;
+/* Ensure dropdown labels are above the dropdowns */
+.dropdowns label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
   color: #4b2e2a;
+}
+
+.dropdowns select {
+  display: block;
+  width: 200px;       /* Consistent width */
+  margin-bottom: 10px;
 }
 
 .dropdowns {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 20px; /* space between columns */
   margin-bottom: 15px;
+  text-align: left; /* align label + dropdown left in their block */
 }
 
 /* Buttons */
@@ -104,6 +115,14 @@ button:disabled {
   max-width: 350px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 /* Quiz */
@@ -173,7 +192,7 @@ button:disabled {
   position: fixed;
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(75,46,42,0.3), transparent); /* dark brown glow */
+  background: radial-gradient(circle, rgba(75,46,42,0.3), transparent);
   pointer-events: none;
   border-radius: 50%;
   mix-blend-mode: overlay;
@@ -182,30 +201,14 @@ button:disabled {
   transform: translate(-50%, -50%);
 }
 
-/* ==============================
-   Loading Spinner
-============================== */
-#loadingText, #avatarLoading {
-  min-height: 60px;            /* reserve space */
-  display: flex;               /* center spinner */
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-  transition: opacity 0.4s ease;  /* fade effect */
-  opacity: 0;                     /* initially hidden */
-}
-
-#loadingText.show, #avatarLoading.show {
-  opacity: 1;                     /* fade in */
-}
-
+/* Spinner */
 .spinner {
-  border: 5px solid rgba(255, 255, 255, 0.3); /* light outer border */
-  border-top: 5px solid #4b2e2a;            /* dark brown for spinning effect */
+  border: 5px solid #f5e6dc;
+  border-top: 5px solid #4b2e2a;
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  margin: 20px auto;
   animation: spin 1s linear infinite;
 }
 
