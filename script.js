@@ -1,11 +1,11 @@
 // ===== Cursor Glow =====
 const cursorGlow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', (e) => {
+document.addEventListener('mousemove', e => {
   cursorGlow.style.top = e.clientY + 'px';
   cursorGlow.style.left = e.clientX + 'px';
 });
 
-// ===== Image Generator (placeholder) =====
+// ===== Image Generator (placeholder with improved look) =====
 const generateBtn = document.getElementById('generateBtn');
 const promptInput = document.getElementById('promptInput');
 const imageContainer = document.getElementById('imageContainer');
@@ -14,14 +14,15 @@ const loadingText = document.getElementById('loadingText');
 generateBtn.addEventListener('click', () => {
   const prompt = promptInput.value.trim();
   if (!prompt) return alert('Enter a colonial scene!');
-  
+
+  imageContainer.innerHTML = '';
   loadingText.classList.remove('hidden');
-  loadingText.textContent = 'Generating...';
-  
+  loadingText.textContent = 'Generating image...';
+
   setTimeout(() => {
     loadingText.classList.add('hidden');
-    imageContainer.innerHTML = `<img src="https://via.placeholder.com/500x300?text=${encodeURIComponent(prompt)}" alt="Generated Image">`;
-  }, 1500); // simulate delay
+    imageContainer.innerHTML = `<img src="https://via.placeholder.com/500x300?text=${encodeURIComponent(prompt)}" alt="Generated Image" style="border:2px solid #4b2e2a; border-radius:12px;">`;
+  }, 1500);
 });
 
 // ===== Avatar Generator (placeholder) =====
@@ -30,9 +31,10 @@ const avatarContainer = document.getElementById('avatarContainer');
 const avatarLoading = document.getElementById('avatarLoading');
 
 generateAvatarBtn.addEventListener('click', () => {
+  avatarContainer.innerHTML = '';
   avatarLoading.classList.remove('hidden');
-  avatarLoading.textContent = 'Generating Avatar...';
-  
+  avatarLoading.textContent = 'Generating avatar...';
+
   const gender = document.getElementById('genderSelect').value;
   const background = document.getElementById('backgroundSelect').value;
   const outfit = document.getElementById('outfitSelect').value;
@@ -41,7 +43,7 @@ generateAvatarBtn.addEventListener('click', () => {
   const hair = document.getElementById('hairSelect').value;
   const age = document.getElementById('ageSelect').value;
   const race = document.getElementById('raceSelect').value;
-  
+
   setTimeout(() => {
     avatarLoading.classList.add('hidden');
     avatarContainer.innerHTML = `
@@ -57,26 +59,14 @@ generateAvatarBtn.addEventListener('click', () => {
         <p><strong>Heritage:</strong> ${race}</p>
       </div>
     `;
-  }, 1500); // simulate delay
+  }, 1500);
 });
 
 // ===== Quiz Logic =====
 const quizData = [
-  {
-    question: "In which year was the Declaration of Independence signed?",
-    options: ["1775", "1776", "1777", "1781"],
-    answer: "1776"
-  },
-  {
-    question: "Who was the commander of the Continental Army?",
-    options: ["Thomas Jefferson", "Benjamin Franklin", "George Washington", "John Adams"],
-    answer: "George Washington"
-  },
-  {
-    question: "Which document ended the Revolutionary War?",
-    options: ["Bill of Rights", "Treaty of Paris", "Articles of Confederation", "Constitution"],
-    answer: "Treaty of Paris"
-  }
+  { question: "In which year was the Declaration of Independence signed?", options: ["1775","1776","1777","1781"], answer: "1776" },
+  { question: "Who was the commander of the Continental Army?", options: ["Thomas Jefferson","Benjamin Franklin","George Washington","John Adams"], answer: "George Washington" },
+  { question: "Which document ended the Revolutionary War?", options: ["Bill of Rights","Treaty of Paris","Articles of Confederation","Constitution"], answer: "Treaty of Paris" }
 ];
 
 let currentQuestion = 0;
@@ -91,7 +81,7 @@ const nextBtn = document.getElementById('nextBtn');
 const scoreEl = document.getElementById('score');
 const takeAgainBtn = document.getElementById('takeAgainBtn');
 
-// Initialize Progress Bar
+// Initialize Progress
 function initProgress() {
   progressContainer.innerHTML = '';
   quizData.forEach(() => {
@@ -104,6 +94,7 @@ function initProgress() {
 // Load Question
 function loadQuestion() {
   submitBtn.disabled = true;
+  submitBtn.classList.remove('hidden');
   nextBtn.classList.add('hidden');
   const q = quizData[currentQuestion];
   questionEl.textContent = q.question;
@@ -124,8 +115,7 @@ function loadQuestion() {
 function updateProgress() {
   const segments = document.querySelectorAll('.progress-segment');
   segments.forEach((seg, index) => {
-    if (index < currentQuestion) seg.style.background = '#4CAF50';
-    else seg.style.background = 'rgba(255,255,255,0.15)';
+    seg.style.background = index < currentQuestion ? '#4CAF50' : 'rgba(255,255,255,0.15)';
   });
 }
 
@@ -133,35 +123,26 @@ function updateProgress() {
 submitBtn.addEventListener('click', () => {
   const selected = document.querySelector('#answers button.selected');
   if (!selected) return;
-
   const correct = quizData[currentQuestion].answer;
-  if (selected.textContent === correct) {
-    selected.classList.add('correct');
-    score++;
-  } else {
-    selected.classList.add('wrong');
-    // highlight correct
-    Array.from(document.querySelectorAll('#answers button')).forEach(btn => {
-      if (btn.textContent === correct) btn.classList.add('correct');
-    });
-  }
 
-  // Show next button at same place as submit
+  Array.from(document.querySelectorAll('#answers button')).forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === correct) btn.classList.add('correct');
+  });
+
+  if (selected.textContent === correct) score++;
+
+  selected.classList.toggle('wrong', selected.textContent !== correct);
+
   submitBtn.classList.add('hidden');
   nextBtn.classList.remove('hidden');
-
   updateProgress();
 });
 
 // Next Question
 nextBtn.addEventListener('click', () => {
   currentQuestion++;
-  if (currentQuestion >= quizData.length) {
-    showScore();
-    return;
-  }
-  submitBtn.classList.remove('hidden');
-  nextBtn.classList.add('hidden');
+  if (currentQuestion >= quizData.length) return showScore();
   loadQuestion();
 });
 
@@ -182,7 +163,6 @@ takeAgainBtn.addEventListener('click', () => {
   score = 0;
   scoreEl.classList.add('hidden');
   takeAgainBtn.classList.add('hidden');
-  submitBtn.classList.remove('hidden');
   loadQuestion();
   initProgress();
 });
