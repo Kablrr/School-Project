@@ -1,4 +1,4 @@
-/* FORCE HIDE LOADING TEXT */
+/* FORCE HIDE LOADING TEXT ON PAGE LOAD */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loadingText").classList.add("hidden");
   document.getElementById("avatarLoading").classList.add("hidden");
@@ -22,7 +22,7 @@ let currentImage = null;
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
-  // Remove previous image if exists
+  // Remove previous image
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
@@ -45,13 +45,11 @@ generateBtn.onclick = () => {
 
   img.onload = () => {
     loadingText.classList.add("hidden");
-    loadingText.innerHTML = "";
-    img.style.opacity = "1"; // fade in
+    img.style.opacity = "1";
   };
 
   img.onerror = () => {
     loadingText.classList.add("hidden");
-    loadingText.innerHTML = "";
     alert("Failed to load image");
   };
 };
@@ -74,7 +72,6 @@ const raceSelect = document.getElementById("raceSelect");
 let currentAvatar = null;
 
 generateAvatarBtn.onclick = () => {
-  // Remove previous avatar
   if (currentAvatar) {
     currentAvatar.onload = null;
     currentAvatar.onerror = null;
@@ -102,7 +99,7 @@ generateAvatarBtn.onclick = () => {
   img.onload = () => {
     avatarLoading.classList.add("hidden");
     avatarLoading.innerHTML = "";
-    img.style.opacity = "1"; // fade in
+    img.style.opacity = "1";
     generateAvatarBtn.disabled = false;
   };
 
@@ -168,33 +165,35 @@ function updateProgressBar() {
 function loadQuestion() {
   selected = null;
   submitBtn.disabled = true;
+
+  // Ensure buttons are correct
   submitBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
   takeAgainBtn.classList.add("hidden");
-  answersEl.innerHTML = "";
 
+  answersEl.innerHTML = "";
   questionEl.textContent = quizData[current].q;
 
-  quizData[current].a.forEach((text, i) => {
-    const btn = document.createElement("button");
-    btn.textContent = text;
-    btn.onclick = () => {
+  quizData[current].a.forEach((t,i)=>{
+    const b = document.createElement("button");
+    b.textContent = t;
+    b.onclick = () => {
       selected = i;
       submitBtn.disabled = false;
-      [...answersEl.children].forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
+      [...answersEl.children].forEach(btn => btn.classList.remove("selected"));
+      b.classList.add("selected");
     };
-    answersEl.appendChild(btn);
+    answersEl.appendChild(b);
   });
 
   updateProgressBar();
 }
 
 submitBtn.onclick = () => {
+  if (currentSound) currentSound.pause();
+
   const correct = quizData[current].c;
   results.push(selected === correct);
-
-  if (currentSound) currentSound.pause();
 
   if (selected === correct) {
     score++;
@@ -212,18 +211,15 @@ submitBtn.onclick = () => {
 
 nextBtn.onclick = () => {
   current++;
-  if (current < quizData.length) {
-    loadQuestion();
-  } else {
-    finishQuiz();
-  }
+  if (current < quizData.length) loadQuestion();
+  else finishQuiz();
 };
 
 function finishQuiz() {
   questionEl.textContent = "Quiz Complete!";
   answersEl.innerHTML = "";
-  submitBtn.classList.add("hidden");
   nextBtn.classList.add("hidden");
+  submitBtn.classList.add("hidden");
   takeAgainBtn.classList.remove("hidden");
   scoreEl.textContent = `Score: ${score}/${quizData.length}`;
   scoreEl.classList.remove("hidden");
