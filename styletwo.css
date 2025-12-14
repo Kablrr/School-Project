@@ -57,7 +57,7 @@ body {
 
 /* ===== Apps Column ===== */
 .apps-column {
-  flex: 0 0 650px; /* Fixed width */
+  flex: 0 0 650px; /* Fixed width for center */
   display: flex;
   justify-content: center;
 }
@@ -72,11 +72,11 @@ body {
 
 /* ===== Sections ===== */
 .section {
-  margin-bottom: 60px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 60px;
 }
 
 h1 {
@@ -124,9 +124,6 @@ button {
 button:hover { background: #b07d62; transform: scale(1.05); }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ===== Hidden ===== */
-.hidden { display: none; }
-
 /* ===== Dropdowns ===== */
 .dropdowns {
   display: grid;
@@ -135,10 +132,17 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   margin-bottom: 20px;
 }
 
-.dropdown-group { display: flex; flex-direction: column; }
-.dropdown-group label { font-weight: bold; margin-bottom: 5px; }
+.dropdown-group {
+  display: flex;
+  flex-direction: column;
+}
 
-/* ===== Quiz ===== */
+.dropdown-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* ===== Quiz Styling ===== */
 #progressContainer {
   display: flex;
   justify-content: space-between;
@@ -185,12 +189,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 #answers button.correct { background: #4CAF50; color: #fff; }
 #answers button.wrong { background: #e74c3c; color: #fff; }
 
-/* ===== Quiz Buttons - Stacked Vertically ===== */
+/* Stack Submit above Next button */
 .quiz-buttons {
   display: flex;
-  flex-direction: column; /* Stack Submit over Next */
+  flex-direction: column;
   align-items: center;
   gap: 12px;
+  width: 100%;
 }
 
 .quiz-buttons button {
@@ -202,8 +207,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 #takeAgainBtn {
   width: 100%;
   max-width: 420px;
-  margin: 12px auto 0;
   display: block;
+  margin: 12px auto 0;
 }
 
 /* ===== Cursor Glow ===== */
@@ -248,6 +253,10 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 
 @media (max-width: 900px) {
-  .dropdowns { grid-template-columns: 1fr; }
-  #answers button, .quiz-buttons button, #takeAgainBtn { width: 95%; max-width: none; }
+  .dropdowns {
+    grid-template-columns: 1fr;
+  }
+  #answers button {
+    width: 95%;
+  }
 }
