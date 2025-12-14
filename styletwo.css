@@ -186,7 +186,7 @@ button:disabled {
    Loading Spinner
 ============================== */
 .spinner {
-  border: 6px solid rgba(75,46,42,0.2); /* light transparent brown */
+  border: 6px solid rgba(255, 255, 255, 0.3); /* light, visible */
   border-top: 6px solid #4b2e2a; /* dark brown */
   border-radius: 50%;
   width: 40px;
