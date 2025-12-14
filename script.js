@@ -18,11 +18,12 @@ const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
 const loadingText = document.getElementById("loadingText");
-loadingText.innerHTML = `<div class="spinner"></div>`;
 
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
+  // Show spinner
+  loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
   generateBtn.disabled = true;
   imageContainer.innerHTML = "";
@@ -50,7 +51,6 @@ generateBtn.onclick = () => {
 const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
-avatarLoading.innerHTML = `<div class="spinner"></div>`;
 
 // Avatar dropdowns
 const backgroundSelect = document.getElementById("backgroundSelect");
@@ -62,6 +62,8 @@ const ageSelect = document.getElementById("ageSelect");
 const raceSelect = document.getElementById("raceSelect");
 
 generateAvatarBtn.onclick = () => {
+  // Show spinner
+  avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
   generateAvatarBtn.disabled = true;
   avatarContainer.innerHTML = "";
