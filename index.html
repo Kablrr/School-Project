@@ -12,7 +12,7 @@
 
 <div class="main-layout">
 
-  <!-- Left Column: 1776 Images -->
+  <!-- Left Column -->
   <div class="image-column left-column">
     <h2>1776</h2>
     <div class="image-wrapper">
@@ -23,11 +23,11 @@
     </div>
   </div>
 
-  <!-- Middle Column: Apps -->
+  <!-- Center Apps Column -->
   <div class="apps-column">
     <div class="container">
 
-      <!-- TEXT TO IMAGE -->
+      <!-- Image Generator -->
       <div class="section">
         <h1>Image Generator</h1>
         <p>Convert your ideas into a colonial scene (May take 30-60 seconds)</p>
@@ -37,10 +37,11 @@
         <div id="imageContainer" class="image-container"></div>
       </div>
 
-      <!-- AVATAR GENERATOR -->
+      <!-- Avatar Generator -->
       <div class="section">
         <h1>1776 Avatar Generator</h1>
         <p>Customize your colonial student avatar (May take 30-60 seconds)</p>
+
         <div class="dropdowns">
           <div class="dropdown-group">
             <label for="genderSelect">Gender:</label>
@@ -131,36 +132,33 @@
             </select>
           </div>
         </div>
+
         <button id="generateAvatarBtn">Generate Avatar</button>
         <div id="avatarLoading" class="hidden"></div>
         <div id="avatarContainer" class="image-container"></div>
       </div>
 
-    <!-- QUIZ -->
-<div class="section" id="quizSection">
-  <h1>1776 History Quiz</h1>
+      <!-- Quiz -->
+      <div class="section">
+        <h1>1776 History Quiz</h1>
 
-  <!-- Progress Bar -->
-  <div id="progressContainer" class="quiz-progress"></div>
+        <div id="progressContainer"></div>
+        <div id="question"></div>
+        <div id="answers"></div>
 
-  <div id="question"></div>
-  <div id="answers"></div>
+        <div class="button-wrapper">
+          <button id="submitBtn" disabled>Submit</button>
+          <button id="nextBtn" class="hidden">Next</button>
+        </div>
 
-  <!-- Buttons wrapper for overlay effect -->
-  <div class="button-wrapper">
-    <button id="submitBtn" disabled>Submit</button>
-    <button id="nextBtn" class="hidden">Next</button>
-  </div>
-
-  <div id="score" class="hidden"></div>
-  <button id="takeAgainBtn" class="hidden">Take Again</button>
-</div>
-
+        <div id="score" class="hidden"></div>
+        <button id="takeAgainBtn" class="hidden">Take Again</button>
+      </div>
 
     </div>
   </div>
 
-  <!-- Right Column: 2025 Images -->
+  <!-- Right Column -->
   <div class="image-column right-column">
     <h2>2025</h2>
     <div class="image-wrapper">
@@ -176,4 +174,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
