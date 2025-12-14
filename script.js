@@ -22,7 +22,6 @@ let currentImage = null;
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
-  // Remove previous image
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
@@ -59,7 +58,6 @@ const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
 
-// Avatar dropdowns
 const genderSelect = document.getElementById("genderSelect");
 const backgroundSelect = document.getElementById("backgroundSelect");
 const outfitSelect = document.getElementById("outfitSelect");
@@ -164,9 +162,9 @@ function updateProgressBar() {
 
 function loadQuestion() {
   selected = null;
-  submitBtn.disabled = true;
 
-  // Ensure buttons are correct
+  // Show/hide buttons correctly every time
+  submitBtn.disabled = true;
   submitBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
   takeAgainBtn.classList.add("hidden");
@@ -218,8 +216,8 @@ nextBtn.onclick = () => {
 function finishQuiz() {
   questionEl.textContent = "Quiz Complete!";
   answersEl.innerHTML = "";
-  nextBtn.classList.add("hidden");
   submitBtn.classList.add("hidden");
+  nextBtn.classList.add("hidden");
   takeAgainBtn.classList.remove("hidden");
   scoreEl.textContent = `Score: ${score}/${quizData.length}`;
   scoreEl.classList.remove("hidden");
