@@ -5,7 +5,7 @@ document.addEventListener('mousemove', e => {
   cursorGlow.style.left = e.clientX + 'px';
 });
 
-// ===== Image Generator (Pollinations AI) =====
+// ===== Image Generator =====
 const generateBtn = document.getElementById('generateBtn');
 const promptInput = document.getElementById('promptInput');
 const imageContainer = document.getElementById('imageContainer');
@@ -13,7 +13,7 @@ const loadingText = document.getElementById('loadingText');
 
 generateBtn.addEventListener('click', () => {
   const prompt = promptInput.value.trim();
-  if (!prompt) return alert('Enter a colonial scene!');
+  if(!prompt) return alert('Enter a colonial scene!');
   imageContainer.innerHTML = '';
   loadingText.classList.remove('hidden');
   loadingText.textContent = 'Generating image...';
@@ -24,14 +24,11 @@ generateBtn.addEventListener('click', () => {
   img.style.border = '2px solid #4b2e2a';
   img.style.borderRadius = '12px';
   img.onload = () => loadingText.classList.add('hidden');
-  img.onerror = () => {
-    loadingText.classList.add('hidden');
-    alert('Failed to generate image.');
-  };
+  img.onerror = () => { loadingText.classList.add('hidden'); alert('Failed to generate image.'); };
   imageContainer.appendChild(img);
 });
 
-// ===== Avatar Generator (Pollinations AI) =====
+// ===== Avatar Generator =====
 const generateAvatarBtn = document.getElementById('generateAvatarBtn');
 const avatarContainer = document.getElementById('avatarContainer');
 const avatarLoading = document.getElementById('avatarLoading');
@@ -58,10 +55,7 @@ generateAvatarBtn.addEventListener('click', () => {
   img.style.border = '2px solid #4b2e2a';
   img.style.borderRadius = '12px';
   img.onload = () => avatarLoading.classList.add('hidden');
-  img.onerror = () => {
-    avatarLoading.classList.add('hidden');
-    alert('Failed to generate avatar.');
-  };
+  img.onerror = () => { avatarLoading.classList.add('hidden'); alert('Failed to generate avatar.'); };
   avatarContainer.appendChild(img);
 });
 
@@ -125,13 +119,12 @@ submitBtn.addEventListener('click', () => {
   if (!selected) return;
 
   const correct = quizData[currentQuestion].answer;
-
   Array.from(document.querySelectorAll('#answers button')).forEach(btn => {
     btn.disabled = true;
     if (btn.textContent === correct) btn.classList.add('correct');
   });
 
-  if (selected.textContent !== correct) selected.classList.add('wrong');
+  if(selected.textContent !== correct) selected.classList.add('wrong');
   else score++;
 
   submitBtn.classList.add('hidden');
@@ -142,7 +135,7 @@ submitBtn.addEventListener('click', () => {
 
 nextBtn.addEventListener('click', () => {
   currentQuestion++;
-  if (currentQuestion >= quizData.length) showScore();
+  if(currentQuestion >= quizData.length) showScore();
   else loadQuestion();
 });
 
@@ -165,6 +158,5 @@ takeAgainBtn.addEventListener('click', () => {
   initProgress();
 });
 
-// Initialize everything
 initProgress();
 loadQuestion();
