@@ -129,3 +129,34 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
 }
+
+.image-comparison-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 40px 0;
+  flex-wrap: wrap; /* Makes it responsive on smaller screens */
+}
+
+.image-column {
+  flex: 1;
+  min-width: 300px; /* prevents squishing too much */
+  text-align: center;
+}
+
+.image-column h2 {
+  margin-bottom: 15px;
+  color: #4b2e2a;
+}
+
+.image-wrapper {
+  margin-bottom: 20px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #4b2e2a;
+  max-width: 400px; /* optional max width */
+  height: auto;
+}
