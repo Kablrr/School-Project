@@ -215,3 +215,54 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
 }
+/* ===== Center Apps & GUI ===== */
+
+/* Center the entire apps column */
+.apps-column {
+  display: flex;
+  justify-content: center;
+}
+
+/* Make the container content centered */
+.apps-column .container {
+  text-align: center;
+}
+
+/* Center inputs, selects, and buttons */
+.section input,
+.section select,
+.section button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Slightly limit input width so it looks clean */
+.section input[type="text"],
+.section select {
+  width: 90%;
+  max-width: 420px;
+}
+
+/* Center loading spinners and images */
+#loadingText,
+#avatarLoading,
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Keep quiz answers nicely centered */
+#answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Prevent quiz buttons from being too wide */
+#answers button {
+  width: 100%;
+  max-width: 420px;
+}
