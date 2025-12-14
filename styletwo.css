@@ -60,6 +60,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .dropdowns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
   grid-auto-flow: row;
   gap: 15px;
   margin-bottom: 20px;
@@ -76,13 +77,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 
 /* Images */
-.image-container img { 
-  margin-top: 20px; 
-  max-width: 350px; 
-  border-radius: 15px; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
-  opacity: 0; 
-  transition: opacity 0.5s ease-in-out; 
+.image-container img {
+  margin-top: 20px;
+  max-width: 350px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 /* Quiz */
@@ -97,24 +98,34 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .quiz-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
 /* Cursor Glow */
-#cursorGlow { 
-  position: fixed; 
-  width: 180px; 
-  height: 180px; 
-  background: radial-gradient(circle, rgba(75,46,42,0.3), transparent); 
-  pointer-events: none; 
-  border-radius: 50%; 
-  mix-blend-mode: overlay; 
-  top: 0; left: 0; 
-  transform: translate(-50%, -50%); 
+#cursorGlow {
+  position: fixed;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(75,46,42,0.3), transparent);
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: overlay;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
 }
 
 /* Spinner */
-.spinner { border: 5px solid #f5e6dc; border-top: 5px solid #4b2e2a; border-radius: 50%; width: 40px; height: 40px; margin: 20px auto; animation: spin 1s linear infinite; }
+.spinner {
+  border: 5px solid #f5e6dc;
+  border-top: 5px solid #4b2e2a;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 20px auto;
+  animation: spin 1s linear infinite;
+}
+
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* Responsive for small screens */
+/* Responsive */
 @media (max-width: 900px) {
-  .dropdowns { grid-template-columns: 1fr; }
+  .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
 }
