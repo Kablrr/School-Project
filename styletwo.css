@@ -1,14 +1,9 @@
 /* Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Georgia', serif;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Georgia', serif; }
 
 body {
-  background: #edc4b3; /* Almond Silk */
-  color: #4b2e2a; /* Dark brown */
+  background: #edc4b3;
+  color: #4b2e2a;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -20,65 +15,28 @@ body {
 .container {
   max-width: 950px;
   width: 100%;
-  background: linear-gradient(180deg, #d69f7e, #cd9777); /* Light Bronze shades */
+  background: linear-gradient(180deg, #d69f7e, #cd9777);
   border-radius: 25px;
   padding: 40px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   text-align: center;
 }
 
-.section {
-  margin-bottom: 60px;
-}
+.section { margin-bottom: 60px; }
+h1 { font-size: 2.2rem; margin-bottom: 10px; color: #4b2e2a; }
+p { color: #4b2e2a; font-weight: 500; margin-bottom: 15px; font-size: 1rem; }
 
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  color: #4b2e2a;
-}
-
-p {
-  color: #4b2e2a;
-  font-weight: 500;
-  margin-bottom: 15px;
-  font-size: 1rem;
-}
-
-/* Inputs and dropdowns */
 input[type="text"], select {
   padding: 12px 14px;
   margin: 8px 0;
   border-radius: 10px;
-  border: 1px solid #b07d62; /* Faded Copper */
+  border: 1px solid #b07d62;
   font-size: 16px;
-  background: #f5e6dc; /* light beige */
+  background: #f5e6dc;
   color: #4b2e2a;
   outline: none;
 }
 
-/* DROPDOWN FIX */
-.dropdowns {
-  display: block;       /* Stack all dropdowns vertically */
-  text-align: left;     /* Align labels and dropdowns to left */
-  margin-bottom: 20px;
-}
-
-.dropdowns label {
-  display: block;       /* Place label above dropdown */
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #4b2e2a;
-}
-
-.dropdowns select {
-  display: block;
-  width: 100%;          /* Fill available width */
-  max-width: 250px;     /* Optional max width */
-  margin-bottom: 10px;
-}
-
-/* Buttons */
 button {
   padding: 12px 20px;
   margin: 10px 5px 0;
@@ -87,130 +45,40 @@ button {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  background: #c38e70; /* Toasted Almond */
-  color: #ffffff;
+  background: #c38e70;
+  color: #fff;
   transition: all 0.2s ease;
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
-button:hover {
-  background: #b07d62; /* Faded Copper */
-  transform: scale(1.05);
-}
+button:hover { background: #b07d62; transform: scale(1.05); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.hidden { display: none; }
 
-.hidden {
-  display: none;
-}
+/* Dropdown fix */
+.dropdowns { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 20px; }
+.dropdown-group { display: flex; flex-direction: column; }
+.dropdown-group label { font-weight: bold; margin-bottom: 5px; }
+.dropdown-group select { width: 100%; max-width: 250px; }
 
-/* Image containers */
-.image-container img {
-  margin-top: 20px;
-  max-width: 350px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
+/* Images */
+.image-container img { margin-top: 20px; max-width: 350px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); opacity: 0; animation: fadeIn 0.5s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
 
 /* Quiz */
-#progressContainer {
-  display: flex;
-  justify-content: space-between;
-  height: 16px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-}
-
-.progress-segment {
-  height: 100%;
-  width: calc(100% / 10); /* 10 segments for 10 questions */
-  margin: 0 1px;
-  border-radius: 4px;
-  background: rgba(255,255,255,0.15);
-  transition: background 0.4s ease;
-}
-
-#question {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #4b2e2a;
-}
-
-#answers button {
-  display: block;
-  width: 90%;
-  max-width: 400px;
-  margin: 8px auto;
-  border: 1px solid #9d6b53;
-  background: #f5e6dc;
-  color: #4b2e2a;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: all 0.2s ease;
-}
-
-#answers button.selected {
-  background: #c38e70;
-  color: #fff;
-  transform: scale(1.05);
-  border: 2px solid #b07d62;
-}
-
-#answers button.correct {
-  background: #4CAF50;
-  color: #fff;
-}
-
-#answers button.wrong {
-  background: #e74c3c;
-  color: #fff;
-}
-
-.quiz-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+#progressContainer { display: flex; justify-content: space-between; height: 16px; margin-bottom: 20px; border-radius: 8px; }
+.progress-segment { height: 100%; width: calc(100% / 10); margin: 0 1px; border-radius: 4px; background: rgba(255,255,255,0.15); transition: background 0.4s ease; }
+#question { font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; color: #4b2e2a; }
+#answers button { display: block; width: 90%; max-width: 400px; margin: 8px auto; border: 1px solid #9d6b53; background: #f5e6dc; color: #4b2e2a; border-radius: 10px; font-size: 16px; transition: all 0.2s ease; }
+#answers button.selected { background: #c38e70; color: #fff; transform: scale(1.05); border: 2px solid #b07d62; }
+#answers button.correct { background: #4CAF50; color: #fff; }
+#answers button.wrong { background: #e74c3c; color: #fff; }
+.quiz-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
 /* Cursor Glow */
-#cursorGlow {
-  position: fixed;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(75,46,42,0.3), transparent);
-  pointer-events: none;
-  border-radius: 50%;
-  mix-blend-mode: overlay;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-}
+#cursorGlow { position: fixed; width: 180px; height: 180px; background: radial-gradient(circle, rgba(75,46,42,0.3), transparent); pointer-events: none; border-radius: 50%; mix-blend-mode: overlay; top: 0; left: 0; transform: translate(-50%, -50%); }
 
 /* Spinner */
-.spinner {
-  border: 5px solid #f5e6dc;
-  border-top: 5px solid #4b2e2a;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin: 20px auto;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+.spinner { border: 5px solid #f5e6dc; border-top: 5px solid #4b2e2a; border-radius: 50%; width: 40px; height: 40px; margin: 20px auto; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
