@@ -19,21 +19,35 @@ const loadingText = document.getElementById("loadingText");
 
 let currentImage = null;
 
+function createDownloadButton(img) {
+  const btn = document.createElement("button");
+  btn.textContent = "Download Image";
+  btn.style.display = "block";
+  btn.style.margin = "10px auto 0";
+  btn.onclick = () => {
+    const a = document.createElement("a");
+    a.href = img.src;
+    a.download = "colonial_scene.png";
+    a.click();
+  };
+  return btn;
+}
+
 generateBtn.onclick = () => {
-  if (!promptInput.value.trim()) return alert("Enter a prompt");
+  const promptValue = promptInput.value.trim();
+  if (!promptValue) return alert("Enter a prompt");
 
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
-    imageContainer.removeChild(currentImage);
+    imageContainer.innerHTML = "";
     currentImage = null;
   }
 
-  imageContainer.innerHTML = "";
   loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
 
-  const prompt = promptInput.value + ", colonial America, 18th century";
+  const prompt = `${promptValue}, colonial America, 18th century`;
 
   const img = new Image();
   currentImage = img;
@@ -45,11 +59,12 @@ generateBtn.onclick = () => {
   img.onload = () => {
     loadingText.classList.add("hidden");
     img.style.opacity = "1";
+    imageContainer.appendChild(createDownloadButton(img));
   };
 
   img.onerror = () => {
     loadingText.classList.add("hidden");
-    alert("Failed to load image");
+    alert("Failed to load image. Try again.");
   };
 };
 
@@ -70,17 +85,18 @@ const raceSelect = document.getElementById("raceSelect");
 let currentAvatar = null;
 
 generateAvatarBtn.onclick = () => {
+  // Disable button while loading
+  generateAvatarBtn.disabled = true;
+
   if (currentAvatar) {
     currentAvatar.onload = null;
     currentAvatar.onerror = null;
-    avatarContainer.removeChild(currentAvatar);
+    avatarContainer.innerHTML = "";
     currentAvatar = null;
   }
 
-  avatarContainer.innerHTML = "";
   avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
-  generateAvatarBtn.disabled = true;
 
   const prompt =
     `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a subtle smile, ` +
@@ -99,13 +115,14 @@ generateAvatarBtn.onclick = () => {
     avatarLoading.innerHTML = "";
     img.style.opacity = "1";
     generateAvatarBtn.disabled = false;
+    avatarContainer.appendChild(createDownloadButton(img));
   };
 
   img.onerror = () => {
     avatarLoading.classList.add("hidden");
     avatarLoading.innerHTML = "";
     generateAvatarBtn.disabled = false;
-    alert("Failed to load avatar");
+    avatarContainer.innerHTML = "Failed to load avatar.";
   };
 };
 
@@ -142,11 +159,11 @@ let currentSound = null;
 
 function createProgressBar() {
   progressContainer.innerHTML = "";
-  for (let i = 0; i < quizData.length; i++) {
+  quizData.forEach(() => {
     const seg = document.createElement("div");
     seg.classList.add("progress-segment");
     progressContainer.appendChild(seg);
-  }
+  });
 }
 
 function updateProgressBar() {
@@ -162,8 +179,6 @@ function updateProgressBar() {
 
 function loadQuestion() {
   selected = null;
-
-  // Show/hide buttons correctly every time
   submitBtn.disabled = true;
   submitBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
@@ -172,39 +187,45 @@ function loadQuestion() {
   answersEl.innerHTML = "";
   questionEl.textContent = quizData[current].q;
 
-  quizData[current].a.forEach((t,i)=>{
-    const b = document.createElement("button");
-    b.textContent = t;
-    b.onclick = () => {
+  quizData[current].a.forEach((answerText, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = answerText;
+    btn.onclick = () => {
       selected = i;
       submitBtn.disabled = false;
-      [...answersEl.children].forEach(btn => btn.classList.remove("selected"));
-      b.classList.add("selected");
+      Array.from(answersEl.children).forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
     };
-    answersEl.appendChild(b);
+    answersEl.appendChild(btn);
   });
 
   updateProgressBar();
 }
 
 submitBtn.onclick = () => {
-  if (currentSound) currentSound.pause();
+  if (selected === null) return; // Safety check
 
   const correct = quizData[current].c;
   results.push(selected === correct);
 
+  if (currentSound) currentSound.pause();
+
   if (selected === correct) {
     score++;
     currentSound = correctSound.cloneNode();
-    currentSound.play();
   } else {
     currentSound = wrongSound.cloneNode();
-    currentSound.play();
   }
+  currentSound.play();
 
-  updateProgressBar();
+  Array.from(answersEl.children).forEach((btn, i) => {
+    if (i === correct) btn.classList.add("correct");
+    if (i === selected && selected !== correct) btn.classList.add("wrong");
+  });
+
   submitBtn.classList.add("hidden");
   nextBtn.classList.remove("hidden");
+  updateProgressBar();
 };
 
 nextBtn.onclick = () => {
