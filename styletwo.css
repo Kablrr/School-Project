@@ -56,9 +56,15 @@ input[type="text"], select {
   outline: none;
 }
 
-/* Ensure dropdown labels are above the dropdowns */
+/* DROPDOWN FIX */
+.dropdowns {
+  display: block;       /* Stack all dropdowns vertically */
+  text-align: left;     /* Align labels and dropdowns to left */
+  margin-bottom: 20px;
+}
+
 .dropdowns label {
-  display: block;
+  display: block;       /* Place label above dropdown */
   margin-top: 10px;
   margin-bottom: 5px;
   font-weight: bold;
@@ -67,17 +73,9 @@ input[type="text"], select {
 
 .dropdowns select {
   display: block;
-  width: 200px;       /* Consistent width */
+  width: 100%;          /* Fill available width */
+  max-width: 250px;     /* Optional max width */
   margin-bottom: 10px;
-}
-
-.dropdowns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px; /* space between columns */
-  margin-bottom: 15px;
-  text-align: left; /* align label + dropdown left in their block */
 }
 
 /* Buttons */
