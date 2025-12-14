@@ -160,3 +160,67 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   max-width: 400px; /* optional max width */
   height: auto;
 }
+/* Main layout */
+.main-layout {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: flex-start; /* align top */
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap; /* stack on small screens */
+}
+
+/* Images columns */
+.image-column {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.left-column {
+  order: 0;
+}
+
+.right-column {
+  order: 2;
+}
+
+.image-column h2 {
+  margin-bottom: 15px;
+  color: #4b2e2a;
+}
+
+.image-wrapper {
+  margin-bottom: 20px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid #4b2e2a;
+}
+
+/* Apps column */
+.apps-column {
+  flex: 2; /* larger center column */
+  min-width: 500px;
+  max-width: 700px;
+}
+
+/* Responsive for small screens */
+@media (max-width: 1200px) {
+  .main-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .apps-column {
+    max-width: 90%;
+  }
+
+  .image-column {
+    max-width: 90%;
+  }
+}
