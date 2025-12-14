@@ -1,16 +1,17 @@
+/* FORCE HIDE LOADING TEXT */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loadingText").classList.add("hidden");
   document.getElementById("avatarLoading").classList.add("hidden");
 });
 
-/* Cursor Glow */
+/* CURSOR GLOW */
 const cursorGlow = document.getElementById("cursorGlow");
 document.addEventListener("mousemove", e => {
   cursorGlow.style.top = `${e.clientY}px`;
   cursorGlow.style.left = `${e.clientX}px`;
 });
 
-/* TEXT TO IMAGE */
+/* TEXT TO IMAGE GENERATOR */
 const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
@@ -21,6 +22,7 @@ let currentImage = null;
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
+  // Remove previous image if exists
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
@@ -33,6 +35,7 @@ generateBtn.onclick = () => {
   loadingText.classList.remove("hidden");
 
   const prompt = promptInput.value + ", colonial America, 18th century";
+
   const img = new Image();
   currentImage = img;
   img.style.opacity = "0";
@@ -42,19 +45,23 @@ generateBtn.onclick = () => {
 
   img.onload = () => {
     loadingText.classList.add("hidden");
-    img.style.opacity = "1";
+    loadingText.innerHTML = "";
+    img.style.opacity = "1"; // fade in
   };
+
   img.onerror = () => {
     loadingText.classList.add("hidden");
+    loadingText.innerHTML = "";
     alert("Failed to load image");
   };
 };
 
-/* AVATAR */
+/* AVATAR GENERATOR */
 const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
 
+// Avatar dropdowns
 const genderSelect = document.getElementById("genderSelect");
 const backgroundSelect = document.getElementById("backgroundSelect");
 const outfitSelect = document.getElementById("outfitSelect");
@@ -67,6 +74,7 @@ const raceSelect = document.getElementById("raceSelect");
 let currentAvatar = null;
 
 generateAvatarBtn.onclick = () => {
+  // Remove previous avatar
   if (currentAvatar) {
     currentAvatar.onload = null;
     currentAvatar.onerror = null;
@@ -79,9 +87,10 @@ generateAvatarBtn.onclick = () => {
   avatarLoading.classList.remove("hidden");
   generateAvatarBtn.disabled = true;
 
-  const prompt = `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a subtle smile, ` +
-                 `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
-                 `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, soft lighting, warm tones`;
+  const prompt =
+    `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a subtle smile, ` +
+    `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
+    `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, soft lighting, warm tones`;
 
   const img = new Image();
   currentAvatar = img;
@@ -93,7 +102,7 @@ generateAvatarBtn.onclick = () => {
   img.onload = () => {
     avatarLoading.classList.add("hidden");
     avatarLoading.innerHTML = "";
-    img.style.opacity = "1";
+    img.style.opacity = "1"; // fade in
     generateAvatarBtn.disabled = false;
   };
 
@@ -130,7 +139,7 @@ const takeAgainBtn = document.getElementById("takeAgainBtn");
 const progressContainer = document.getElementById("progressContainer");
 const scoreEl = document.getElementById("score");
 
-// Sounds
+// Quiz sounds
 const correctSound = new Audio("correct.mp3");
 const wrongSound = new Audio("wrong.mp3");
 const completeSound = new Audio("complete.mp3");
@@ -147,9 +156,12 @@ function createProgressBar() {
 
 function updateProgressBar() {
   const segments = document.querySelectorAll(".progress-segment");
-  segments.forEach((seg,i)=>{
-    if(i<results.length) seg.style.background = results[i]? "#4CAF50":"#e74c3c";
-    else seg.style.background = "rgba(255,255,255,0.15)";
+  segments.forEach((seg, i) => {
+    if (i < results.length) {
+      seg.style.background = results[i] ? "#4CAF50" : "#e74c3c";
+    } else {
+      seg.style.background = "rgba(255,255,255,0.15)";
+    }
   });
 }
 
@@ -163,10 +175,72 @@ function loadQuestion() {
 
   questionEl.textContent = quizData[current].q;
 
-  quizData[current].a.forEach((text,i)=>{
+  quizData[current].a.forEach((text, i) => {
     const btn = document.createElement("button");
     btn.textContent = text;
     btn.onclick = () => {
       selected = i;
       submitBtn.disabled = false;
-      [...answersEl.children]
+      [...answersEl.children].forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+    };
+    answersEl.appendChild(btn);
+  });
+
+  updateProgressBar();
+}
+
+submitBtn.onclick = () => {
+  const correct = quizData[current].c;
+  results.push(selected === correct);
+
+  if (currentSound) currentSound.pause();
+
+  if (selected === correct) {
+    score++;
+    currentSound = correctSound.cloneNode();
+    currentSound.play();
+  } else {
+    currentSound = wrongSound.cloneNode();
+    currentSound.play();
+  }
+
+  updateProgressBar();
+  submitBtn.classList.add("hidden");
+  nextBtn.classList.remove("hidden");
+};
+
+nextBtn.onclick = () => {
+  current++;
+  if (current < quizData.length) {
+    loadQuestion();
+  } else {
+    finishQuiz();
+  }
+};
+
+function finishQuiz() {
+  questionEl.textContent = "Quiz Complete!";
+  answersEl.innerHTML = "";
+  submitBtn.classList.add("hidden");
+  nextBtn.classList.add("hidden");
+  takeAgainBtn.classList.remove("hidden");
+  scoreEl.textContent = `Score: ${score}/${quizData.length}`;
+  scoreEl.classList.remove("hidden");
+
+  if (currentSound) currentSound.pause();
+  completeSound.play();
+}
+
+takeAgainBtn.onclick = () => {
+  current = 0;
+  score = 0;
+  results.length = 0;
+  scoreEl.classList.add("hidden");
+  createProgressBar();
+  loadQuestion();
+};
+
+// Initialize
+createProgressBar();
+loadQuestion();
