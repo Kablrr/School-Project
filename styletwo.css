@@ -63,11 +63,13 @@ body {
   flex: 2;
   min-width: 500px;
   max-width: 700px;
+  display: flex;
+  justify-content: center; /* Center content inside */
 }
 
-/* ===== Container inside Apps ===== */
 .container {
   width: 100%;
+  text-align: center; /* Center the content of the apps */
 }
 
 /* ===== Sections ===== */
@@ -98,9 +100,10 @@ input[type="text"], select {
   background: #f5e6dc;
   color: #4b2e2a;
   outline: none;
+  width: 90%;  /* Set a default width for text inputs */
+  max-width: 420px; /* Prevent inputs from stretching too wide */
 }
 
-/* ===== Buttons ===== */
 button {
   padding: 12px 20px;
   margin: 10px 5px 0;
@@ -126,7 +129,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, auto);
-  grid-auto-flow: row;
   gap: 15px;
   margin-bottom: 20px;
 }
@@ -214,55 +216,4 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 @media (max-width: 900px) {
   .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
-}
-/* ===== Center Apps & GUI ===== */
-
-/* Center the entire apps column */
-.apps-column {
-  display: flex;
-  justify-content: center;
-}
-
-/* Make the container content centered */
-.apps-column .container {
-  text-align: center;
-}
-
-/* Center inputs, selects, and buttons */
-.section input,
-.section select,
-.section button {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Slightly limit input width so it looks clean */
-.section input[type="text"],
-.section select {
-  width: 90%;
-  max-width: 420px;
-}
-
-/* Center loading spinners and images */
-#loadingText,
-#avatarLoading,
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-/* Keep quiz answers nicely centered */
-#answers {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Prevent quiz buttons from being too wide */
-#answers button {
-  width: 100%;
-  max-width: 420px;
 }
