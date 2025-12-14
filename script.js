@@ -1,17 +1,16 @@
-/* FORCE HIDE LOADING TEXT */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loadingText").classList.add("hidden");
   document.getElementById("avatarLoading").classList.add("hidden");
 });
 
-/* CURSOR GLOW */
+/* Cursor Glow */
 const cursorGlow = document.getElementById("cursorGlow");
 document.addEventListener("mousemove", e => {
   cursorGlow.style.top = `${e.clientY}px`;
   cursorGlow.style.left = `${e.clientX}px`;
 });
 
-/* TEXT TO IMAGE GENERATOR */
+/* TEXT TO IMAGE */
 const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
@@ -22,7 +21,6 @@ let currentImage = null;
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
-  // Remove previous image safely
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
@@ -30,40 +28,33 @@ generateBtn.onclick = () => {
     currentImage = null;
   }
 
+  imageContainer.innerHTML = "";
   loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
 
   const prompt = promptInput.value + ", colonial America, 18th century";
-
   const img = new Image();
   currentImage = img;
   img.style.opacity = "0";
   img.style.transition = "opacity 0.5s ease-in-out";
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  imageContainer.appendChild(img);
 
   img.onload = () => {
-    if (currentImage === img) { // ensure only current image
-      loadingText.classList.add("hidden");
-      img.style.opacity = "1";
-    }
+    loadingText.classList.add("hidden");
+    img.style.opacity = "1";
   };
-
   img.onerror = () => {
-    if (currentImage === img) {
-      loadingText.classList.add("hidden");
-      alert("Failed to load image");
-    }
+    loadingText.classList.add("hidden");
+    alert("Failed to load image");
   };
-
-  imageContainer.appendChild(img);
 };
 
-/* AVATAR GENERATOR */
+/* AVATAR */
 const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
 
-// Avatar dropdowns
 const genderSelect = document.getElementById("genderSelect");
 const backgroundSelect = document.getElementById("backgroundSelect");
 const outfitSelect = document.getElementById("outfitSelect");
@@ -76,7 +67,6 @@ const raceSelect = document.getElementById("raceSelect");
 let currentAvatar = null;
 
 generateAvatarBtn.onclick = () => {
-  // Remove previous avatar safely
   if (currentAvatar) {
     currentAvatar.onload = null;
     currentAvatar.onerror = null;
@@ -84,40 +74,35 @@ generateAvatarBtn.onclick = () => {
     currentAvatar = null;
   }
 
+  avatarContainer.innerHTML = "";
   avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
   generateAvatarBtn.disabled = true;
 
-  const prompt =
-    `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a subtle smile, ` +
-    `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
-    `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, soft lighting, warm tones`;
+  const prompt = `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a subtle smile, ` +
+                 `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
+                 `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, soft lighting, warm tones`;
 
   const img = new Image();
   currentAvatar = img;
   img.style.opacity = "0";
   img.style.transition = "opacity 0.5s ease-in-out";
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  avatarContainer.appendChild(img);
 
   img.onload = () => {
-    if (currentAvatar === img) {
-      avatarLoading.classList.add("hidden");
-      avatarLoading.innerHTML = "";
-      img.style.opacity = "1";
-      generateAvatarBtn.disabled = false;
-    }
+    avatarLoading.classList.add("hidden");
+    avatarLoading.innerHTML = "";
+    img.style.opacity = "1";
+    generateAvatarBtn.disabled = false;
   };
 
   img.onerror = () => {
-    if (currentAvatar === img) {
-      avatarLoading.classList.add("hidden");
-      avatarLoading.innerHTML = "";
-      generateAvatarBtn.disabled = false;
-      alert("Failed to load avatar");
-    }
+    avatarLoading.classList.add("hidden");
+    avatarLoading.innerHTML = "";
+    generateAvatarBtn.disabled = false;
+    alert("Failed to load avatar");
   };
-
-  avatarContainer.appendChild(img);
 };
 
 /* QUIZ */
@@ -145,7 +130,7 @@ const takeAgainBtn = document.getElementById("takeAgainBtn");
 const progressContainer = document.getElementById("progressContainer");
 const scoreEl = document.getElementById("score");
 
-// Quiz sounds
+// Sounds
 const correctSound = new Audio("correct.mp3");
 const wrongSound = new Audio("wrong.mp3");
 const completeSound = new Audio("complete.mp3");
@@ -162,81 +147,26 @@ function createProgressBar() {
 
 function updateProgressBar() {
   const segments = document.querySelectorAll(".progress-segment");
-  segments.forEach((seg, i) => {
-    if (i < results.length) {
-      seg.style.background = results[i] ? "#4CAF50" : "#e74c3c";
-    } else {
-      seg.style.background = "rgba(255,255,255,0.15)";
-    }
+  segments.forEach((seg,i)=>{
+    if(i<results.length) seg.style.background = results[i]? "#4CAF50":"#e74c3c";
+    else seg.style.background = "rgba(255,255,255,0.15)";
   });
 }
 
 function loadQuestion() {
   selected = null;
   submitBtn.disabled = true;
+  submitBtn.classList.remove("hidden");
   nextBtn.classList.add("hidden");
   takeAgainBtn.classList.add("hidden");
   answersEl.innerHTML = "";
 
   questionEl.textContent = quizData[current].q;
 
-  quizData[current].a.forEach((t,i)=>{
-    const b = document.createElement("button");
-    b.textContent = t;
-    b.onclick = () => {
+  quizData[current].a.forEach((text,i)=>{
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.onclick = () => {
       selected = i;
       submitBtn.disabled = false;
-      [...answersEl.children].forEach(btn => btn.classList.remove("selected"));
-      b.classList.add("selected");
-    };
-    answersEl.appendChild(b);
-  });
-
-  updateProgressBar();
-}
-
-submitBtn.onclick = () => {
-  const correct = quizData[current].c;
-  results.push(selected === correct);
-  if (currentSound) currentSound.pause();
-
-  currentSound = (selected === correct ? correctSound.cloneNode() : wrongSound.cloneNode());
-  currentSound.play();
-
-  if (selected === correct) score++;
-
-  updateProgressBar();
-  submitBtn.classList.add("hidden");
-  nextBtn.classList.remove("hidden");
-};
-
-nextBtn.onclick = () => {
-  current++;
-  if (current < quizData.length) loadQuestion();
-  else finishQuiz();
-};
-
-function finishQuiz() {
-  questionEl.textContent = "Quiz Complete!";
-  answersEl.innerHTML = "";
-  nextBtn.classList.add("hidden");
-  submitBtn.classList.add("hidden");
-  takeAgainBtn.classList.remove("hidden");
-  scoreEl.textContent = `Score: ${score}/${quizData.length}`;
-  scoreEl.classList.remove("hidden");
-  if (currentSound) currentSound.pause();
-  completeSound.play();
-}
-
-takeAgainBtn.onclick = () => {
-  current = 0;
-  score = 0;
-  results.length = 0;
-  scoreEl.classList.add("hidden");
-  createProgressBar();
-  loadQuestion();
-};
-
-// Initialize
-createProgressBar();
-loadQuestion();
+      [...answersEl.children]
