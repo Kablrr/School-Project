@@ -217,3 +217,55 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
 }
+/* ===== FORCE CENTER APPS GUI (FINAL FIX) ===== */
+
+/* Center the apps column content */
+.apps-column {
+  display: flex;
+  justify-content: center;
+}
+
+/* Make the main container a flex column */
+.apps-column .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Center each section */
+.apps-column .section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Center inputs, selects, buttons */
+.apps-column input,
+.apps-column select,
+.apps-column button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Clean input sizing */
+.apps-column input[type="text"],
+.apps-column select {
+  width: 90%;
+  max-width: 420px;
+}
+
+/* Center quiz answers */
+#answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Prevent wide quiz buttons */
+#answers button {
+  width: 100%;
+  max-width: 420px;
+}
