@@ -1,131 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kabir Malhi - 1776 Project</title>
-  <link rel="stylesheet" href="styletwo.css">
-</head>
-<body>
+<div class="section">
+  <h1>1776 Avatar Generator</h1>
+  <p>Customize your colonial student avatar</p>
 
-<div id="cursorGlow"></div>
+  <div class="dropdowns">
 
-<div class="container">
+    <label for="genderSelect">Gender:</label>
+    <select id="genderSelect">
+      <option>Male</option>
+      <option>Female</option>
+    </select>
 
-  <!-- TEXT TO IMAGE -->
-  <div class="section">
-    <h1>Text-to-Image Generator</h1>
-    <p>Convert your ideas into a colonial scene</p>
-    <input id="promptInput" type="text" placeholder="Enter a colonial scene...">
-    <button id="generateBtn">Generate Image</button>
-    <div id="loadingText" class="hidden"></div>
-    <div id="imageContainer" class="image-container"></div>
+    <label for="backgroundSelect">Background:</label>
+    <select id="backgroundSelect">
+      <option>Classroom</option>
+      <option>Library</option>
+      <option>Town Square</option>
+      <option>Tavern</option>
+      <option>Courtyard</option>
+      <option>Market</option>
+      <option>Garden</option>
+      <option>Ship Deck</option>
+      <option>Church</option>
+    </select>
+
+    <label for="outfitSelect">Outfit:</label>
+    <select id="outfitSelect">
+      <option>Blue Coat</option>
+      <option>Brown Coat</option>
+      <option>Formal Suit</option>
+      <option>Farmer Clothes</option>
+      <option>Plain Clothes</option>
+      <option>Merchant Clothes</option>
+      <option>Military Uniform</option>
+      <option>Apprentice Outfit</option>
+    </select>
+
+    <label for="hatSelect">Hat:</label>
+    <select id="hatSelect">
+      <option>Tricorn Hat</option>
+      <option>Cap</option>
+      <option>Bonnet</option>
+      <option>No Hat</option>
+      <option>Wide Brim Hat</option>
+      <option>Bandana</option>
+    </select>
+
+    <label for="accessorySelect">Accessory:</label>
+    <select id="accessorySelect">
+      <option>Book</option>
+      <option>Quill</option>
+      <option>Scroll</option>
+      <option>None</option>
+      <option>Sword</option>
+      <option>Basket</option>
+      <option>Lantern</option>
+    </select>
+
+    <label for="hairSelect">Hair Style:</label>
+    <select id="hairSelect">
+      <option>Long</option>
+      <option>Short</option>
+      <option>Curly</option>
+      <option>Bun</option>
+      <option>None</option>
+      <option>Ponytail</option>
+      <option>Braided</option>
+    </select>
+
+    <label for="ageSelect">Age:</label>
+    <select id="ageSelect">
+      <option>Young</option>
+      <option>Teenage</option>
+      <option>Adult</option>
+      <option>Elderly</option>
+    </select>
+
+    <label for="raceSelect">Heritage:</label>
+    <select id="raceSelect">
+      <option>European</option>
+      <option>African</option>
+      <option>Native American</option>
+      <option>Mixed Heritage</option>
+    </select>
   </div>
 
-  <!-- AVATAR -->
-  <div class="section">
-    <h1>1776 Avatar Generator</h1>
-    <p>Customize your colonial student avatar</p>
-
-    <div class="dropdowns">
-      <div class="dropdown-item">
-        <label for="backgroundSelect">Background:</label>
-        <select id="backgroundSelect">
-          <option>Classroom</option>
-          <option>Library</option>
-          <option>Town Square</option>
-          <option>Tavern</option>
-          <option>Courtyard</option>
-        </select>
-      </div>
-
-      <div class="dropdown-item">
-        <label for="outfitSelect">Outfit:</label>
-        <select id="outfitSelect">
-          <option>Blue Coat</option>
-          <option>Brown Coat</option>
-          <option>Formal Suit</option>
-          <option>Farmer Clothes</option>
-          <option>Plain Clothes</option>
-        </select>
-      </div>
-
-      <div class="dropdown-item">
-        <label for="hatSelect">Hat:</label>
-        <select id="hatSelect">
-          <option>Tricorn Hat</option>
-          <option>Cap</option>
-          <option>Bonnet</option>
-          <option>No Hat</option>
-        </select>
-      </div>
-
-      <div class="dropdown-item">
-        <label for="accessorySelect">Accessory:</label>
-        <select id="accessorySelect">
-          <option>Book</option>
-          <option>Quill</option>
-          <option>Scroll</option>
-          <option>None</option>
-        </select>
-      </div>
-
-      <div class="dropdown-item">
-        <label for="hairSelect">Hair Style:</label>
-        <select id="hairSelect">
-          <option>Long</option>
-          <option>Short</option>
-          <option>Curly</option>
-          <option>Bun</option>
-          <option>None</option>
-        </select>
-      </div>
-
-      <div class="dropdown-item">
-        <label for="ageSelect">Age:</label>
-        <select id="ageSelect">
-          <option>Young</option>
-          <option>Teenage</option>
-          <option>Adult</option>
-        </select>
-      </div>
-
-      <div class="dropdown-item">
-        <label for="raceSelect">Heritage:</label>
-        <select id="raceSelect">
-          <option>European</option>
-          <option>African</option>
-          <option>Native American</option>
-          <option>Mixed Heritage</option>
-        </select>
-      </div>
-    </div>
-
-    <button id="generateAvatarBtn">Generate Avatar</button>
-    <div id="avatarLoading" class="hidden"></div>
-    <div id="avatarContainer" class="image-container"></div>
-  </div>
-
-  <!-- QUIZ -->
-  <div class="section">
-    <h1>1776 History Quiz</h1>
-
-    <div id="progressContainer"></div>
-
-    <div id="question"></div>
-    <div id="answers"></div>
-
-    <div class="quiz-buttons">
-      <button id="submitBtn" disabled>Submit</button>
-      <button id="nextBtn" class="hidden">Next</button>
-    </div>
-
-    <div id="score" class="hidden"></div>
-    <button id="takeAgainBtn" class="hidden">Take Again</button>
-  </div>
-
+  <button id="generateAvatarBtn">Generate Avatar</button>
+  <div id="avatarLoading" class="hidden">Generating avatar...</div>
+  <div id="avatarContainer" class="image-container"></div>
 </div>
-
-<script src="script.js"></script>
-</body>
-</html>
