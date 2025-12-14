@@ -38,10 +38,16 @@ generateBtn.onclick = () => {
 
   const img = new Image();
   currentImage = img;
+  img.style.opacity = "0";
+  img.style.transition = "opacity 0.5s ease-in-out";
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
   imageContainer.appendChild(img);
 
-  img.onload = () => loadingText.classList.add("hidden");
+  img.onload = () => {
+    loadingText.classList.add("hidden");
+    img.style.opacity = "1"; // fade in
+  };
+
   img.onerror = () => {
     loadingText.classList.add("hidden");
     alert("Failed to load image");
@@ -85,12 +91,15 @@ generateAvatarBtn.onclick = () => {
 
   const img = new Image();
   currentAvatar = img;
+  img.style.opacity = "0";
+  img.style.transition = "opacity 0.5s ease-in-out";
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
   avatarContainer.appendChild(img);
 
   img.onload = () => {
     avatarLoading.classList.add("hidden");
     avatarLoading.innerHTML = "";
+    img.style.opacity = "1"; // fade in
     generateAvatarBtn.disabled = false;
   };
 
