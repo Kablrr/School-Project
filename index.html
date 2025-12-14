@@ -136,22 +136,26 @@
         <div id="avatarContainer" class="image-container"></div>
       </div>
 
-      <!-- QUIZ -->
-      <div class="section">
-        <h1>1776 History Quiz</h1>
+    <!-- QUIZ -->
+<div class="section" id="quizSection">
+  <h1>1776 History Quiz</h1>
 
-        <div id="progressContainer"></div>
-        <div id="question"></div>
-        <div id="answers"></div>
+  <!-- Progress Bar -->
+  <div id="progressContainer" class="quiz-progress"></div>
 
-        <div class="button-wrapper">
-          <button id="submitBtn" disabled>Submit</button>
-          <button id="nextBtn" class="hidden">Next</button>
-        </div>
+  <div id="question"></div>
+  <div id="answers"></div>
 
-        <div id="score" class="hidden"></div>
-        <button id="takeAgainBtn" class="hidden">Take Again</button>
-      </div>
+  <!-- Buttons wrapper for overlay effect -->
+  <div class="button-wrapper">
+    <button id="submitBtn" disabled>Submit</button>
+    <button id="nextBtn" class="hidden">Next</button>
+  </div>
+
+  <div id="score" class="hidden"></div>
+  <button id="takeAgainBtn" class="hidden">Take Again</button>
+</div>
+
 
     </div>
   </div>
@@ -172,3 +176,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
