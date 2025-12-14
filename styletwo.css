@@ -29,7 +29,7 @@ body {
 
 /* ===== Image Columns ===== */
 .image-column {
-  flex: 0 0 300px; /* Fixed width to prevent shrinking */
+  flex: 0 0 300px; /* Fixed width */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +57,7 @@ body {
 
 /* ===== Apps Column ===== */
 .apps-column {
-  flex: 0 0 650px; /* Fixed center width */
+  flex: 0 0 650px; /* Fixed width */
   display: flex;
   justify-content: center;
 }
@@ -185,7 +185,26 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 #answers button.correct { background: #4CAF50; color: #fff; }
 #answers button.wrong { background: #e74c3c; color: #fff; }
 
-.quiz-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+/* ===== Quiz Buttons - Stacked Vertically ===== */
+.quiz-buttons {
+  display: flex;
+  flex-direction: column; /* Stack Submit over Next */
+  align-items: center;
+  gap: 12px;
+}
+
+.quiz-buttons button {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Widen Take Again button */
+#takeAgainBtn {
+  width: 100%;
+  max-width: 420px;
+  margin: 12px auto 0;
+  display: block;
+}
 
 /* ===== Cursor Glow ===== */
 #cursorGlow {
@@ -230,5 +249,5 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 @media (max-width: 900px) {
   .dropdowns { grid-template-columns: 1fr; }
-  #answers button { width: 95%; }
+  #answers button, .quiz-buttons button, #takeAgainBtn { width: 95%; max-width: none; }
 }
