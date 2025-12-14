@@ -19,25 +19,35 @@ const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
 const loadingText = document.getElementById("loadingText");
 
+let currentImage = null; // track current image to cancel previous loads
+
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
-  // Clear container and show spinner
+  // Remove previous image if exists
+  if (currentImage) {
+    currentImage.onload = null;
+    currentImage.onerror = null;
+    imageContainer.removeChild(currentImage);
+    currentImage = null;
+  }
+
+  // Show spinner
   imageContainer.innerHTML = "";
   loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
-  requestAnimationFrame(() => loadingText.classList.add("show")); // trigger fade-in
+  requestAnimationFrame(() => loadingText.classList.add("show"));
   generateBtn.disabled = true;
 
   const prompt = `${promptInput.value}, colonial America, 18th century, historically accurate, oil painting, soft lighting, warm tones`;
+
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  currentImage = img;
 
-  // Append image immediately
   imageContainer.appendChild(img);
 
   img.onload = () => {
-    // Fade out spinner
     loadingText.classList.remove("show");
     setTimeout(() => {
       loadingText.classList.add("hidden");
@@ -73,12 +83,21 @@ const hairSelect = document.getElementById("hairSelect");
 const ageSelect = document.getElementById("ageSelect");
 const raceSelect = document.getElementById("raceSelect");
 
+let currentAvatar = null; // track current avatar to cancel previous loads
+
 generateAvatarBtn.onclick = () => {
-  // Clear container and show spinner
+  // Remove previous avatar if exists
+  if (currentAvatar) {
+    currentAvatar.onload = null;
+    currentAvatar.onerror = null;
+    avatarContainer.removeChild(currentAvatar);
+    currentAvatar = null;
+  }
+
   avatarContainer.innerHTML = "";
   avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
-  requestAnimationFrame(() => avatarLoading.classList.add("show")); // trigger fade-in
+  requestAnimationFrame(() => avatarLoading.classList.add("show"));
   generateAvatarBtn.disabled = true;
 
   const prompt =
@@ -88,6 +107,8 @@ generateAvatarBtn.onclick = () => {
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  currentAvatar = img;
+
   avatarContainer.appendChild(img);
 
   img.onload = () => {
