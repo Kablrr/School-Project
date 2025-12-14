@@ -12,22 +12,65 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* change to 'center' if you want vertical centering */
+  align-items: flex-start;
   padding: 30px;
   overflow-x: hidden;
 }
 
-/* ===== Main Container ===== */
-.container {
-  max-width: 950px;
+/* ===== Main Layout ===== */
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
   width: 100%;
-  background: linear-gradient(180deg, #d69f7e, #cd9777);
-  border-radius: 25px;
-  padding: 40px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  text-align: center;
+  max-width: 1600px;
+  flex-wrap: wrap;
 }
 
+/* ===== Image Columns ===== */
+.image-column {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-column { order: 0; }
+.right-column { order: 2; }
+
+.image-column h2 {
+  margin-bottom: 15px;
+  color: #4b2e2a;
+}
+
+.image-wrapper {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid #4b2e2a;
+}
+
+/* ===== Apps Column ===== */
+.apps-column {
+  flex: 2;
+  min-width: 500px;
+  max-width: 700px;
+}
+
+/* ===== Container inside Apps ===== */
+.container {
+  width: 100%;
+}
+
+/* ===== Sections ===== */
 .section {
   margin-bottom: 60px;
 }
@@ -45,7 +88,7 @@ p {
   font-size: 1rem;
 }
 
-/* ===== Inputs & Buttons ===== */
+/* ===== Inputs & Selects ===== */
 input[type="text"], select {
   padding: 12px 14px;
   margin: 8px 0;
@@ -57,6 +100,7 @@ input[type="text"], select {
   outline: none;
 }
 
+/* ===== Buttons ===== */
 button {
   padding: 12px 20px;
   margin: 10px 5px 0;
@@ -71,21 +115,13 @@ button {
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
-button:hover {
-  background: #b07d62;
-  transform: scale(1.05);
-}
+button:hover { background: #b07d62; transform: scale(1.05); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+/* ===== Hidden ===== */
+.hidden { display: none; }
 
-.hidden {
-  display: none;
-}
-
-/* ===== Avatar Dropdowns ===== */
+/* ===== Dropdowns ===== */
 .dropdowns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -95,25 +131,8 @@ button:disabled {
   margin-bottom: 20px;
 }
 
-.dropdown-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.dropdown-group label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-/* ===== Images ===== */
-.image-container img {
-  margin-top: 20px;
-  max-width: 350px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
+.dropdown-group { display: flex; flex-direction: column; }
+.dropdown-group label { font-weight: bold; margin-bottom: 5px; }
 
 /* ===== Quiz ===== */
 #progressContainer {
@@ -153,29 +172,11 @@ button:disabled {
   transition: all 0.2s ease;
 }
 
-#answers button.selected {
-  background: #c38e70;
-  color: #fff;
-  transform: scale(1.05);
-  border: 2px solid #b07d62;
-}
+#answers button.selected { background: #c38e70; color: #fff; transform: scale(1.05); border: 2px solid #b07d62; }
+#answers button.correct { background: #4CAF50; color: #fff; }
+#answers button.wrong { background: #e74c3c; color: #fff; }
 
-#answers button.correct {
-  background: #4CAF50;
-  color: #fff;
-}
-
-#answers button.wrong {
-  background: #e74c3c;
-  color: #fff;
-}
-
-.quiz-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+.quiz-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
 /* ===== Cursor Glow ===== */
 #cursorGlow {
@@ -202,72 +203,15 @@ button:disabled {
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* ===== Responsive ===== */
+@media (max-width: 1200px) {
+  .main-layout { flex-direction: column; align-items: center; }
+  .apps-column, .image-column { max-width: 90%; }
+}
+
 @media (max-width: 900px) {
   .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
-}
-
-/* ===== Main Layout: 1776 / Apps / 2025 ===== */
-.main-layout {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  padding: 40px;
-  flex-wrap: wrap;
-}
-
-.image-column {
-  flex: 1;
-  min-width: 200px;
-  max-width: 300px;
-  text-align: center;
-}
-
-.left-column { order: 0; }
-.right-column { order: 2; }
-
-.image-column h2 {
-  margin-bottom: 15px;
-  color: #4b2e2a;
-}
-
-.image-wrapper {
-  margin-bottom: 20px;
-}
-
-.image-wrapper img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 2px solid #4b2e2a;
-  max-width: 400px;
-}
-
-.apps-column {
-  flex: 2;
-  min-width: 500px;
-  max-width: 700px;
-}
-
-/* Responsive for small screens */
-@media (max-width: 1200px) {
-  .main-layout {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .apps-column {
-    max-width: 90%;
-  }
-
-  .image-column {
-    max-width: 90%;
-  }
 }
