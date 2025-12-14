@@ -25,6 +25,7 @@ generateBtn.onclick = () => {
   // Show spinner
   loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
+  setTimeout(() => loadingText.classList.add("show"), 10); // trigger fade-in
   generateBtn.disabled = true;
   imageContainer.innerHTML = "";
 
@@ -34,9 +35,12 @@ generateBtn.onclick = () => {
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
   img.onload = img.onerror = () => {
-    // Remove spinner and re-enable button
-    loadingText.classList.add("hidden");
-    loadingText.innerHTML = "";
+    // Fade out spinner
+    loadingText.classList.remove("show");
+    setTimeout(() => {
+      loadingText.classList.add("hidden");
+      loadingText.innerHTML = "";
+    }, 400); // match CSS transition duration
     generateBtn.disabled = false;
   };
 
@@ -63,6 +67,7 @@ generateAvatarBtn.onclick = () => {
   // Show spinner
   avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
+  setTimeout(() => avatarLoading.classList.add("show"), 10); // trigger fade-in
   generateAvatarBtn.disabled = true;
   avatarContainer.innerHTML = "";
 
@@ -75,9 +80,12 @@ generateAvatarBtn.onclick = () => {
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
   img.onload = img.onerror = () => {
-    // Remove spinner and re-enable button
-    avatarLoading.classList.add("hidden");
-    avatarLoading.innerHTML = "";
+    // Fade out spinner
+    avatarLoading.classList.remove("show");
+    setTimeout(() => {
+      avatarLoading.classList.add("hidden");
+      avatarLoading.innerHTML = "";
+    }, 400); // match CSS transition duration
     generateAvatarBtn.disabled = false;
   };
 
