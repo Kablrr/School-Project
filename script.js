@@ -32,14 +32,12 @@ generateBtn.onclick = () => {
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
-  img.onload = () => {
+
+  img.onload = img.onerror = () => {
+    // Remove spinner and re-enable button
     loadingText.classList.add("hidden");
+    loadingText.innerHTML = "";
     generateBtn.disabled = false;
-  };
-  img.onerror = () => {
-    loadingText.classList.add("hidden");
-    generateBtn.disabled = false;
-    alert("Failed to load image");
   };
 
   imageContainer.appendChild(img);
@@ -75,14 +73,12 @@ generateAvatarBtn.onclick = () => {
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
-  img.onload = () => {
+
+  img.onload = img.onerror = () => {
+    // Remove spinner and re-enable button
     avatarLoading.classList.add("hidden");
+    avatarLoading.innerHTML = "";
     generateAvatarBtn.disabled = false;
-  };
-  img.onerror = () => {
-    avatarLoading.classList.add("hidden");
-    generateAvatarBtn.disabled = false;
-    alert("Failed to load avatar");
   };
 
   avatarContainer.appendChild(img);
