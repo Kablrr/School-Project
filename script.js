@@ -168,7 +168,7 @@ submitBtn.onclick = () => {
   const correct = quizData[current].c;
   results.push(selected === correct);
 
-  // Stop any previous sounds
+  // Stop previous sounds
   correctSound.pause(); correctSound.currentTime = 0;
   wrongSound.pause(); wrongSound.currentTime = 0;
 
