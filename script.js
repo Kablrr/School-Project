@@ -22,29 +22,39 @@ const loadingText = document.getElementById("loadingText");
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
-  // Show spinner
+  // Clear container and show spinner
+  imageContainer.innerHTML = "";
   loadingText.innerHTML = `<div class="spinner"></div>`;
   loadingText.classList.remove("hidden");
-  setTimeout(() => loadingText.classList.add("show"), 10); // trigger fade-in
+  requestAnimationFrame(() => loadingText.classList.add("show")); // trigger fade-in
   generateBtn.disabled = true;
-  imageContainer.innerHTML = "";
 
   const prompt = `${promptInput.value}, colonial America, 18th century, historically accurate, oil painting, soft lighting, warm tones`;
-
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
 
-  img.onload = img.onerror = () => {
+  // Append image immediately
+  imageContainer.appendChild(img);
+
+  img.onload = () => {
     // Fade out spinner
     loadingText.classList.remove("show");
     setTimeout(() => {
       loadingText.classList.add("hidden");
       loadingText.innerHTML = "";
-    }, 400); // match CSS transition duration
+    }, 400);
     generateBtn.disabled = false;
   };
 
-  imageContainer.appendChild(img);
+  img.onerror = () => {
+    loadingText.classList.remove("show");
+    setTimeout(() => {
+      loadingText.classList.add("hidden");
+      loadingText.innerHTML = "";
+    }, 400);
+    generateBtn.disabled = false;
+    alert("Failed to load image");
+  };
 };
 
 /* ==============================
@@ -64,12 +74,12 @@ const ageSelect = document.getElementById("ageSelect");
 const raceSelect = document.getElementById("raceSelect");
 
 generateAvatarBtn.onclick = () => {
-  // Show spinner
+  // Clear container and show spinner
+  avatarContainer.innerHTML = "";
   avatarLoading.innerHTML = `<div class="spinner"></div>`;
   avatarLoading.classList.remove("hidden");
-  setTimeout(() => avatarLoading.classList.add("show"), 10); // trigger fade-in
+  requestAnimationFrame(() => avatarLoading.classList.add("show")); // trigger fade-in
   generateAvatarBtn.disabled = true;
-  avatarContainer.innerHTML = "";
 
   const prompt =
     `A ${ageSelect.value} ${raceSelect.value} colonial student with a gentle smile, ` +
@@ -78,18 +88,26 @@ generateAvatarBtn.onclick = () => {
 
   const img = new Image();
   img.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${Date.now()}`;
+  avatarContainer.appendChild(img);
 
-  img.onload = img.onerror = () => {
-    // Fade out spinner
+  img.onload = () => {
     avatarLoading.classList.remove("show");
     setTimeout(() => {
       avatarLoading.classList.add("hidden");
       avatarLoading.innerHTML = "";
-    }, 400); // match CSS transition duration
+    }, 400);
     generateAvatarBtn.disabled = false;
   };
 
-  avatarContainer.appendChild(img);
+  img.onerror = () => {
+    avatarLoading.classList.remove("show");
+    setTimeout(() => {
+      avatarLoading.classList.add("hidden");
+      avatarLoading.innerHTML = "";
+    }, 400);
+    generateAvatarBtn.disabled = false;
+    alert("Failed to load avatar");
+  };
 };
 
 /* ==============================
