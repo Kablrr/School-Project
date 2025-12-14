@@ -56,14 +56,27 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .hidden { display: none; }
 
-/* Avatar dropdowns */
-.dropdowns { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 20px; }
-.dropdown-group { display: flex; flex-direction: column; width: 100%; max-width: 250px; }
-.dropdown-group label { font-weight: bold; margin-bottom: 5px; }
+/* Avatar dropdowns using grid 2 rows x 4 columns */
+.dropdowns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.dropdown-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
 /* Images */
-.image-container img { margin-top: 20px; max-width: 350px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); opacity: 0; animation: fadeIn 0.5s forwards; }
-@keyframes fadeIn { to { opacity: 1; } }
+.image-container img { margin-top: 20px; max-width: 350px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.5s ease-in-out; }
 
 /* Quiz */
 #progressContainer { display: flex; justify-content: space-between; height: 16px; margin-bottom: 20px; border-radius: 8px; }
@@ -84,7 +97,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* Responsive for small screens */
-@media (max-width: 600px) {
-  .dropdown-group select { max-width: 100%; }
+@media (max-width: 800px) {
+  .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
 }
