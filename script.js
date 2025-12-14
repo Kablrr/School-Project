@@ -1,135 +1,187 @@
-// ===== Quiz Data =====
-const quizData = [
+// ===== Cursor Glow =====
+const cursorGlow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  cursorGlow.style.top = e.clientY + 'px';
+  cursorGlow.style.left = e.clientX + 'px';
+});
+
+// ===== Image Generator (stub example) =====
+const generateBtn = document.getElementById('generateBtn');
+const promptInput = document.getElementById('promptInput');
+const imageContainer = document.getElementById('imageContainer');
+const loadingText = document.getElementById('loadingText');
+
+generateBtn.addEventListener('click', () => {
+  const prompt = promptInput.value.trim();
+  if (!prompt) return alert("Enter a prompt!");
+
+  loadingText.classList.remove('hidden');
+  loadingText.textContent = 'Generating...';
+  imageContainer.innerHTML = '';
+
+  // Simulate image generation
+  setTimeout(() => {
+    const img = document.createElement('img');
+    img.src = 'https://via.placeholder.com/400x300?text=Generated+Image';
+    img.alt = prompt;
+    img.style.border = "2px solid #4b2e2a";
+    img.style.borderRadius = "12px";
+    imageContainer.appendChild(img);
+    loadingText.classList.add('hidden');
+  }, 1500);
+});
+
+// ===== Avatar Generator =====
+const generateAvatarBtn = document.getElementById('generateAvatarBtn');
+const avatarContainer = document.getElementById('avatarContainer');
+const avatarLoading = document.getElementById('avatarLoading');
+
+generateAvatarBtn.addEventListener('click', () => {
+  avatarLoading.classList.remove('hidden');
+  avatarLoading.textContent = 'Generating Avatar...';
+  avatarContainer.innerHTML = '';
+
+  const gender = document.getElementById('genderSelect').value;
+  const background = document.getElementById('backgroundSelect').value;
+  const outfit = document.getElementById('outfitSelect').value;
+  const hat = document.getElementById('hatSelect').value;
+  const accessory = document.getElementById('accessorySelect').value;
+  const hair = document.getElementById('hairSelect').value;
+  const age = document.getElementById('ageSelect').value;
+  const race = document.getElementById('raceSelect').value;
+
+  // Simulate avatar generation
+  setTimeout(() => {
+    const img = document.createElement('img');
+    img.src = 'https://via.placeholder.com/300x400?text=Avatar';
+    img.alt = `${gender}, ${age}, ${race}`;
+    img.style.border = "2px solid #4b2e2a";
+    img.style.borderRadius = "12px";
+    avatarContainer.appendChild(img);
+    avatarLoading.classList.add('hidden');
+  }, 1500);
+});
+
+// ===== Quiz =====
+const questions = [
   {
     question: "Who wrote the Declaration of Independence?",
     answers: ["George Washington", "Thomas Jefferson", "Benjamin Franklin", "John Adams"],
     correct: 1
   },
   {
-    question: "In which year was the Declaration of Independence signed?",
-    answers: ["1775", "1776", "1777", "1781"],
+    question: "In which year was the Declaration signed?",
+    answers: ["1775", "1776", "1781", "1789"],
     correct: 1
   },
   {
-    question: "Which country helped the Americans in the Revolutionary War?",
-    answers: ["France", "Spain", "Germany", "Netherlands"],
-    correct: 0
+    question: "Which colony was the first to declare independence?",
+    answers: ["Virginia", "Massachusetts", "New York", "Rhode Island"],
+    correct: 3
   }
 ];
 
 let currentQuestion = 0;
 let score = 0;
-let selectedAnswer = null;
+const progressContainer = document.getElementById('progressContainer');
+const questionEl = document.getElementById('question');
+const answersEl = document.getElementById('answers');
+const submitBtn = document.getElementById('submitBtn');
+const nextBtn = document.getElementById('nextBtn');
+const scoreEl = document.getElementById('score');
+const takeAgainBtn = document.getElementById('takeAgainBtn');
 
-// ===== DOM Elements =====
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const submitBtn = document.getElementById("submitBtn");
-const nextBtn = document.getElementById("nextBtn");
-const takeAgainBtn = document.getElementById("takeAgainBtn");
-const scoreEl = document.getElementById("score");
-const progressContainer = document.getElementById("progressContainer");
-
-// ===== Initialize Progress Bar =====
-function createProgressBar() {
-  progressContainer.innerHTML = "";
-  for (let i = 0; i < quizData.length; i++) {
-    const seg = document.createElement("div");
-    seg.classList.add("progress-segment");
-    progressContainer.appendChild(seg);
+// Initialize progress bar
+function initProgress() {
+  progressContainer.innerHTML = '';
+  for (let i = 0; i < questions.length; i++) {
+    const div = document.createElement('div');
+    div.className = 'progress-segment';
+    progressContainer.appendChild(div);
   }
 }
+initProgress();
 
-function updateProgressBar() {
-  const segments = document.querySelectorAll(".progress-segment");
-  segments.forEach((seg, index) => {
-    seg.style.background = index <= currentQuestion ? "#4CAF50" : "rgba(255,255,255,0.15)";
-  });
-}
-
-// ===== Load Question =====
+// Load a question
 function loadQuestion() {
-  selectedAnswer = null;
   submitBtn.disabled = true;
-  nextBtn.classList.add("hidden");
-  submitBtn.classList.remove("hidden");
+  nextBtn.classList.add('hidden');
 
-  const current = quizData[currentQuestion];
-  questionEl.textContent = current.question;
-
-  answersEl.innerHTML = "";
-  current.answers.forEach((ans, idx) => {
-    const btn = document.createElement("button");
+  const q = questions[currentQuestion];
+  questionEl.textContent = q.question;
+  answersEl.innerHTML = '';
+  q.answers.forEach((ans, index) => {
+    const btn = document.createElement('button');
     btn.textContent = ans;
-    btn.addEventListener("click", () => selectAnswer(idx, btn));
+    btn.addEventListener('click', () => selectAnswer(btn, index));
     answersEl.appendChild(btn);
   });
-
-  updateProgressBar();
 }
 
-// ===== Select Answer =====
-function selectAnswer(idx, btn) {
-  selectedAnswer = idx;
-
-  // Clear previous selections
-  const buttons = answersEl.querySelectorAll("button");
-  buttons.forEach(b => b.classList.remove("selected"));
-  btn.classList.add("selected");
-
+// Answer selection
+let selectedIndex = null;
+function selectAnswer(btn, index) {
+  selectedIndex = index;
+  document.querySelectorAll('#answers button').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
   submitBtn.disabled = false;
 }
 
-// ===== Submit Answer =====
-submitBtn.addEventListener("click", () => {
-  const current = quizData[currentQuestion];
-  const buttons = answersEl.querySelectorAll("button");
+// Submit button
+submitBtn.addEventListener('click', () => {
+  const correctIndex = questions[currentQuestion].correct;
+  const buttons = document.querySelectorAll('#answers button');
 
-  buttons.forEach((b, idx) => {
-    if (idx === current.correct) b.classList.add("correct");
-    if (idx === selectedAnswer && idx !== current.correct) b.classList.add("wrong");
+  buttons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === correctIndex) btn.classList.add('correct');
+    if (idx === selectedIndex && idx !== correctIndex) btn.classList.add('wrong');
   });
 
-  if (selectedAnswer === current.correct) score++;
+  // Update score
+  if (selectedIndex === correctIndex) score++;
 
-  // Hide submit, show next at the same position
-  submitBtn.classList.add("hidden");
-  nextBtn.classList.remove("hidden");
+  // Update progress bar
+  progressContainer.children[currentQuestion].style.background = '#4CAF50';
+
+  // Show Next button on top of Submit
+  submitBtn.classList.add('hidden');
+  nextBtn.classList.remove('hidden');
 });
 
-// ===== Next Question =====
-nextBtn.addEventListener("click", () => {
+// Next button
+nextBtn.addEventListener('click', () => {
   currentQuestion++;
-  if (currentQuestion < quizData.length) {
+  if (currentQuestion < questions.length) {
+    submitBtn.classList.remove('hidden');
     loadQuestion();
   } else {
     showScore();
   }
 });
 
-// ===== Show Score =====
+// Show final score
 function showScore() {
-  questionEl.textContent = "Quiz Completed!";
-  answersEl.innerHTML = "";
-  submitBtn.classList.add("hidden");
-  nextBtn.classList.add("hidden");
-  scoreEl.textContent = `You scored ${score} / ${quizData.length}`;
-  scoreEl.classList.remove("hidden");
-  takeAgainBtn.classList.remove("hidden");
-
-  // Reset progress bar
-  updateProgressBar();
+  questionEl.textContent = 'Quiz Completed!';
+  answersEl.innerHTML = '';
+  submitBtn.classList.add('hidden');
+  nextBtn.classList.add('hidden');
+  scoreEl.textContent = `Your Score: ${score} / ${questions.length}`;
+  scoreEl.classList.remove('hidden');
+  takeAgainBtn.classList.remove('hidden');
 }
 
-// ===== Take Again =====
-takeAgainBtn.addEventListener("click", () => {
+// Take again
+takeAgainBtn.addEventListener('click', () => {
   currentQuestion = 0;
   score = 0;
-  scoreEl.classList.add("hidden");
-  takeAgainBtn.classList.add("hidden");
+  selectedIndex = null;
+  scoreEl.classList.add('hidden');
+  takeAgainBtn.classList.add('hidden');
+  initProgress();
+  submitBtn.classList.remove('hidden');
   loadQuestion();
 });
 
-// ===== Initialize =====
-createProgressBar();
+// Initial load
 loadQuestion();
