@@ -11,7 +11,7 @@ document.addEventListener("mousemove", e => {
   cursorGlow.style.left = `${e.clientX}px`;
 });
 
-/* TEXT TO IMAGE */
+/* TEXT TO IMAGE GENERATOR */
 const generateBtn = document.getElementById("generateBtn");
 const promptInput = document.getElementById("promptInput");
 const imageContainer = document.getElementById("imageContainer");
@@ -22,6 +22,7 @@ let currentImage = null;
 generateBtn.onclick = () => {
   if (!promptInput.value.trim()) return alert("Enter a prompt");
 
+  // Remove previous image if exists
   if (currentImage) {
     currentImage.onload = null;
     currentImage.onerror = null;
@@ -47,7 +48,7 @@ generateBtn.onclick = () => {
   };
 };
 
-/* AVATAR */
+/* AVATAR GENERATOR */
 const generateAvatarBtn = document.getElementById("generateAvatarBtn");
 const avatarContainer = document.getElementById("avatarContainer");
 const avatarLoading = document.getElementById("avatarLoading");
@@ -78,9 +79,9 @@ generateAvatarBtn.onclick = () => {
   generateAvatarBtn.disabled = true;
 
   const prompt =
-    `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a gentle smile, ` +
+    `A ${genderSelect.value} ${ageSelect.value} ${raceSelect.value} colonial student with a subtle smile, ` +
     `wearing ${outfitSelect.value}, ${hatSelect.value}, holding ${accessorySelect.value}, ` +
-    `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, realistic, soft lighting, warm colors`;
+    `with ${hairSelect.value} hair, standing in a ${backgroundSelect.value}, oil painting, soft lighting, warm tones`;
 
   const img = new Image();
   currentAvatar = img;
@@ -222,5 +223,6 @@ takeAgainBtn.onclick = () => {
   loadQuestion();
 };
 
+// Initialize
 createProgressBar();
 loadQuestion();
