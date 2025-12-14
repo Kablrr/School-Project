@@ -56,12 +56,12 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .hidden { display: none; }
 
-/* Avatar dropdowns using grid 2 rows x 4 columns */
+/* Avatar dropdowns 2 rows x 4 columns */
 .dropdowns {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
-  grid-template-rows: repeat(2, auto);   /* 2 rows */
-  grid-auto-flow: row;                   /* fill row first */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: row;
   gap: 15px;
   margin-bottom: 20px;
 }
@@ -74,14 +74,6 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .dropdown-group label {
   font-weight: bold;
   margin-bottom: 5px;
-}
-
-/* Responsive for small screens: 1 column */
-@media (max-width: 900px) {
-  .dropdowns {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
 }
 
 /* Images */
@@ -106,7 +98,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* Responsive for small screens */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .dropdowns { grid-template-columns: 1fr; grid-template-rows: auto; }
   #answers button { width: 95%; }
 }
